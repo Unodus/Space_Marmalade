@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1002066675, guid: e9e75a8a99b1447d6937851a497bce57, type: 3}
+  m_Name: AudioMobSettings
+  m_EditorClassIdentifier: 
+  m_gameGenre: 690
+  m_UseStoreId: 0
+  m_StoreIdAndroidString: com.audiomob.example
+  m_StoreIdIosString: 000000000
+  m_storeURLString: https://example.com/
+  m_ServerEndPoint: 1
+  m_useLocation: 2
+  m_bannerBorderColor: {r: 0.91, g: 0.35, b: 0.05, a: 1}
+  m_consentFrameworkVersion:
+    id: 0
+    name: 
+  m_CoppaConsent: 0
+  _respectSilentMode: 1

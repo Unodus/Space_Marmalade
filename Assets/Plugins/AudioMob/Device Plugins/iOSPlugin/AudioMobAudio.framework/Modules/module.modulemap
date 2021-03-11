@@ -1,0 +1,6 @@
+framework module AudioMobAudio {
+  umbrella header "AudioMobAudio.h"
+
+  export *
+  module * { export * }
+}
