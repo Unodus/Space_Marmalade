@@ -11698,6 +11698,11 @@ PrefabInstance:
       propertyPath: eliasPlayer
       value: 
       objectReference: {fileID: 1037868865}
+    - target: {fileID: 58023216094951222, guid: 47b04993c75ebc5469e0277afe512adf,
+        type: 3}
+      propertyPath: actionPresetName
+      value: Combat 1 Transition
+      objectReference: {fileID: 0}
     - target: {fileID: 228139120968009306, guid: 47b04993c75ebc5469e0277afe512adf,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -11943,6 +11948,16 @@ PrefabInstance:
       propertyPath: eliasPlayer
       value: 
       objectReference: {fileID: 1037868865}
+    - target: {fileID: 5312610412431037243, guid: 47b04993c75ebc5469e0277afe512adf,
+        type: 3}
+      propertyPath: actionPresetName
+      value: Strategy Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 5312610412431037243, guid: 47b04993c75ebc5469e0277afe512adf,
+        type: 3}
+      propertyPath: useDoubleEffectParam
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7426699289872319093, guid: 47b04993c75ebc5469e0277afe512adf,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
