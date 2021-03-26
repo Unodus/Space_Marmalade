@@ -10,7 +10,7 @@ public class SoundSliderScript : MonoBehaviour
 
     [SerializeField] GameObject SliderPrefab;
     [SerializeField] AudioMixer[] MyMixers;
-    [SerializeField] float Max, Min;
+    [SerializeField] float Max, Min, DefaultVal;
     void Start()
     {
         for ( int i = 0; i < MyMixers.Length; i++)
@@ -19,7 +19,7 @@ public class SoundSliderScript : MonoBehaviour
             newSlider.TryGetComponent(out Slider slider);
             slider.maxValue = Max;
             slider.minValue = Min;
-            slider.value = Mathf.Lerp(Min, Max, 0.5f);
+            slider.value = Mathf.Lerp(Min, Max, DefaultVal);
             slider.GetComponentInChildren<TextMeshProUGUI>().text = MyMixers[i].name;
 
             int j = i;

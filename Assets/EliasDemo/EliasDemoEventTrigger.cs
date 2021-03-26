@@ -23,10 +23,12 @@ public class EliasDemoEventTrigger : MonoBehaviour
 	public bool useSetSendVolume;
 	public EliasSetSendVolume setSendVolume;
 
-
+    public GameObject PopupPrefab;
 
     public void UpdateElias()
     {
+
+
         if (useSetLevel)
         {
             eliasPlayer.QueueEvent(setLevel.CreateSetLevelEvent(eliasPlayer.Elias));
@@ -52,8 +54,18 @@ public class EliasDemoEventTrigger : MonoBehaviour
             eliasPlayer.QueueEvent(setSendVolume.CreateSetSendVolumeEvent(eliasPlayer.Elias));
         }
 
-
+        CreatePopUp(actionPresetName);
     }
+
+
+    private void CreatePopUp(string action)
+    {
+        if (!PopupPrefab)
+            return;
+        GameObject Popup = Instantiate(PopupPrefab, transform.root);
+        Popup.GetComponent<CornerPopUp>().CustomStart(eliasPlayer.GetActiveTheme() + ": " + action);
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
