@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.EventSystems;
+
 public class CameraPan : MonoBehaviour
 {
 
@@ -12,6 +14,12 @@ public class CameraPan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             touchStart = GetWorldPosition(groundZ);
@@ -22,6 +30,7 @@ public class CameraPan : MonoBehaviour
             cam.transform.position += direction;
         }
     }
+
     private Vector3 GetWorldPosition(float z)
     {
         Ray mousePos = cam.ScreenPointToRay(Input.mousePosition);
