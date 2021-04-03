@@ -6,7 +6,7 @@ public class CameraPan : MonoBehaviour
 {
 
     private Vector3 touchStart;
-    public Camera cam;
+    Camera cam;
     public float groundZ = 0;
 
     // Update is called once per frame
@@ -19,11 +19,12 @@ public class CameraPan : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector3 direction = touchStart - GetWorldPosition(groundZ);
-            cam.transform.position += direction;
+            transform.position += direction;
         }
     }
     private Vector3 GetWorldPosition(float z)
     {
+        cam = Camera.main;
         Ray mousePos = cam.ScreenPointToRay(Input.mousePosition);
         Plane ground = new Plane(Vector3.forward, new Vector3(0, 0, z));
         float distance;

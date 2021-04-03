@@ -17,7 +17,7 @@ public class GridMath
 
     public float TransitionSpeed = 2;
 
-
+    public int Manifolds = 5;
 
     public Vector3 SetPosition(float x, float y)
     {
@@ -134,7 +134,7 @@ public class GridMath
     {
         //if(Position.x <0)
         //{ Position.x = 1 - Position.x; }
-        float angle = Mathf.LerpUnclamped(0, 2 * Mathf.PI, Position.x); // = x (between 0 and 2*pi)
+        float angle = Mathf.LerpUnclamped(0, 2 * Mathf.PI, Position.x * Manifolds); // = x (between 0 and 2*pi)
         float radius = Mathf.LerpUnclamped(0, Size * ScreenRatio.y, Position.y);  // = y (between 0 and 0.5*vertical)
 
 
