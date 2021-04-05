@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2fc1da056a9664cb3a63b662f66d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file: ELIAS_Themes/Nexus Stratagem/Space Marmalade - Nexus Stratagem_05.mepro
+  file: ELIAS_Themes/Nexus Strategem/Space Marmalade - Nexus Stratagem_09.mepro
   actionPreset: 0
   customPreset:
     flags: 0
@@ -155,10 +155,10 @@ MonoBehaviour:
     stingerRequiredTheme: 
     stingerName: 
   eliasFramesPerBuffer: 4096
-  eliasCachePageCount: 4
+  eliasCachePageCount: 128
   eliasCachePageSize: 4096
   eliasSampleRate: 44100
-  eliasChannelCount: 2
+  eliasChannelCount: 0
   playOnStart: 1
   deserializeProjectOnStart: 1
   customBasePath: 
