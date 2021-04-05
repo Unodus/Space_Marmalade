@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3601235721330608432}
   - component: {fileID: 3785101022244255015}
   - component: {fileID: -7035418217323077039}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,11 @@ GameObject:
   - component: {fileID: 1471756022089989437}
   - component: {fileID: 8884710525339623674}
   - component: {fileID: 4198908483834091940}
-  m_Layer: 8
+<<<<<<< Updated upstream
+  m_Layer: 0
+=======
+  m_Layer: 9
+>>>>>>> Stashed changes
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +713,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 2
+    maxNumParticles: 1
     size3D: 0
     rotation3D: 0
     gravityModifier:

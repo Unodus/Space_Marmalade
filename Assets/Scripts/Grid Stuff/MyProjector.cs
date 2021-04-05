@@ -78,7 +78,7 @@ public class MyProjector : MonoBehaviour
 
     public void ChangeX(string newX)//update width of grid
     {
-        if (String.IsNullOrEmpty(newX) )
+        if (string.IsNullOrEmpty(newX) )
             return;
         if (int.Parse(newX) <= 1)
             return;

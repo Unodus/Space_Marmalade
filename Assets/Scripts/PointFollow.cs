@@ -47,8 +47,11 @@ public class PointFollow : MonoBehaviour
     {
         public int Column, Row;
         public GameObject p;
+<<<<<<< Updated upstream
         public GameObject lp;
         public GameObject rp;
+=======
+>>>>>>> Stashed changes
         public NodeMode Mode;
     }
 
@@ -130,9 +133,12 @@ public class PointFollow : MonoBehaviour
 
     public TurnPhase CurrentTurn;
 
+<<<<<<< Updated upstream
     //public List<MyPoint> EchoPointsLeft = new List<MyPoint>();
     //public List<MyPoint> EchoPointsRight = new List<MyPoint>();
 
+=======
+>>>>>>> Stashed changes
     Slider InstantiateTimer() // Creates the timer at the start of each turn
     {
         GameObject Canvas = GameObject.FindGameObjectWithTag("Canvas");
@@ -300,6 +306,7 @@ public class PointFollow : MonoBehaviour
 
                 Vector3 Displacement = new Vector3((2 * ((1.25f + gridMath.Columns) / gridMath.Columns)) * gridMath.Size * gridMath.ScreenRatio.x, 0, 0);
 
+<<<<<<< Updated upstream
                 pp.lp = Instantiate(pp.p);
                 pp.lp.transform.SetParent(transform);
                 pp.lp.transform.position -= Displacement;
@@ -310,6 +317,8 @@ public class PointFollow : MonoBehaviour
 
                 pp.lp.GetComponent<Renderer>().enabled = false;
                 pp.rp.GetComponent<Renderer>().enabled = false;
+=======
+>>>>>>> Stashed changes
                 MyPoints.Add(pp);
             }
         }
@@ -320,8 +329,13 @@ public class PointFollow : MonoBehaviour
         foreach (MyPoint p in ThesePoints)
         {
             Destroy(p.p);
+<<<<<<< Updated upstream
             Destroy(p.lp);
             Destroy(p.rp);
+=======
+//            Destroy(p.lp);
+  //          Destroy(p.rp);
+>>>>>>> Stashed changes
         }
         ThesePoints.Clear();
         InitiatePoints();
@@ -466,6 +480,7 @@ public class PointFollow : MonoBehaviour
             p.p.transform.localScale = TargetSize;
             p.p.transform.position = TargetPosition;
 
+<<<<<<< Updated upstream
             p.lp.transform.localScale = TargetSize;
             p.rp.transform.localScale = TargetSize;
 
@@ -480,6 +495,8 @@ public class PointFollow : MonoBehaviour
                 p.lp.transform.position = Vector3.MoveTowards(p.lp.transform.position, TargetPosition - Displacement, Vector3.Distance(p.lp.transform.position, TargetPosition - Displacement) * gridMath.TransitionSpeed * Time.deltaTime);
                 p.rp.transform.position = Vector3.MoveTowards(p.rp.transform.position, TargetPosition + Displacement, Vector3.Distance(p.rp.transform.position, TargetPosition + Displacement) * gridMath.TransitionSpeed * Time.deltaTime);
             }
+=======
+>>>>>>> Stashed changes
         }
     }
 
@@ -655,7 +672,11 @@ public class PointFollow : MonoBehaviour
                 TimerObject.value -= Time.deltaTime;
                 if (TimerObject.value <= 0 )
                 {
+<<<<<<< Updated upstream
                     projectorMath.ChangeBool(true);
+=======
+                   projectorMath.ChangeBool(true);
+>>>>>>> Stashed changes
 
                     EndTurn();
                     Destroy(TimerObject.gameObject);

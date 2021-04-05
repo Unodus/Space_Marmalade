@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 298379416941521303}
   - component: {fileID: 4769583644439225203}
   - component: {fileID: 4693769306330697010}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: unknown-removebg-preview_0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 3610430990098739066}
   - component: {fileID: 4619891072845837208}
   - component: {fileID: 4313182757924650560}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: unknown-removebg-preview_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 5575901101774782421}
   - component: {fileID: 7582819637997437038}
   - component: {fileID: 676112394307614536}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}

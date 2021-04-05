@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7752921718993159735}
   - component: {fileID: 1740706265136344541}
   - component: {fileID: 5455346964885446742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player_ship_ (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 4961669853216663656}
   - component: {fileID: 6953952252896827347}
   - component: {fileID: 3202166438952290519}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 6084494194323131171}
   - component: {fileID: 4189588816341230719}
   - component: {fileID: 1687049914386271400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player_ship_ (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
