@@ -10906,18 +10906,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28bbb6e83e19dd47a69eb002e523801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Projector: {fileID: 796258735}
-  PlayerPrefab: {fileID: 7002879127763840371, guid: 05af7befa17b46344818982fa74464a1,
-    type: 3}
-  SmallEnemyPrefab: {fileID: 7536151125668182734, guid: c640b453fe63ff047b15f3a6bce64455,
-    type: 3}
-  LargeEnemyPrefab: {fileID: 7002879127763840371, guid: 7ac0627f6ab5e9c4694506135d1510e5,
-    type: 3}
-  PointPrefab: {fileID: 3601235721330608435, guid: 3f22f88ec72528e449416c440faaf1ed,
-    type: 3}
-  TimerPrefab: {fileID: 6712452830101834316, guid: 913ede55bfed1514e8dd9b94e5c11da2,
-    type: 3}
-  CurrentTurn: 0
 --- !u!4 &1005784180
 Transform:
   m_ObjectHideFlags: 0
@@ -11222,7 +11210,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1196475378}
   - component: {fileID: 1196475381}
-  - component: {fileID: 1196475380}
   - component: {fileID: 1196475379}
   m_Layer: 0
   m_Name: Blur Camera
@@ -11276,14 +11263,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &1196475380
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196475377}
-  m_Enabled: 1
 --- !u!20 &1196475381
 Camera:
   m_ObjectHideFlags: 0
@@ -11400,6 +11379,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219994993}
   m_CullTransparentMesh: 0
+--- !u!114 &1228161377 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 645221650611797940, guid: 47b04993c75ebc5469e0277afe512adf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2014297218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d87d309abcc9146a62c6dd2619896b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1309304913
 GameObject:
   m_ObjectHideFlags: 0
@@ -12499,13 +12490,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5279607006447306326, guid: 47b04993c75ebc5469e0277afe512adf,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279607006447306326, guid: 47b04993c75ebc5469e0277afe512adf,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1005784179}
+      objectReference: {fileID: 1228161377}
     - target: {fileID: 5279607006447306326, guid: 47b04993c75ebc5469e0277afe512adf,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: ReadyPoints
+      value: UpdateElias
       objectReference: {fileID: 0}
     - target: {fileID: 5279607006447306326, guid: 47b04993c75ebc5469e0277afe512adf,
         type: 3}
