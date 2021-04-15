@@ -33,8 +33,8 @@ public class MyProjector : MonoBehaviour
     void Awake() //Instatiates line creator, and grabs variable values from the grid values file 
     {
         LineManager = LineRenderer.GetComponent<LineMaker>();
-        gridMath.Rows = Rows + Random.Range(-Displacement, Displacement);
-        gridMath.Columns = Columns + Random.Range(-Displacement, Displacement);
+        gridMath.Rows = (Rows + Random.Range(-Displacement, Displacement));
+        gridMath.Columns = (Columns + Random.Range(-Displacement, Displacement)) * gridMath.Manifolds;
         gridMath.Size = 1;
 
     }

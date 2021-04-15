@@ -132,8 +132,18 @@ public class GridMath
 
     public Vector3 CoordtoPolar(Vector2 Position)
     {
-        //if(Position.x <0)
-        //{ Position.x = 1 - Position.x; }
+
+        //float x = Position.x * Manifolds;
+
+        //for (int i = 0; i< Manifolds; i++)
+        //{
+        //    if(x> i +1)
+        //    {
+        //        x -= 1;
+        //    }
+        //}
+     
+
         float angle = Mathf.LerpUnclamped(0, 2 * Mathf.PI, Position.x * Manifolds); // = x (between 0 and 2*pi)
         float radius = Mathf.LerpUnclamped(0, Size * ScreenRatio.y, Position.y);  // = y (between 0 and 0.5*vertical)
 
