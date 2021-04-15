@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85584f77376e4d440958668d708e6799, type: 3}
+  m_Name: MyEliasProfile
+  m_EditorClassIdentifier: 
+  eliasPalette:
+  - Name: Strategy
+    useSetLevel: 0
+    setLevel:
+      flags: 0
+      preWaitTimeMs: 0
+      level: 0
+      jumpToBar: 0
+      suggestedMaxTimeMs: 0
+      transitionPresetName: 
+      themeName: 
+      trackGroupName: 
+      stingerRequiredTheme: 
+      stingerName: 
+    useSetLevelOnTrack: 0
+    setLevelOnTrack:
+      flags: 0
+      preWaitTimeMs: 0
+      level: 0
+      jumpToBar: 0
+      suggestedMaxTimeMs: 0
+      transitionPresetName: 
+      themeName: 
+      trackName: 
+      stingerRequiredTheme: 
+      stingerName: 
+    usePlayStinger: 0
+    playStinger:
+      flags: 0
+      preWaitTimeMs: 0
+      transitionPresetName: 
+      name: 
+      level: 0
+    useActionPreset: 1
+    actionPresetName: Strategy Mode
+    allowRequiredThemeMissmatch: 0
+    useDoubleEffectParam: 0
+    doubleEffectParam:
+      flags: 0
+      preWaitTimeMs: 0
+      busName: 
+      slot: 0
+      parameterIndex: 0
+      sweepTimeMS: 0
+      value: 0
+    useSetSendVolume: 0
+    setSendVolume:
+      flags: 0
+      preWaitTimeMs: 0
+      busName: 
+      slot: 9
+      volume: 0
+      fadeTimeMS: 0
+  - Name: Combat
+    useSetLevel: 0
+    setLevel:
+      flags: 0
+      preWaitTimeMs: 0
+      level: 0
+      jumpToBar: 0
+      suggestedMaxTimeMs: 0
+      transitionPresetName: 
+      themeName: 
+      trackGroupName: 
+      stingerRequiredTheme: 
+      stingerName: 
+    useSetLevelOnTrack: 0
+    setLevelOnTrack:
+      flags: 0
+      preWaitTimeMs: 0
+      level: 0
+      jumpToBar: 0
+      suggestedMaxTimeMs: 0
+      transitionPresetName: 
+      themeName: 
+      trackName: 
+      stingerRequiredTheme: 
+      stingerName: 
+    usePlayStinger: 0
+    playStinger:
+      flags: 0
+      preWaitTimeMs: 0
+      transitionPresetName: 
+      name: 
+      level: 0
+    useActionPreset: 1
+    actionPresetName: Combat 1 Transition
+    allowRequiredThemeMissmatch: 0
+    useDoubleEffectParam: 0
+    doubleEffectParam:
+      flags: 0
+      preWaitTimeMs: 0
+      busName: 
+      slot: 0
+      parameterIndex: 0
+      sweepTimeMS: 0
+      value: 0
+    useSetSendVolume: 0
+    setSendVolume:
+      flags: 0
+      preWaitTimeMs: 0
+      busName: 
+      slot: 9
+      volume: 0
+      fadeTimeMS: 0
+  PopupPrefab: {fileID: 7958515236411960784, guid: 923b357cbc2c1b8409fe706ca395f0c6,
+    type: 3}

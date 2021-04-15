@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,6 +14,9 @@ public class PointFollow : MonoBehaviour
     [SerializeField]  GameObject SmallEnemyPrefab;
     [SerializeField]  GameObject LargeEnemyPrefab;
 
+
+    [SerializeField] PostSwitcher postSwitcher;
+
     [SerializeField] GameObject PointPrefab; // Refference for each navigable point on the map
 
     GridMath gridMath;          // Ref to the grid values
@@ -25,6 +27,8 @@ public class PointFollow : MonoBehaviour
     Slider TimerObject; 
 
     int NumOfPoints; // The total amount of points in the grid
+
+    int MaxGridX, MinGridX, ColumnsPerManifold;
     
     public enum NodeMode // Each point can have three states- whether it's empty, able to be selected, or has a ship on it
     {
@@ -158,9 +162,27 @@ public class PointFollow : MonoBehaviour
         MyShips.Add(new SmallEnemy(MyPoints[RandomNumber], SmallEnemyPrefab));
         TempList.RemoveAt(RandomNumber);
 
-        
-        
-        projectorMath.ChangeBool(true);
+
+
+        ColumnsPerManifold = gridMath.Columns / gridMath.Manifolds;
+        MaxGridX = gridMath.Columns + ColumnsPerManifold;//(int)Mathf.Floor( Mathf.Lerp(0, gridMath.Columns, 0.5f ));
+        MinGridX = 0;//(int)Mathf.Ceil(Mathf.Lerp(0, gridMath.Columns, 0.5f)); ;
+
+        for(int i = 0; i< gridMath.Manifolds; i++)
+        {
+            if ( i < (gridMath.Manifolds / 2))
+            {
+                MinGridX += ColumnsPerManifold;
+            }
+            else
+            {
+                MaxGridX -= ColumnsPerManifold;
+            }
+        }
+
+
+        Debug.Log(ColumnsPerManifold + " /" + MaxGridX + " " + MinGridX);
+            
         ReadyPoints();
 
     }
@@ -192,15 +214,15 @@ public class PointFollow : MonoBehaviour
 
         if(newMode == NodeMode.Empty)
         {
-            Point.p.GetComponent<Renderer>().material.color = new Color(0,0,0,0);
+            Point.p.GetComponent<SpriteRenderer>().material.color = new Color(1,1,1,0.1f);
         }
         else if (newMode == NodeMode.Occupied)
         {
-            Point.p.GetComponent<Renderer>().material.color = Color.red;
+            Point.p.GetComponent<SpriteRenderer>().material.color = Color.red;
         }
         else if (newMode == NodeMode.Selectable)
         {
-            Point.p.GetComponent<Renderer>().material.color = Color.white;
+            Point.p.GetComponent<SpriteRenderer>().material.color = Color.white;
         }
 
     }
@@ -560,7 +582,8 @@ public class PointFollow : MonoBehaviour
                 }
 
             }
-            projectorMath.ChangeBool(false);
+            postSwitcher.SetAim();
+            //            projectorMath.ChangeBool(false);
             ReadyPoints();
         }
         if (CurrentTurn == TurnPhase.EnemyTurnShooting)
@@ -592,8 +615,8 @@ public class PointFollow : MonoBehaviour
 
             }
 
-
-            projectorMath.ChangeBool(true);
+            postSwitcher.SetMove();
+            //            projectorMath.ChangeBool(true);
             ReadyPoints();
 
             FindSelectableNodes(MyShips[0].Reach * 100, MyShips[0]);
@@ -624,7 +647,8 @@ public class PointFollow : MonoBehaviour
                 TimerObject.value -= Time.deltaTime;
                 if (TimerObject.value <= 0 )
                 {
-                   projectorMath.ChangeBool(true);
+                    postSwitcher.SetMove();
+                    //  projectorMath.ChangeBool(true);
 
                     EndTurn();
                     Destroy(TimerObject.gameObject);
@@ -661,7 +685,8 @@ public class PointFollow : MonoBehaviour
                         if (FirePoint.p != null)
                     {
                         MyShips[0].p.GetComponent<PlayerMovement>().Shoot(FirePoint.p.transform.position);
-                        projectorMath.ChangeBool(true);
+                        postSwitcher.SetMove();
+                        //                        projectorMath.ChangeBool(true);
                         ReadyPoints();
 
                     }

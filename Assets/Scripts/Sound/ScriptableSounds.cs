@@ -13,14 +13,7 @@ public class ScriptableSounds : ScriptableObject
         PowerUp
     };
 
-    [Serializable]
-    public class EliasPalettes // Each palette
-    {
-        public string name;
-    }
-    
-    public EliasPalettes[] eliasPalette;    // array of all palettes
-
+  
 
     [Serializable]
     public class SoundPalettes // Each palette contains 

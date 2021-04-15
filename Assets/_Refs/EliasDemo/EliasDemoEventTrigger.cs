@@ -23,12 +23,8 @@ public class EliasDemoEventTrigger : MonoBehaviour
 	public bool useSetSendVolume;
 	public EliasSetSendVolume setSendVolume;
 
-    public GameObject PopupPrefab;
-
-    public void UpdateElias()
+	private void OnTriggerEnter(Collider other)
     {
-
-
         if (useSetLevel)
         {
             eliasPlayer.QueueEvent(setLevel.CreateSetLevelEvent(eliasPlayer.Elias));
@@ -38,37 +34,20 @@ public class EliasDemoEventTrigger : MonoBehaviour
             eliasPlayer.QueueEvent(setLevelOnTrack.CreateSetLevelOnTrackEvent(eliasPlayer.Elias));
         }
         if (usePlayStinger)
-        {
-            eliasPlayer.QueueEvent(playStinger.CreatePlayerStingerEvent(eliasPlayer.Elias));
-        }
-        if (useActionPreset)
-        {
-            eliasPlayer.RunActionPreset(actionPresetName, allowRequiredThemeMissmatch);
-        }
-        if (useDoubleEffectParam)
-        {
-            eliasPlayer.QueueEvent(doubleEffectParam.CreateSetEffectParameterEvent(eliasPlayer.Elias));
+		{
+			eliasPlayer.QueueEvent (playStinger.CreatePlayerStingerEvent (eliasPlayer.Elias));
+		} 
+		if (useActionPreset)
+		{
+			eliasPlayer.RunActionPreset (actionPresetName, allowRequiredThemeMissmatch);
+		} 
+		if (useDoubleEffectParam)
+		{
+			eliasPlayer.QueueEvent (doubleEffectParam.CreateSetEffectParameterEvent(eliasPlayer.Elias));
         }
         if (useSetSendVolume)
         {
             eliasPlayer.QueueEvent(setSendVolume.CreateSetSendVolumeEvent(eliasPlayer.Elias));
         }
-
-        CreatePopUp(actionPresetName);
-    }
-
-
-    private void CreatePopUp(string action)
-    {
-        if (!PopupPrefab)
-            return;
-        GameObject Popup = Instantiate(PopupPrefab, transform.root);
-        Popup.GetComponent<CornerPopUp>().CustomStart(eliasPlayer.GetActiveTheme() + ": " + action);
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        UpdateElias();
     }
 }
