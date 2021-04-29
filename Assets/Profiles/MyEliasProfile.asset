@@ -117,7 +117,7 @@ MonoBehaviour:
       slot: 9
       volume: 0
       fadeTimeMS: 0
-  - Name: new theme
+  - Name: Mode
     useSetLevel: 0
     setLevel:
       flags: 0
@@ -149,8 +149,8 @@ MonoBehaviour:
       transitionPresetName: 
       name: 
       level: 0
-    useActionPreset: 0
-    actionPresetName: 
+    useActionPreset: 1
+    actionPresetName: Mode Transition
     allowRequiredThemeMissmatch: 0
     useDoubleEffectParam: 0
     doubleEffectParam:
