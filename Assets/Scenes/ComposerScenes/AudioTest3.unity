@@ -1396,6 +1396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcdce92e1581407448765df6f151769d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EventProfiler: {fileID: 0}
   Projector: {fileID: 796258735}
   PlayerPrefab: {fileID: 7002879127763840371, guid: 05af7befa17b46344818982fa74464a1,
     type: 3}
@@ -2674,6 +2675,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
       value: SetMove
       objectReference: {fileID: 0}
+    - target: {fileID: 645221650611797940, guid: 47b04993c75ebc5469e0277afe512adf,
+        type: 3}
+      propertyPath: actionPresetName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 645221650611797940, guid: 47b04993c75ebc5469e0277afe512adf,
+        type: 3}
+      propertyPath: useActionPreset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 815666322960020156, guid: 47b04993c75ebc5469e0277afe512adf,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3063,6 +3074,11 @@ PrefabInstance:
         type: 3}
       propertyPath: actionPresetName
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5312610412431037243, guid: 47b04993c75ebc5469e0277afe512adf,
+        type: 3}
+      propertyPath: useActionPreset
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7426699289872319093, guid: 47b04993c75ebc5469e0277afe512adf,
         type: 3}
