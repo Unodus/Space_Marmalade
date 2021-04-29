@@ -2106,6 +2106,7 @@ MonoBehaviour:
   ThemeNames:
   - Strategy
   - Combat
+  - Mode
   EliasObject: {fileID: 910787906}
 --- !u!114 &1531450320 stripped
 MonoBehaviour:

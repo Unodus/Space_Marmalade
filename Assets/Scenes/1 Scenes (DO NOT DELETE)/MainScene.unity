@@ -1396,6 +1396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcdce92e1581407448765df6f151769d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EventProfiler: {fileID: 0}
   Projector: {fileID: 796258735}
   PlayerPrefab: {fileID: 7002879127763840371, guid: 05af7befa17b46344818982fa74464a1,
     type: 3}
@@ -2106,6 +2107,7 @@ MonoBehaviour:
   ThemeNames:
   - Strategy
   - Combat
+  - Mode
   EliasObject: {fileID: 910787906}
 --- !u!114 &1531450320 stripped
 MonoBehaviour:
@@ -3221,75 +3223,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &1417883209794479152
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 619501999461225805, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_Name
-      value: Particle System Force Field
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 490.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 241.27943
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1094.3734
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771142163091989965, guid: b41e443a2e12b1f43a1f322c202235ae,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b41e443a2e12b1f43a1f322c202235ae, type: 3}
 --- !u!1001 &2759517580222038805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3406,6 +3339,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI Sound Sliders
+      objectReference: {fileID: 0}
+    - target: {fileID: 2759517580462526239, guid: 1262ac2a55b69834694a002afed6a9a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -188
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1262ac2a55b69834694a002afed6a9a0, type: 3}
