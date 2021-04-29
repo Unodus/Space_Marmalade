@@ -44,7 +44,7 @@ public class PostSwitcher : MonoBehaviour
     {
         SwitchOpenObject(0);
         MyGrid.ChangeBool(true);
-        EliasThemeNames.ChangeElias(EliasComponent, ThemeNames[0]);
+        EliasThemeNames.ChangeElias(EliasComponent, ThemeNames[2]);
      
 
     }
