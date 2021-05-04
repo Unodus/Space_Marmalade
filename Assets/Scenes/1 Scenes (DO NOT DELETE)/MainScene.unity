@@ -1396,7 +1396,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcdce92e1581407448765df6f151769d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventProfiler: {fileID: 0}
+  EventProfiler: {fileID: 11400000, guid: aff4546ba7e82f447bea762d56bac703, type: 2}
+  EliasThemeNames: {fileID: 11400000, guid: 423173561ff75254e83c9b84652fb906, type: 2}
+  EliasObject: {fileID: 910787906}
   Projector: {fileID: 796258735}
   PlayerPrefab: {fileID: 7002879127763840371, guid: 05af7befa17b46344818982fa74464a1,
     type: 3}

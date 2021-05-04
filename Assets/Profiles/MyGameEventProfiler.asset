@@ -10,21 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d0d3352ba5c7bc409f1c8ae6231bef0, type: 3}
-  m_Name: EliasProfile
+  m_Name: MyGameEventProfiler
   m_EditorClassIdentifier: 
   Events:
   - Name: Enemy Turn Shooting
+    turnPhase: 0
     ReturnToCentre: 0
     TriggerEliasProfiler: 
   - Name: Enemy Turn Moving
-    ReturnToCentre: 0
-    TriggerEliasProfiler: 
-  - Name: Player Turn Moving
+    turnPhase: 1
     ReturnToCentre: 0
     TriggerEliasProfiler: 
   - Name: Player Turn Shooting
+    turnPhase: 3
+    ReturnToCentre: 0
+    TriggerEliasProfiler: Combat
+  - Name: Player Turn Moving
+    turnPhase: 2
+    ReturnToCentre: 0
+    TriggerEliasProfiler: Strategy
+  - Name: Transition
+    turnPhase: 4
     ReturnToCentre: 0
     TriggerEliasProfiler: 
-  - Name: Transition
+  - Name: Player Turn Start
+    turnPhase: 5
+    ReturnToCentre: 0
+    TriggerEliasProfiler: 
+  - Name: Player Turn End
+    turnPhase: 6
     ReturnToCentre: 0
     TriggerEliasProfiler: 

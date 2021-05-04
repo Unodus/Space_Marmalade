@@ -14,7 +14,9 @@ public class ScriptableGameEvents : ScriptableObject
         EnemyTurnMoving,
         PlayerTurn_Moving,
         PlayerTurn_Shooting,
-        Transition
+        Transition,
+        PlayerTurn_Start,
+        PlayerTurn_End
     }
 
 
@@ -22,6 +24,7 @@ public class ScriptableGameEvents : ScriptableObject
     public class EventSettings // Each palette
     {
         public string Name;
+        public TurnPhase turnPhase;
         public bool ReturnToCentre;
         public string TriggerEliasProfiler;
        }
@@ -39,6 +42,19 @@ public class ScriptableGameEvents : ScriptableObject
         }
 
         Debug.LogWarning(myName + " is not registered in the profiler");
+        return null;
+    }
+    public EventSettings GetEventByPhase(TurnPhase myEnum)
+    {
+        foreach (EventSettings i in Events)
+        {
+            if (i.turnPhase == myEnum)
+            {
+                return i;
+            }
+        }
+
+        Debug.LogWarning(myEnum + " is not registered in the profiler");
         return null;
     }
 
