@@ -9,6 +9,12 @@ public class PointFollow : MonoBehaviour
 
 
     [SerializeField] ScriptableGameEvents EventProfiler;
+    [SerializeField] ScriptableElias EliasThemeNames;
+
+    [SerializeField]
+    GameObject EliasObject;
+    EliasPlayer EliasComponent;
+
 
     [SerializeField]GameObject Projector; 
 
@@ -136,6 +142,8 @@ public class PointFollow : MonoBehaviour
 
     void Start()// Instantiate grid and ships in random positions
     {
+        if (!EliasComponent)
+            EliasObject.TryGetComponent(out EliasComponent);
 
         CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting;
 
@@ -144,13 +152,6 @@ public class PointFollow : MonoBehaviour
         gridMath = projectorMath.gridMath;
         InitiatePoints();
         PositionPoints(MyPoints);
-
-
-
-
-
-
-
 
         ColumnsPerManifold = gridMath.Columns / gridMath.Manifolds;
 
@@ -177,10 +178,200 @@ public class PointFollow : MonoBehaviour
         SpaceshipBases.Add(new SmallEnemy(MyPoints[RandomNumber], SmallEnemyPrefab));
         TempList.RemoveAt(RandomNumber);
 
-
-
-
         ReadyPoints();
+
+    }
+
+    void CallEvent(ScriptableGameEvents.TurnPhase turnPhase)
+    {
+
+        ScriptableGameEvents.EventSettings currentEvent = EventProfiler.GetEventByPhase(turnPhase);
+        if (currentEvent == null) return;
+        Debug.Log(currentEvent.Name);
+        CurrentTurn = turnPhase;
+
+        if (!string.IsNullOrEmpty( currentEvent.TriggerEliasProfiler ))
+            EliasThemeNames.ChangeElias(EliasComponent, currentEvent.TriggerEliasProfiler);
+
+        switch (turnPhase)
+        {
+            case ScriptableGameEvents.TurnPhase.EnemyTurnMoving:
+                break;
+            case ScriptableGameEvents.TurnPhase.EnemyTurnShooting:
+                break;
+            case ScriptableGameEvents.TurnPhase.PlayerTurn_Moving:
+                break;
+            case ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting:
+                break;
+            case ScriptableGameEvents.TurnPhase.PlayerTurn_Start:
+                break;
+            case ScriptableGameEvents.TurnPhase.PlayerTurn_End:
+
+                Destroy(GameObject.FindGameObjectWithTag("Timer"));
+
+                SpaceshipBases[0].Movement = SpaceshipBases[0].MaxMovement;
+                //CurrentTurn = ScriptableGameEvents.TurnPhase.Transition;
+                LaunchMissiles(SpaceshipBases[0], ScriptableGameEvents.TurnPhase.EnemyTurnMoving);
+
+
+                break;
+            default:
+                Debug.Log("Event Logic is not programmed");
+                break;
+        }
+
+        }
+
+    void AddEnemyShip()
+    {
+        MyPoint SpawnZone = GetRandNode();
+        int RandomNumber = Random.Range(0, 2);
+        if (RandomNumber == 0)
+        {
+            SpaceshipBases.Add(new SmallEnemy(SpawnZone, SmallEnemyPrefab));
+        }
+        else
+        {
+            SpaceshipBases.Add(new BigEnemy(SpawnZone, LargeEnemyPrefab));
+        }
+    }
+
+    void TimeSelf()
+    {
+        if (TimerObject == null)
+        {
+            TimerObject = InstantiateTimer();
+        }
+        else
+        {
+            TimerObject.value -= Time.deltaTime;
+            if (TimerObject.value <= 0)
+            {
+                postSwitcher.SetMove();
+
+                EndTurn();
+                Destroy(TimerObject.gameObject);
+            }
+        }
+    }
+
+    void UpdateByEvent()
+    {
+        ScriptableGameEvents.EventSettings currentEvent = EventProfiler.GetEventByPhase(CurrentTurn);
+        if (currentEvent == null) return;
+
+
+
+        switch (CurrentTurn)
+        {
+            case ScriptableGameEvents.TurnPhase.EnemyTurnMoving:
+                    //do enemy stuff
+
+                    foreach (SpaceshipBase p in SpaceshipBases)
+                    {
+                        if (p.ShipType == 1)
+                        {
+                            FindSelectableNodes(p.Movement * gridMath.Size, p);
+                            ChangeNode(p, GetClosestNode(SpaceshipBases[0].ShipPrefab.transform.position, p, 0));
+                            p.Movement = p.MaxMovement;
+                        }
+
+                        if (p.ShipType == 2)
+                        {
+                            FindSelectableNodes(p.Movement * gridMath.Size, p);
+                            ChangeNode(p, GetClosestNode(GetRandNode().p.transform.position, p, 0));
+                            p.Movement = p.MaxMovement;
+                        }
+
+                    }
+
+                    postSwitcher.SetAim();
+                    ReadyPoints();
+                
+                break;
+            case ScriptableGameEvents.TurnPhase.EnemyTurnShooting:
+               
+                    //do enemy stuff
+
+                    List<MyPoint> ShipsToMake = new List<MyPoint>();
+
+                    foreach (SpaceshipBase p in SpaceshipBases)
+                    {
+                        if (p.ShipType == 1)
+                        {
+                            FindSelectableNodes(p.Reach * gridMath.Size, p);
+                            p.ShipPrefab.GetComponent<PlayerMovement>().Shoot(GetClosestNode(SpaceshipBases[0].ShipPrefab.transform.position, p, 0).p.transform.position);
+                            LaunchMissiles(p, ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
+
+                        }
+                        if (p.ShipType == 2)
+                        {
+                            FindSelectableNodes(p.Reach * gridMath.Size, p);
+                            ShipsToMake.Add(p.CurrentNode);
+
+                        }
+                    }
+
+                    foreach (MyPoint p in ShipsToMake)
+                    {
+                        SpaceshipBases.Add(new SmallEnemy(p, SmallEnemyPrefab));
+
+                    }
+
+                    postSwitcher.SetMove();
+                    ReadyPoints();
+                    FindSelectableNodes(SpaceshipBases[0].Reach * 100, SpaceshipBases[0]);
+
+                    
+
+
+        
+                break;
+            case ScriptableGameEvents.TurnPhase.PlayerTurn_Moving:
+                TimeSelf();
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    worldPosition.z = 0;
+                    ChangeNode(SpaceshipBases[0], GetClosestNode(worldPosition, SpaceshipBases[0], 1));
+                }
+
+                break;
+            case ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting:
+                TimeSelf();
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    worldPosition.z = 0;
+
+
+                    if (Vector3.Distance(SpaceshipBases[0].ShipPrefab.transform.position, worldPosition) < SpaceshipBases[0].Reach)
+                        {
+                            MyPoint FirePoint = GetClosestNode(worldPosition, SpaceshipBases[0], 1);
+                            if (FirePoint.p != null)
+                            {
+                                SpaceshipBases[0].ShipPrefab.GetComponent<PlayerMovement>().Shoot(FirePoint.p.transform.position);
+                                postSwitcher.SetMove();
+                                ReadyPoints();
+                            }
+
+
+                        }
+
+                    
+                }
+
+                break;
+            case ScriptableGameEvents.TurnPhase.PlayerTurn_Start:
+                break;
+            case ScriptableGameEvents.TurnPhase.PlayerTurn_End:
+                break;
+            default:
+                Debug.Log("Event Logic is not programmed");
+                break;
+        }
 
     }
 
@@ -200,8 +391,6 @@ public class PointFollow : MonoBehaviour
                             NewPoint = i;
                //        CheckNodeIsWithinBounds(NewPoint);
                         }
-
-                        
                     }
                 }
             }
@@ -289,7 +478,6 @@ public class PointFollow : MonoBehaviour
 
         NewPoint = CheckNodeIsWithinBounds(NewPoint);
 
-
         Ship.CurrentNode = NewPoint;
         Ship.ShipPrefab.transform.SetParent(NewPoint.p.transform);
 
@@ -322,17 +510,9 @@ public class PointFollow : MonoBehaviour
 
     public void EndTurn() // When the end of turn button is pressed, delete the existing turn timer, reset movement and make the missiles move
     {
-
         if (CurrentTurn == ScriptableGameEvents.TurnPhase.EnemyTurnShooting || CurrentTurn == ScriptableGameEvents.TurnPhase.EnemyTurnMoving)
             return;
-
-        Destroy(GameObject.FindGameObjectWithTag("Timer"));
-
-        SpaceshipBases[0].Movement = SpaceshipBases[0].MaxMovement;
-        CurrentTurn = ScriptableGameEvents.TurnPhase.Transition;
-        LaunchMissiles(SpaceshipBases[0], ScriptableGameEvents.TurnPhase.EnemyTurnMoving);
-
-
+        CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_End);
     }
 
     void LaunchMissiles(SpaceshipBase Sender, ScriptableGameEvents.TurnPhase NextTurn) // For each unmoved missile, moves them
@@ -341,7 +521,7 @@ public class PointFollow : MonoBehaviour
         GameObject[] Missiles = GameObject.FindGameObjectsWithTag("Missile");
         if (Missiles.Length == 0)
         {
-            CurrentTurn = NextTurn;
+            CallEvent(NextTurn);
         }
         else
         {
@@ -380,7 +560,7 @@ public class PointFollow : MonoBehaviour
         }
         Destroy(MissileObject);
 
-        CurrentTurn = NextTurn;
+        CallEvent(NextTurn);
         yield return null;
 
     }
@@ -571,12 +751,15 @@ public class PointFollow : MonoBehaviour
     {
         if(CurrentTurn == ScriptableGameEvents.TurnPhase.EnemyTurnMoving)
         {
-            CurrentTurn = ScriptableGameEvents.TurnPhase.Transition;
+            CallEvent(ScriptableGameEvents.TurnPhase.Transition);
+//            CurrentTurn = ScriptableGameEvents.TurnPhase.Transition;
             StartCoroutine("Reset", (0));
         }
         else
         {
-            CurrentTurn = ScriptableGameEvents.TurnPhase.Transition;
+            CallEvent(ScriptableGameEvents.TurnPhase.Transition);
+
+//            CurrentTurn = ScriptableGameEvents.TurnPhase.Transition;
             StartCoroutine("Reset", (gridMath.TransitionSpeed * 1.0f));
         }
     }
@@ -587,22 +770,23 @@ public class PointFollow : MonoBehaviour
         if(Count == 0)
         {
             yield return new WaitForSeconds(gridMath.TransitionSpeed * 2.0f);
-            CurrentTurn = ScriptableGameEvents.TurnPhase.EnemyTurnShooting;
+
+            CallEvent(ScriptableGameEvents.TurnPhase.EnemyTurnShooting);
+
+//            CurrentTurn = ScriptableGameEvents.TurnPhase.EnemyTurnShooting;
         }
         else
         {
             if (gridMath.PolarActive)
             {
-                CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Moving;
-
-
+                CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
                 FindSelectableNodes(SpaceshipBases[0].Movement * gridMath.Size, SpaceshipBases[0]);
 
 
             }
             else
             {
-                CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting;
+                CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting);
                 FindSelectableNodes(SpaceshipBases[0].Reach * gridMath.Size, SpaceshipBases[0]);
             }
 
@@ -615,29 +799,27 @@ public class PointFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (SpaceshipBase p in SpaceshipBases) // if there is only one ship remaining (ie, player has won), return to the menu
-        {
-            if (p.ShipPrefab == null)
-            {
-                SpaceshipBases.Remove(p);
-
-                if (SpaceshipBases[0].ShipType != 0)
-                {
-                    SceneManager.LoadScene(0);
-                }
-
-                return;
-            }
-        }
-
         if (NumOfPoints == gridMath.Columns * gridMath.Rows)
-        {
             PositionPoints(MyPoints);
-        }
         else
-        {
             DeinitialisePoints(MyPoints);
-        }
+        
+        //foreach (SpaceshipBase p in SpaceshipBases) // if there is only one ship remaining (ie, player has won), return to the menu
+        //{
+        //    if (p.ShipPrefab == null)
+        //    {
+        //        SpaceshipBases.Remove(p);
+
+        //        if (SpaceshipBases[0].ShipType != 0)
+        //        {
+        //            SceneManager.LoadScene(0);
+        //        }
+
+        //        return;
+        //    }
+        //}
+
+       
 
         PositionShips(SpaceshipBases);
 
@@ -647,108 +829,20 @@ public class PointFollow : MonoBehaviour
 
         if (CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Moving && !gridMath.PolarActive)
         {
-            CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting;
+            CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting);
+
+//            CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting;
         }
         if (CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting && gridMath.PolarActive)
         {
-            CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Moving;
-        }
+            CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
 
-        if (CurrentTurn == ScriptableGameEvents.TurnPhase.EnemyTurnMoving )
-        {
-            //do enemy stuff
-
-            foreach (SpaceshipBase p in SpaceshipBases)
-            {
-                if (p.ShipType == 1)
-                {
-                    FindSelectableNodes(p.Movement * gridMath.Size, p);
-                    ChangeNode(p, GetClosestNode(SpaceshipBases[0].ShipPrefab.transform.position, p, 0));
-                    p.Movement = p.MaxMovement;
-                }
-
-                if (p.ShipType == 2)
-                {
-                    FindSelectableNodes(p.Movement * gridMath.Size, p);
-                    ChangeNode(p, GetClosestNode(GetRandNode().p.transform.position, p, 0));
-                    p.Movement = p.MaxMovement;
-                }
-
-            }
-            postSwitcher.SetAim();
-            //            projectorMath.ChangeBool(false);
-            ReadyPoints();
-        }
-        if (CurrentTurn == ScriptableGameEvents.TurnPhase.EnemyTurnShooting)
-        {
-            //do enemy stuff
-
-            List<MyPoint> ShipsToMake = new List<MyPoint>();
-
-            foreach (SpaceshipBase p in SpaceshipBases)
-            {
-                if (p.ShipType == 1)
-                {
-                    FindSelectableNodes(p.Reach * gridMath.Size, p);    
-                    p.ShipPrefab.GetComponent<PlayerMovement>().Shoot(GetClosestNode(SpaceshipBases[0].ShipPrefab.transform.position, p, 0).p.transform.position);
-                    LaunchMissiles(p, ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
-
-                }
-                if (p.ShipType == 2)
-                {
-                    FindSelectableNodes(p.Reach * gridMath.Size, p);
-                    ShipsToMake.Add(p.CurrentNode);
-                    
-                }
-            }
-
-            foreach (MyPoint p in ShipsToMake)
-            {
-                SpaceshipBases.Add(new SmallEnemy(p, SmallEnemyPrefab));
-
-            }
-
-            postSwitcher.SetMove();
-            //            projectorMath.ChangeBool(true);
-            ReadyPoints();
-
-            FindSelectableNodes(SpaceshipBases[0].Reach * 100, SpaceshipBases[0]);
-
-            MyPoint SpawnZone = GetRandNode();
-            int RandomNumber = Random.Range(0, 2);
-            if (RandomNumber == 0)
-            {
-                SpaceshipBases.Add(new SmallEnemy(SpawnZone, SmallEnemyPrefab));
-            }
-            else
-            {
-                SpaceshipBases.Add(new BigEnemy(SpawnZone, LargeEnemyPrefab));
-            }
-
-
+//            CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Moving;
         }
 
 
-        else if (CurrentTurn != ScriptableGameEvents.TurnPhase.Transition)
-        {
-            if (TimerObject == null)
-            {
-                TimerObject = InstantiateTimer();
-            }
-            else
-            {
-                TimerObject.value -= Time.deltaTime;
-                if (TimerObject.value <= 0 )
-                {
-                    postSwitcher.SetMove();
-                    //  projectorMath.ChangeBool(true);
 
-                    EndTurn();
-                    Destroy(TimerObject.gameObject);
-                }
-            }
-        }
-
+        UpdateByEvent();
 
         // Handles inputs
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -756,44 +850,5 @@ public class PointFollow : MonoBehaviour
             SceneManager.LoadScene(0);
         }
         
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            worldPosition.z = 0;
-
-            if (CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Moving)
-            {
-                ChangeNode(SpaceshipBases[0], GetClosestNode(worldPosition, SpaceshipBases[0], 1));
-
-            }
-
-
-            else if (CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting)
-            {
-                
-                    //worldPosition = GetClosestNode(worldPosition, SpaceshipBases[0]).p.transform.position;
-                    if (Vector3.Distance(SpaceshipBases[0].ShipPrefab.transform.position, worldPosition) < SpaceshipBases[0].Reach)
-                    {
-                        MyPoint FirePoint = GetClosestNode(worldPosition, SpaceshipBases[0], 1);
-                        if (FirePoint.p != null)
-                    {
-                        SpaceshipBases[0].ShipPrefab.GetComponent<PlayerMovement>().Shoot(FirePoint.p.transform.position);
-                        postSwitcher.SetMove();
-                        //                        projectorMath.ChangeBool(true);
-                        ReadyPoints();
-
-                    }
-
-
-                }
-
-            }
-            
-
-
-        }
-
-
-
     }
 }   
