@@ -76,7 +76,6 @@ public class ScriptableElias : ScriptableObject
             if (i.useActionPreset)
             {
                 eliasPlayer.RunActionPreset(i.actionPresetName, i.allowRequiredThemeMissmatch);
-
                 CreatePopUp(myTheme, eliasPlayer);
 
             }

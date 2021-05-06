@@ -136,6 +136,11 @@ public class EliasPlayer : MonoBehaviour
 	/// </summary>
 	public void RunActionPreset(string preset, bool ignoreRequiredThemeMissmatch = false)
     {
+        if (elias == null)
+            return;
+        if (elias.Handle == null)
+            return;
+
         if (elias.Handle == IntPtr.Zero)
             return;
 
@@ -266,7 +271,7 @@ public class EliasPlayer : MonoBehaviour
 		EliasHelper.LogResult(r, "Problems queing an event");
 	}
 
-    public void Start()
+    public void Awake()
     {
         if (elias == null)
         {

@@ -46,5 +46,5 @@ MonoBehaviour:
   - Name: Player Turn End
     turnPhase: 6
     ReturnToCentre: 0
-    TriggerEliasProfiler: 
+    TriggerEliasProfiler: Mode
     CameraMode: 0
