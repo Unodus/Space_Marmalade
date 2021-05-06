@@ -110,6 +110,12 @@ public class MyProjector : MonoBehaviour
 
         UpdateSize(gridMath.Size);
     }
+
+    public bool GetBool()
+    {
+        return gridMath.PolarActive;
+    }
+
     public void ChangeGridVis(bool newBool)// update polar quality
     {
         gridVisible = newBool;
@@ -144,7 +150,7 @@ public class MyProjector : MonoBehaviour
     {
         if (gridMath.PolarActive)
         {
-            float angle = Mathf.Lerp(0, 2*Mathf.PI, ((newx )/ (float)(gridMath.Columns ))); // = x (between 0 and 2*pi)
+            float angle = Mathf.Lerp(0, 2*Mathf.PI, ((newx * -1 )/ (float)(gridMath.Columns ))); // = x (between 0 and 2*pi)
             float radius = Mathf.Lerp(0, gridMath.Size * gridMath.ScreenRatio.y, ((newy )/ (float)(gridMath.Rows )));  // = y (between 0 and 0.5*vertical)
             Grid[newx, newy] = new Vector3( Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
         }

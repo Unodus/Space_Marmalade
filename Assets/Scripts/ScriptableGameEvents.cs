@@ -27,6 +27,7 @@ public class ScriptableGameEvents : ScriptableObject
         public TurnPhase turnPhase;
         public bool ReturnToCentre;
         public string TriggerEliasProfiler;
+        public int CameraMode;
        }
 
     public EventSettings[] Events;    // array of all palettes

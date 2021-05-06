@@ -74,6 +74,7 @@ public class LineMaker : MonoBehaviour
             }
             else
             {
+
                 GridSystem.Outlines[i].pp.startColor = LineColor;
                 GridSystem.Outlines[i].pp.endColor = LineColor;
 
@@ -87,8 +88,23 @@ public class LineMaker : MonoBehaviour
             End = new Vector2(j, gridMath.Rows -0.5f);
             GridSystem.ColumnLines[i] = GetLine(Start, End);
 
-            GridSystem.ColumnLines[i].pp.startColor = LineColor;
-            GridSystem.ColumnLines[i].pp.endColor = LineColor;
+
+
+            if ((i ) % (gridMath.Columns  / gridMath.Manifolds ) == 0)
+            {
+                GridSystem.ColumnLines[i].pp.startColor = Color.white;
+                GridSystem.ColumnLines[i].pp.endColor = Color.white;
+
+            }
+
+            else
+            {
+
+                GridSystem.ColumnLines[i].pp.startColor = LineColor;
+                GridSystem.ColumnLines[i].pp.endColor = LineColor;
+
+            }
+
         }
         for (int i = 0; i < (gridMath.Rows -1); i++)
         {
@@ -96,6 +112,8 @@ public class LineMaker : MonoBehaviour
             Start = new Vector2(-0.5f, j);
             End = new Vector2(gridMath.Columns - 0.5f, j);
             GridSystem.RowLines[i] = GetLine(Start, End);
+
+
 
             GridSystem.RowLines[i].pp.startColor = LineColor;
             GridSystem.RowLines[i].pp.endColor = LineColor;
