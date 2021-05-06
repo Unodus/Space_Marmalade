@@ -8,6 +8,9 @@ public class PointFollow : MonoBehaviour
 {
 
 
+    [SerializeField] GameObject[] CameraObjects = new GameObject[2];
+    
+    
     [SerializeField] ScriptableGameEvents EventProfiler;
     [SerializeField] ScriptableElias EliasThemeNames;
 
@@ -24,7 +27,7 @@ public class PointFollow : MonoBehaviour
     [SerializeField]  GameObject LargeEnemyPrefab;
 
 
-    [SerializeField] PostSwitcher postSwitcher;
+  //  [SerializeField] PostSwitcher postSwitcher;
 
     [SerializeField] GameObject PointPrefab; // Refference for each navigable point on the map
 
@@ -140,8 +143,58 @@ public class PointFollow : MonoBehaviour
         return Timer.GetComponent<Slider>();
     }
 
+    public void SetMove()
+    {
+        projectorMath.ChangeBool(true);
+    }
+    public void SetAim()
+    {
+
+        projectorMath.ChangeBool(false);
+    }
+
+    public void ToggleState()
+    {
+   
+        if (projectorMath.GetBool())
+        {
+            SetAim();
+        }
+        else
+        {
+            SetMove();
+        }
+    }
+
+
+    public void SwitchOpenObject(int SelectedObject, GameObject[] Objects)
+    {
+        for (int i = 0; i < Objects.Length; i++)
+        {
+
+            if (i == SelectedObject)
+
+            { Objects[i].SetActive(true); }
+            else
+            { Objects[i].SetActive(false); }
+
+        }
+    }
+
+
+
     void Start()// Instantiate grid and ships in random positions
     {
+
+
+
+
+        if (!EliasComponent)
+            EliasObject.TryGetComponent(out EliasComponent);
+
+
+
+
         if (!EliasComponent)
             EliasObject.TryGetComponent(out EliasComponent);
 
@@ -155,8 +208,8 @@ public class PointFollow : MonoBehaviour
 
         ColumnsPerManifold = gridMath.Columns / gridMath.Manifolds;
 
-        MaxGridX = 2 * ColumnsPerManifold;//(int)Mathf.Floor( Mathf.Lerp(0, gridMath.Columns, 0.5f ));
-        MinGridX = 3 * ColumnsPerManifold;//(int)Mathf.Ceil(Mathf.Lerp(0, gridMath.Columns, 0.5f)); ;
+        MaxGridX = 3 * ColumnsPerManifold;
+        MinGridX = 2 * ColumnsPerManifold;
 
 
         List<MyPoint> TempList = new List<MyPoint>( MyPoints);
@@ -170,15 +223,18 @@ public class PointFollow : MonoBehaviour
         SpaceshipBases.Add(new Player(MyPoints[RandomNumber], PlayerPrefab));
         TempList.RemoveAt(RandomNumber);
 
-        RandomNumber = Random.Range(0, TempList.Count);
+       // RandomNumber = Random.Range(0, TempList.Count);
 
 
-        MyPoints[RandomNumber] = CheckNodeIsWithinBounds(MyPoints[RandomNumber]);
+   //     MyPoints[RandomNumber] = CheckNodeIsWithinBounds(MyPoints[RandomNumber]);
 
-        SpaceshipBases.Add(new SmallEnemy(MyPoints[RandomNumber], SmallEnemyPrefab));
-        TempList.RemoveAt(RandomNumber);
+     //   SpaceshipBases.Add(new SmallEnemy(MyPoints[RandomNumber], SmallEnemyPrefab));
+      //  TempList.RemoveAt(RandomNumber);
 
         ReadyPoints();
+
+        SetMove();
+
 
     }
 
@@ -187,14 +243,18 @@ public class PointFollow : MonoBehaviour
 
         ScriptableGameEvents.EventSettings currentEvent = EventProfiler.GetEventByPhase(turnPhase);
         if (currentEvent == null) return;
-        Debug.Log(currentEvent.Name);
+        //Debug.Log(currentEvent.Name);
         CurrentTurn = turnPhase;
 
         if (!string.IsNullOrEmpty( currentEvent.TriggerEliasProfiler ))
             EliasThemeNames.ChangeElias(EliasComponent, currentEvent.TriggerEliasProfiler);
 
+        SwitchOpenObject(currentEvent.CameraMode, CameraObjects);
+
         switch (turnPhase)
         {
+            case ScriptableGameEvents.TurnPhase.Transition:
+                break;
             case ScriptableGameEvents.TurnPhase.EnemyTurnMoving:
                 break;
             case ScriptableGameEvents.TurnPhase.EnemyTurnShooting:
@@ -216,7 +276,7 @@ public class PointFollow : MonoBehaviour
 
                 break;
             default:
-                Debug.Log("Event Logic is not programmed");
+                Debug.Log("Event Logic is not programmed: " + turnPhase);
                 break;
         }
 
@@ -247,7 +307,7 @@ public class PointFollow : MonoBehaviour
             TimerObject.value -= Time.deltaTime;
             if (TimerObject.value <= 0)
             {
-                postSwitcher.SetMove();
+                SetMove();
 
                 EndTurn();
                 Destroy(TimerObject.gameObject);
@@ -264,6 +324,8 @@ public class PointFollow : MonoBehaviour
 
         switch (CurrentTurn)
         {
+            case ScriptableGameEvents.TurnPhase.Transition:
+                break;
             case ScriptableGameEvents.TurnPhase.EnemyTurnMoving:
                     //do enemy stuff
 
@@ -285,7 +347,7 @@ public class PointFollow : MonoBehaviour
 
                     }
 
-                    postSwitcher.SetAim();
+                    SetAim();
                     ReadyPoints();
                 
                 break;
@@ -318,7 +380,7 @@ public class PointFollow : MonoBehaviour
 
                     }
 
-                    postSwitcher.SetMove();
+                    SetMove();
                     ReadyPoints();
                     FindSelectableNodes(SpaceshipBases[0].Reach * 100, SpaceshipBases[0]);
 
@@ -353,7 +415,7 @@ public class PointFollow : MonoBehaviour
                             if (FirePoint.p != null)
                             {
                                 SpaceshipBases[0].ShipPrefab.GetComponent<PlayerMovement>().Shoot(FirePoint.p.transform.position);
-                                postSwitcher.SetMove();
+                                    SetMove();
                                 ReadyPoints();
                             }
 
@@ -378,95 +440,26 @@ public class PointFollow : MonoBehaviour
 
     MyPoint CheckNodeIsWithinBounds(MyPoint NewPoint)// Moves a ship to a different part of the grid
     {
-        if (NewPoint.Column < MinGridX)
+        if (NewPoint.Column < MinGridX || NewPoint.Column > MaxGridX)
         {
-            foreach (MyPoint i in MyPoints)
+            int properColumn = (NewPoint.Column ) % (gridMath.Columns / gridMath.Manifolds);
+            properColumn = properColumn + MinGridX;
+
+            foreach(MyPoint i in MyPoints)
             {
-                if (i.Row == NewPoint.Row)
+                if (i.Column == properColumn && i.Row == NewPoint.Row)
                 {
-                    if (i.Column == NewPoint.Column + ColumnsPerManifold)
-                    {
-                        if (NewPoint != i)
-                        {
-                            NewPoint = i;
-               //        CheckNodeIsWithinBounds(NewPoint);
-                        }
-                    }
+                    return i;
                 }
             }
-        }
-
-        if (NewPoint.Column > MaxGridX)
-        {
-            foreach (MyPoint i in MyPoints)
-            {
-                if (i.Row == NewPoint.Row)
-                {
-                    if (i.Column == NewPoint.Column - ColumnsPerManifold)
-                    {
-                        if (NewPoint != i)
-                        {
-                            NewPoint = i;
-                  //                                      CheckNodeIsWithinBounds(NewPoint);
-                        }
-                        
-                    }
-                }
-            }
-        }
-        Debug.Log("After Coordinates:" + NewPoint.Column + " by " + NewPoint.Row + ". Between " + MinGridX + " and " + MaxGridX + " with a threshold of " + ColumnsPerManifold);
-        //       
-
-        if (NewPoint.Column >= MinGridX && NewPoint.Column <= MaxGridX)
-        {
+            Debug.Log(properColumn + " " + MinGridX);
             return NewPoint;
-
         }
         else
         {
-            if (NewPoint.Column < MinGridX)
-            {
-                foreach (MyPoint i in MyPoints)
-                {
-                    if (i.Row == NewPoint.Row)
-                    {
-                        if (i.Column == NewPoint.Column + ColumnsPerManifold)
-                        {
-                            if (NewPoint != i)
-                            {
-                                NewPoint = i;
-                                //        CheckNodeIsWithinBounds(NewPoint);
-                            }
-
-
-                        }
-                    }
-                }
-            }
-
-            if (NewPoint.Column > MaxGridX)
-            {
-                foreach (MyPoint i in MyPoints)
-                {
-                    if (i.Row == NewPoint.Row)
-                    {
-                        if (i.Column == NewPoint.Column - ColumnsPerManifold)
-                        {
-                            if (NewPoint != i)
-                            {
-                                NewPoint = i;
-                                //                                      CheckNodeIsWithinBounds(NewPoint);
-                            }
-
-                        }
-                    }
-                }
-            }
-            Debug.Log("After Coordinates:" + NewPoint.Column + " by " + NewPoint.Row);
-
             return NewPoint;
         }
-            
+
 
     }
 
