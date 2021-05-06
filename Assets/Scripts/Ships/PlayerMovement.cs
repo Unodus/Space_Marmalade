@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    GameObject MissilePrefab, ExplosionPrefab, ImplosionPrefab, ShipSpriteRef;
+    GameObject MissilePrefab, ExplosionPrefab, ImplosionPrefab, ShipSpriteRef, ShieldObject;
     LineMaker LineComp;
 
+
+    public float ShieldSize = 1 ;
     
 
     void Start() // plays an implosion effect on creation
@@ -45,5 +47,16 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+
+    private void LateUpdate()
+    {
+        LerpShieldSize();
+    }
+
+    public void LerpShieldSize()
+    {
+        ShieldObject.transform.localScale = Vector3.MoveTowards(ShieldObject.transform.localScale, Vector3.one *2.5f* ShieldSize , Time.deltaTime * 10);
+    }
+
 
 }

@@ -149,7 +149,6 @@ public class PointFollow : MonoBehaviour
     }
     public void SetAim()
     {
-
         projectorMath.ChangeBool(false);
     }
 
@@ -158,11 +157,11 @@ public class PointFollow : MonoBehaviour
    
         if (projectorMath.GetBool())
         {
-            SetAim();
+            CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting);
         }
         else
         {
-            SetMove();
+            CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
         }
     }
 
@@ -191,15 +190,6 @@ public class PointFollow : MonoBehaviour
 
         if (!EliasComponent)
             EliasObject.TryGetComponent(out EliasComponent);
-
-
-
-
-        if (!EliasComponent)
-            EliasObject.TryGetComponent(out EliasComponent);
-
-        CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting;
-
 
         projectorMath = Projector.GetComponent<MyProjector>();
         gridMath = projectorMath.gridMath;
@@ -231,9 +221,9 @@ public class PointFollow : MonoBehaviour
      //   SpaceshipBases.Add(new SmallEnemy(MyPoints[RandomNumber], SmallEnemyPrefab));
       //  TempList.RemoveAt(RandomNumber);
 
-        ReadyPoints();
+        
 
-        SetMove();
+        CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Start);
 
 
     }
@@ -243,11 +233,14 @@ public class PointFollow : MonoBehaviour
 
         ScriptableGameEvents.EventSettings currentEvent = EventProfiler.GetEventByPhase(turnPhase);
         if (currentEvent == null) return;
-        //Debug.Log(currentEvent.Name);
+  
         CurrentTurn = turnPhase;
 
         if (!string.IsNullOrEmpty( currentEvent.TriggerEliasProfiler ))
+
+        {
             EliasThemeNames.ChangeElias(EliasComponent, currentEvent.TriggerEliasProfiler);
+        }
 
         SwitchOpenObject(currentEvent.CameraMode, CameraObjects);
 
@@ -260,17 +253,25 @@ public class PointFollow : MonoBehaviour
             case ScriptableGameEvents.TurnPhase.EnemyTurnShooting:
                 break;
             case ScriptableGameEvents.TurnPhase.PlayerTurn_Moving:
+                SetMove();
+
                 break;
             case ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting:
+                SetAim();
                 break;
             case ScriptableGameEvents.TurnPhase.PlayerTurn_Start:
+
+                SpaceshipBases[0].Movement = SpaceshipBases[0].MaxMovement;
+                SpaceshipBases[0].ShipPrefab.GetComponent<PlayerMovement>().ShieldSize = SpaceshipBases[0].Movement;
+                CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Moving;
+                ReadyPoints();
+
+
                 break;
             case ScriptableGameEvents.TurnPhase.PlayerTurn_End:
 
                 Destroy(GameObject.FindGameObjectWithTag("Timer"));
 
-                SpaceshipBases[0].Movement = SpaceshipBases[0].MaxMovement;
-                //CurrentTurn = ScriptableGameEvents.TurnPhase.Transition;
                 LaunchMissiles(SpaceshipBases[0], ScriptableGameEvents.TurnPhase.EnemyTurnMoving);
 
 
@@ -363,7 +364,7 @@ public class PointFollow : MonoBehaviour
                         {
                             FindSelectableNodes(p.Reach * gridMath.Size, p);
                             p.ShipPrefab.GetComponent<PlayerMovement>().Shoot(GetClosestNode(SpaceshipBases[0].ShipPrefab.transform.position, p, 0).p.transform.position);
-                            LaunchMissiles(p, ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
+                            LaunchMissiles(p, ScriptableGameEvents.TurnPhase.PlayerTurn_Start);
 
                         }
                         if (p.ShipType == 2)
@@ -475,10 +476,15 @@ public class PointFollow : MonoBehaviour
         Ship.ShipPrefab.transform.SetParent(NewPoint.p.transform);
 
         Ship.Movement -= Vector3.Magnitude(Ship.ShipPrefab.transform.localPosition) *0.25f* gridMath.Size;
+
+
+
         if (Ship.Movement <0)
         {
             Ship.Movement = 0;
         }
+
+        Ship.ShipPrefab.GetComponent<PlayerMovement>().ShieldSize = Ship.Movement;
     }
 
 
@@ -745,34 +751,32 @@ public class PointFollow : MonoBehaviour
         if(CurrentTurn == ScriptableGameEvents.TurnPhase.EnemyTurnMoving)
         {
             CallEvent(ScriptableGameEvents.TurnPhase.Transition);
-//            CurrentTurn = ScriptableGameEvents.TurnPhase.Transition;
+
             StartCoroutine("Reset", (0));
         }
         else
         {
             CallEvent(ScriptableGameEvents.TurnPhase.Transition);
 
-//            CurrentTurn = ScriptableGameEvents.TurnPhase.Transition;
             StartCoroutine("Reset", (gridMath.TransitionSpeed * 1.0f));
         }
     }
     IEnumerator Reset(float Count) // This function waits for the appropriate time before allowing the selection to happen
     {
         yield return new WaitForSeconds(Count); //Count is the amount of time in seconds that you want to wait.
-     
-        if(Count == 0)
+
+        if (Count == 0)
         {
             yield return new WaitForSeconds(gridMath.TransitionSpeed * 2.0f);
 
             CallEvent(ScriptableGameEvents.TurnPhase.EnemyTurnShooting);
 
-//            CurrentTurn = ScriptableGameEvents.TurnPhase.EnemyTurnShooting;
         }
         else
         {
             if (gridMath.PolarActive)
             {
-                CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
+                CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Start);
                 FindSelectableNodes(SpaceshipBases[0].Movement * gridMath.Size, SpaceshipBases[0]);
 
 
@@ -816,22 +820,6 @@ public class PointFollow : MonoBehaviour
 
         PositionShips(SpaceshipBases);
 
-
-
-        //handles the turn-changing logic
-
-        if (CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Moving && !gridMath.PolarActive)
-        {
-            CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting);
-
-//            CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting;
-        }
-        if (CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting && gridMath.PolarActive)
-        {
-            CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
-
-//            CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Moving;
-        }
 
 
 
