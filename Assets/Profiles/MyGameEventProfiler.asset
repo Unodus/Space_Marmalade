@@ -15,7 +15,7 @@ MonoBehaviour:
   Events:
   - Name: Enemy Turn Shooting
     turnPhase: 0
-    ReturnToCentre: 0
+    ReturnToCentre: 1
     TriggerEliasProfiler: 
     CameraMode: 0
   - Name: Enemy Turn Moving
