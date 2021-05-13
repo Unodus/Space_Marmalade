@@ -98,7 +98,7 @@ MonoBehaviour:
       name: 
       level: 0
     useActionPreset: 1
-    actionPresetName: Combat 1 Transition
+    actionPresetName: Combat Transition
     allowRequiredThemeMissmatch: 0
     useDoubleEffectParam: 0
     doubleEffectParam:
