@@ -27,7 +27,7 @@ MonoBehaviour:
     turnPhase: 3
     ReturnToCentre: 0
     TriggerEliasProfiler: Combat
-    CameraMode: 0
+    CameraMode: 1
   - Name: Player Turn Moving
     turnPhase: 2
     ReturnToCentre: 0

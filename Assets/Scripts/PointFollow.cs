@@ -185,9 +185,6 @@ public class PointFollow : MonoBehaviour
     void Start()// Instantiate grid and ships in random positions
     {
 
-
-
-
         if (!EliasComponent)
             EliasObject.TryGetComponent(out EliasComponent);
 
@@ -233,8 +230,31 @@ public class PointFollow : MonoBehaviour
 
         ScriptableGameEvents.EventSettings currentEvent = EventProfiler.GetEventByPhase(turnPhase);
         if (currentEvent == null) return;
-  
+
+      
+
         CurrentTurn = turnPhase;
+
+
+        switch (currentEvent.CameraMode)
+        {
+            case 0:
+                SetMove();
+                break;
+            case 1:
+                SetAim();
+                break;
+
+            default:
+                Debug.Log(currentEvent.CameraMode + " isn't a registered camera mode");
+                break;
+
+        }
+ //       if ( currentEvent.CameraMode ==0)
+
+
+            Debug.Log("Current Event: " + turnPhase + " with Elias String:  " + currentEvent.TriggerEliasProfiler );
+
 
         if (!string.IsNullOrEmpty( currentEvent.TriggerEliasProfiler ))
 
@@ -253,17 +273,17 @@ public class PointFollow : MonoBehaviour
             case ScriptableGameEvents.TurnPhase.EnemyTurnShooting:
                 break;
             case ScriptableGameEvents.TurnPhase.PlayerTurn_Moving:
-                SetMove();
+                
 
                 break;
             case ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting:
-                SetAim();
+          
                 break;
             case ScriptableGameEvents.TurnPhase.PlayerTurn_Start:
 
                 SpaceshipBases[0].Movement = SpaceshipBases[0].MaxMovement;
                 SpaceshipBases[0].ShipPrefab.GetComponent<PlayerMovement>().ShieldSize = SpaceshipBases[0].Movement;
-                CurrentTurn = ScriptableGameEvents.TurnPhase.PlayerTurn_Moving;
+                
                 ReadyPoints();
 
 
@@ -381,11 +401,11 @@ public class PointFollow : MonoBehaviour
 
                     }
 
-                    SetMove();
-                    ReadyPoints();
-                    FindSelectableNodes(SpaceshipBases[0].Reach * 100, SpaceshipBases[0]);
+                // SetMove();
+                // ReadyPoints();
+                // FindSelectableNodes(SpaceshipBases[0].Reach * 100, SpaceshipBases[0]);
 
-                    
+                CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Start);
 
 
         
@@ -438,7 +458,6 @@ public class PointFollow : MonoBehaviour
 
     }
 
-
     MyPoint CheckNodeIsWithinBounds(MyPoint NewPoint)// Moves a ship to a different part of the grid
     {
         if (NewPoint.Column < MinGridX || NewPoint.Column > MaxGridX)
@@ -453,7 +472,6 @@ public class PointFollow : MonoBehaviour
                     return i;
                 }
             }
-            Debug.Log(properColumn + " " + MinGridX);
             return NewPoint;
         }
         else
@@ -486,7 +504,6 @@ public class PointFollow : MonoBehaviour
 
         Ship.ShipPrefab.GetComponent<PlayerMovement>().ShieldSize = Ship.Movement;
     }
-
 
     void ChangeNodeType(MyPoint Point, NodeMode newMode) // Used to calculate whether a node on the map is selectable
     {
@@ -563,7 +580,6 @@ public class PointFollow : MonoBehaviour
         yield return null;
 
     }
-
     void InitiatePoints() // Instantiate Point gameobjects, based on gridmath data 
     {
         NumOfPoints = gridMath.Columns * gridMath.Rows;
@@ -756,7 +772,7 @@ public class PointFollow : MonoBehaviour
         }
         else
         {
-            CallEvent(ScriptableGameEvents.TurnPhase.Transition);
+          //  CallEvent(ScriptableGameEvents.TurnPhase.Transition);
 
             StartCoroutine("Reset", (gridMath.TransitionSpeed * 1.0f));
         }
@@ -774,9 +790,11 @@ public class PointFollow : MonoBehaviour
         }
         else
         {
-            if (gridMath.PolarActive)
+
+            if (CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Moving || CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Start)
             {
-                CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Start);
+
+                CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
                 FindSelectableNodes(SpaceshipBases[0].Movement * gridMath.Size, SpaceshipBases[0]);
 
 
