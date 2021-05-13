@@ -24,7 +24,7 @@ public class ScriptableElias : ScriptableObject
         public EliasPlayStinger playStinger;
 
         public bool useActionPreset;
-        public string actionPresetName;
+        public string[] actionPresetName;
         public bool allowRequiredThemeMissmatch;
 
         public bool useDoubleEffectParam;
@@ -75,8 +75,9 @@ public class ScriptableElias : ScriptableObject
             }
             if (i.useActionPreset)
             {
-                eliasPlayer.RunActionPreset(i.actionPresetName, i.allowRequiredThemeMissmatch);
-                CreatePopUp(myTheme, eliasPlayer);
+                int j = UnityEngine.Random.Range(0, i.actionPresetName.Length);
+                eliasPlayer.RunActionPreset(i.actionPresetName[j], i.allowRequiredThemeMissmatch);
+                CreatePopUp(i.actionPresetName[j], eliasPlayer);
 
             }
             if (i.useDoubleEffectParam)

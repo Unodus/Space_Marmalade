@@ -46,7 +46,8 @@ MonoBehaviour:
       name: 
       level: 0
     useActionPreset: 1
-    actionPresetName: Strategy Mode
+    actionPresetName:
+    - Strategy Mode
     allowRequiredThemeMissmatch: 0
     useDoubleEffectParam: 0
     doubleEffectParam:
@@ -98,7 +99,9 @@ MonoBehaviour:
       name: 
       level: 0
     useActionPreset: 1
-    actionPresetName: Combat 1 Transition
+    actionPresetName:
+    - Combat 1 Transition
+    - Combat 2 Transition
     allowRequiredThemeMissmatch: 0
     useDoubleEffectParam: 0
     doubleEffectParam:
@@ -150,7 +153,8 @@ MonoBehaviour:
       name: 
       level: 0
     useActionPreset: 1
-    actionPresetName: Mode Transition
+    actionPresetName:
+    - Mode
     allowRequiredThemeMissmatch: 0
     useDoubleEffectParam: 0
     doubleEffectParam:
