@@ -100,8 +100,8 @@ MonoBehaviour:
       level: 0
     useActionPreset: 1
     actionPresetName:
-    - Combat 1 Transition
-    - Combat 2 Transition
+    - Combat Transition
+    - Combat Transition 2
     allowRequiredThemeMissmatch: 0
     useDoubleEffectParam: 0
     doubleEffectParam:
@@ -154,7 +154,7 @@ MonoBehaviour:
       level: 0
     useActionPreset: 1
     actionPresetName:
-    - Mode
+    - Mode Transition
     allowRequiredThemeMissmatch: 0
     useDoubleEffectParam: 0
     doubleEffectParam:
