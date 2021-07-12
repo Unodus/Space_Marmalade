@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PointFollow : MonoBehaviour
 {
-
+    [SerializeField] SoundHelpers SoundManager;
 
     [SerializeField] GameObject[] CameraObjects = new GameObject[2];
     
@@ -488,6 +488,9 @@ public class PointFollow : MonoBehaviour
         if (NewPoint.p == null)
             return;
 
+        if (NewPoint == Ship.CurrentNode)
+            return;
+
         NewPoint = CheckNodeIsWithinBounds(NewPoint);
 
         Ship.CurrentNode = NewPoint;
@@ -503,6 +506,19 @@ public class PointFollow : MonoBehaviour
         }
 
         Ship.ShipPrefab.GetComponent<PlayerMovement>().ShieldSize = Ship.Movement;
+
+
+
+
+        if(CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Moving)
+        {
+            SoundManager.PlaySound(ScriptableSounds.GameSounds.ShipMovePlayer);
+        }
+        else
+        {
+            SoundManager.PlaySound(ScriptableSounds.GameSounds.ShipMoveEnemy);
+        }
+
     }
 
     void ChangeNodeType(MyPoint Point, NodeMode newMode) // Used to calculate whether a node on the map is selectable
