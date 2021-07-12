@@ -138,8 +138,6 @@ public class LineMaker : MonoBehaviour
             MyLines.Remove(GridSystem.Outlines[i]);
         }
     }
-
-
     public GameObject GetLine(Vector3 cStart, Vector3 cEnd) // Converts two points in world space into a line game object, properly segmented
     {
 
