@@ -12,7 +12,6 @@ public class DialogueRecorder : MonoBehaviour
     [SerializeField] uint MinLine, LineStart, LineAmount, MaxLine;
 
 
-
     // To DO: Work out why lines occassionally are allowed above LineAmount. Work out how to calculate LineAmount at runtime
 
     int test = 0;
