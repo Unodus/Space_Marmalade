@@ -210,13 +210,13 @@ public class PointFollow : MonoBehaviour
         SpaceshipBases.Add(new Player(MyPoints[RandomNumber], PlayerPrefab));
         TempList.RemoveAt(RandomNumber);
 
-       // RandomNumber = Random.Range(0, TempList.Count);
+        RandomNumber = Random.Range(0, TempList.Count);
 
 
-   //     MyPoints[RandomNumber] = CheckNodeIsWithinBounds(MyPoints[RandomNumber]);
+        MyPoints[RandomNumber] = CheckNodeIsWithinBounds(MyPoints[RandomNumber]);
 
-     //   SpaceshipBases.Add(new SmallEnemy(MyPoints[RandomNumber], SmallEnemyPrefab));
-      //  TempList.RemoveAt(RandomNumber);
+        SpaceshipBases.Add(new SmallEnemy(MyPoints[RandomNumber], SmallEnemyPrefab));
+        TempList.RemoveAt(RandomNumber);
 
         
 

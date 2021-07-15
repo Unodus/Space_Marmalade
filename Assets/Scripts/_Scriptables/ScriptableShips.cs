@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SpaceshipProfile", menuName = "ScriptableObjects/SpaceshipProfile", order = 5)]
+[CreateAssetMenu(fileName = "SpaceshipProfile", menuName = "ScriptableObjects/SpaceshipProfile")]
 
 public class ScriptableShips : ScriptableObject
 {
