@@ -11,13 +11,19 @@ public class ScriptableCheatCodes : ScriptableObject
     public class CheatType
     {
         public string CheatCode;
-        public int InternalCode;
+        public CommandType InternalCode;
     }
 
     public CheatType[] Commands;    // array of all palettes
 
+    public enum CommandType 
+    { 
+    None,
+    CheatEnable
+    }
 
-    public int GetCodeByName(string Code)
+
+    public CommandType GetCodeByName(string Code)
     {
         foreach (CheatType i in Commands)
         {
@@ -26,9 +32,7 @@ public class ScriptableCheatCodes : ScriptableObject
                 return i.InternalCode ;
             }
         }
-
-        Debug.LogWarning(Code + " is not registered in the profiler");
-        return 0;
+        return CommandType.None;
     }
 
 
