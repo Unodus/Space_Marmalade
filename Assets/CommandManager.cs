@@ -26,16 +26,16 @@ public class CommandManager : MonoBehaviour
 
     }
 
-    public void ProcessCommand(int input)
+    public void ProcessCommand(ScriptableCheatCodes.CommandType input)
     {
         switch(input)
         {
-            case 0:
+            case ScriptableCheatCodes.CommandType.None:
 
                 // No Command inputted
 
                 break;
-            case 1:
+            case ScriptableCheatCodes.CommandType.CheatEnable:
 
                 dialogueBox.AddLineOfText("Cheat Codes enabled");
                 break;
