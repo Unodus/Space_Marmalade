@@ -12,4 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d6160cbc16edd4bb68f9cede29bf1a, type: 3}
   m_Name: MySpaceshipProfile
   m_EditorClassIdentifier: 
-  Spaceships: []
+  Spaceships:
+  - Name: 
+    ShipPrefab: {fileID: 0}
+    Movement: 0
+    MaxMovement: 0
+    Reach: 0
+    Shots: 0
+    ShipType: 0
+  - Name: 
+    ShipPrefab: {fileID: 0}
+    Movement: 0
+    MaxMovement: 0
+    Reach: 0
+    Shots: 0
+    ShipType: 0
+  - Name: 
+    ShipPrefab: {fileID: 0}
+    Movement: 0
+    MaxMovement: 0
+    Reach: 0
+    Shots: 0
+    ShipType: 0

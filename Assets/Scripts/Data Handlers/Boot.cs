@@ -9,6 +9,7 @@ public class Boot : MonoBehaviour
     [SerializeField]  DialogueRecorder ConsoleLog;
 
     [SerializeField] ScriptableScenes ScenesToLoadOnBoot;
+    [SerializeField] ScriptableStrings StringValues;
 
     List<IEnumerator> StartUpProcesses;
     WaitForEndOfFrame RestFrame;
@@ -23,7 +24,7 @@ public class Boot : MonoBehaviour
 
     public void StartBoot()
     {
-        LogToConsole("Boot Started");
+        LogToConsole(StringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 1));
         StartUpProcesses = new List<IEnumerator>();
         #region
         // Put Startup Enumerators here:
@@ -33,12 +34,12 @@ public class Boot : MonoBehaviour
         // ^^^^^
         #endregion
         StartCoroutine(Startup(StartUpProcesses.ToArray()));
-        LogToConsole("Ready");
+        LogToConsole(StringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 2));
     }
 
     public void LoadBuild()
     {
-        LogToConsole("Loading Game");
+        LogToConsole(StringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 3));
         StartUpProcesses = new List<IEnumerator>();
         #region
         // Put Build Enumerators here:
@@ -55,7 +56,7 @@ public class Boot : MonoBehaviour
 
     public void UnloadBuild()
     {
-        LogToConsole("Unloading Game");
+        LogToConsole(StringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 4));
         StartUpProcesses = new List<IEnumerator>();
         #region
         // Put Build Enumerators here:
@@ -98,14 +99,14 @@ public class Boot : MonoBehaviour
 
         GameLoaded = false;
 
-        LogToConsole("Boot Loaded");
+        LogToConsole(StringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 5));
         yield return null;
     }
     
     IEnumerator LoadBootScenes()
     {
-        if (!GameLoaded) LogToConsole("Completed Load");
-        else LogToConsole("Load Failed");
+        if (!GameLoaded) LogToConsole(StringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 6));
+        else LogToConsole(StringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 7));
 
 
         if (ScenesToLoadOnBoot == null || GameLoaded) yield return null;
@@ -128,8 +129,8 @@ public class Boot : MonoBehaviour
     
     IEnumerator UnloadBootScenes()
     {
-        if (GameLoaded) LogToConsole("Completed Load");
-        else LogToConsole("Load Failed");
+        if (GameLoaded) LogToConsole(StringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 6));
+        else LogToConsole(StringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 7));
 
         if (ScenesToLoadOnBoot == null || !GameLoaded) yield return null;
         else
