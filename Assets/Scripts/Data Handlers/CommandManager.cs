@@ -8,6 +8,7 @@ public class CommandManager : MonoBehaviour
     [SerializeField] InputField inputLineField;
     [SerializeField] DialogueRecorder dialogueBox;
     [SerializeField] ScriptableCheatCodes CheatCodes;
+    [SerializeField] ScriptableStrings stringValues;
 
     public void AddLineFromInput()
     {
@@ -37,7 +38,7 @@ public class CommandManager : MonoBehaviour
                 break;
             case ScriptableCheatCodes.CommandType.CheatEnable:
 
-                dialogueBox.AddLineOfText("Cheat Codes enabled");
+                dialogueBox.AddLineOfText(stringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 0));
                 break;
 
             default:

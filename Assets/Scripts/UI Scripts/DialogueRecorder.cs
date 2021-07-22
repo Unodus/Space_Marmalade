@@ -14,25 +14,25 @@ public class DialogueRecorder : MonoBehaviour
 
     // To DO: Work out why lines occassionally are allowed above LineAmount. Work out how to calculate LineAmount at runtime
 
-    int test = 0;
-    [ContextMenu("Test Adding stuff")]
-    public void Addstuff()
-    {
-        StartCoroutine(DoSomething());
-    }
-    IEnumerator DoSomething()
-    {
-        WaitForEndOfFrame endOfFrame = new WaitForEndOfFrame();
-        for (int i = 0; i <5; i++)
-        {
+    //int test = 0;
+    //[ContextMenu("Test Adding stuff")]
+    //public void Addstuff()
+    //{
+    //    StartCoroutine(DoSomething());
+    //}
+    //IEnumerator DoSomething()
+    //{
+    //    WaitForEndOfFrame endOfFrame = new WaitForEndOfFrame();
+    //    for (int i = 0; i <5; i++)
+    //    {
 
-        AddLineOfText("debugline" + test);
-        test++;
+    //    AddLineOfText("debugline" + test);
+    //    test++;
 
-            yield return endOfFrame;
-        }
+    //        yield return endOfFrame;
+    //    }
 
-    }
+    //}
 
     public void AddLineOfText(string newText)
     {
@@ -71,10 +71,7 @@ public class DialogueRecorder : MonoBehaviour
     {
         
         if (newline < MinLine) newline = MinLine;
-        if (newline > MaxLine ) newline = MaxLine ;
-
-      //  if (MinLine + newline < LineAmount) LineStart = newline;
-        
+        if (newline > MaxLine ) newline = MaxLine;   
         if (newline + LineAmount < MaxLine) LineStart = newline;
         UpdateTextBox();
     }    
