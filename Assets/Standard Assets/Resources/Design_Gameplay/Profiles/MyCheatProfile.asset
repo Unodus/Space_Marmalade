@@ -15,3 +15,10 @@ MonoBehaviour:
   Commands:
   - CheatCode: cheat
     InternalCode: 1
+    CommandMessageReference: 0
+  - CheatCode: PlaySound
+    InternalCode: 2
+    CommandMessageReference: 8
+  - CheatCode: PlayMusic
+    InternalCode: 3
+    CommandMessageReference: 9

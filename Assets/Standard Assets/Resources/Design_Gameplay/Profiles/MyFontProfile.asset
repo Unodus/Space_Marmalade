@@ -16,7 +16,7 @@ MonoBehaviour:
   - myCategory: 1
     myFonts:
       myFont: {fileID: 0}
-      DefaultColor: {r: 0, g: 0, b: 0, a: 0}
+      DefaultColor: {r: 1, g: 1, b: 1, a: 0}
       FontSize: 0
       Style: 0
   - myCategory: 2
@@ -28,6 +28,6 @@ MonoBehaviour:
   - myCategory: 0
     myFonts:
       myFont: {fileID: 0}
-      DefaultColor: {r: 0, g: 0, b: 0, a: 0}
+      DefaultColor: {r: 1, g: 1, b: 1, a: 0}
       FontSize: 0
       Style: 0

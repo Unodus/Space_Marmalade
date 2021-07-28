@@ -7,8 +7,11 @@ public class CommandManager : MonoBehaviour
 {
     [SerializeField] InputField inputLineField;
     [SerializeField] DialogueRecorder dialogueBox;
-    [SerializeField] ScriptableCheatCodes CheatCodes;
+    [SerializeField] public ScriptableCheatCodes CheatCodes;
     [SerializeField] ScriptableStrings stringValues;
+
+    [SerializeField] ScriptableSounds soundFiles;
+    [SerializeField] ScriptableElias eliasFiles;
 
     public void AddLineFromInput()
     {
@@ -27,9 +30,11 @@ public class CommandManager : MonoBehaviour
 
     }
 
-    public void ProcessCommand(ScriptableCheatCodes.CommandType input)
+    public void ProcessCommand(ScriptableCheatCodes.CheatType input)
     {
-        switch(input)
+        dialogueBox.AddLineOfText(stringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference));
+
+        switch (input.InternalCode)
         {
             case ScriptableCheatCodes.CommandType.None:
 
@@ -38,12 +43,33 @@ public class CommandManager : MonoBehaviour
                 break;
             case ScriptableCheatCodes.CommandType.CheatEnable:
 
-                dialogueBox.AddLineOfText(stringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 0));
+
+                break;
+
+            default:
+                break;
+        }
+
+
+    }
+
+    public void ProcessCommand(ScriptableCheatCodes.CheatType input, string inputString)
+    {
+        dialogueBox.AddLineOfText(stringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference) + inputString);
+
+        switch (input.InternalCode)
+        {
+            case ScriptableCheatCodes.CommandType.None:
+
+                // No Command inputted
+
+                break;
+            case ScriptableCheatCodes.CommandType.PlaySound:
+                
                 break;
 
             default:
                 break;
         }
     }
-
 }

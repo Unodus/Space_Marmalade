@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/_Scenes (DO NOT DELETE)/Boot.unity
+    path: Assets/Standard Assets/Scenes/_Scenes (DO NOT DELETE)/Boot.unity
     guid: 39b77e2c1a5b05a458fcd8005cf4c528
   - enabled: 1
-    path: Assets/Scenes/_Scenes (DO NOT DELETE)/Statics.unity
+    path: Assets/Standard Assets/Scenes/_Scenes (DO NOT DELETE)/Statics.unity
     guid: 263849c52b6a72f4992e656a838fc00f
   - enabled: 1
-    path: Assets/Scenes/_Scenes (DO NOT DELETE)/Tutorial.unity
+    path: Assets/Standard Assets/Scenes/_Scenes (DO NOT DELETE)/Tutorial.unity
     guid: 010990c62f361a84db7f2efa2d5b66e0
   - enabled: 1
-    path: Assets/Scenes/_Scenes (DO NOT DELETE)/PauseMenu.unity
+    path: Assets/Standard Assets/Scenes/_Scenes (DO NOT DELETE)/PauseMenu.unity
     guid: 8eee3b22fb754fa4c8e2a61ef012b722
   m_configObjects: {}

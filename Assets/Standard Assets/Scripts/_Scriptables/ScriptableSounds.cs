@@ -52,6 +52,10 @@ public class ScriptableSounds : ScriptableObject
             {
                 if (j.Name == soundName)
                 {
+                    CommandManager console = FindObjectOfType<CommandManager>();
+                    console.ProcessCommand(console.CheatCodes.GetCodeByName("PlaySound"), j.Name.ToString());
+
+
                     returnSound = j;
                     returnSound.volume = Mathf.Lerp(0, i.GroupVolume, returnSound.volume);
                     return returnSound;

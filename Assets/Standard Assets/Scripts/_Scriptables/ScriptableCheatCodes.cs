@@ -12,6 +12,7 @@ public class ScriptableCheatCodes : ScriptableObject
     {
         public string CheatCode;
         public CommandType InternalCode;
+        public int CommandMessageReference;
     }
 
     public CheatType[] Commands;    // array of all palettes
@@ -19,20 +20,22 @@ public class ScriptableCheatCodes : ScriptableObject
     public enum CommandType 
     { 
     None,
-    CheatEnable
+    CheatEnable,
+    PlaySound,
+    EliasChange
     }
 
 
-    public CommandType GetCodeByName(string Code)
+    public CheatType GetCodeByName(string Code)
     {
         foreach (CheatType i in Commands)
         {
             if (i.CheatCode == Code)
             {
-                return i.InternalCode ;
+                return i;
             }
         }
-        return CommandType.None;
+        return null;
     }
 
 

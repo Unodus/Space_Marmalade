@@ -269,10 +269,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 355424428}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 12
 --- !u!114 &355424428 stripped
 MonoBehaviour:
@@ -377,10 +377,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 386608843}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 7
 --- !u!1 &394215918
 GameObject:
@@ -637,10 +637,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 421939779}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 5
 --- !u!1 &467675689
 GameObject:
@@ -790,10 +790,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 606054101}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 11
 --- !u!114 &606054101 stripped
 MonoBehaviour:
@@ -898,10 +898,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 721297227}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 1
 --- !u!1 &782522890
 GameObject:
@@ -994,10 +994,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 782522892}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 2
 --- !u!1 &961906130
 GameObject:
@@ -1190,10 +1190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 1045314790}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 3
 --- !u!1 &1087329952
 GameObject:
@@ -1410,10 +1410,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 1286354394}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 10
 --- !u!114 &1286354394 stripped
 MonoBehaviour:
@@ -2013,10 +2013,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 1462740142}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 4
 --- !u!114 &1523186732 stripped
 MonoBehaviour:
@@ -2121,10 +2121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 1526266402}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 8
 --- !u!1 &1562614793
 GameObject:
@@ -2217,10 +2217,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 1562614795}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 6
 --- !u!1 &1679606449 stripped
 GameObject:
@@ -2253,11 +2253,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 1679606450}
+  fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
+  fontCategory: 2
   stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
   stringCategory: 1
-  fontLibrary: {fileID: 0}
-  fontCategory: 0
   stringIndex: 9
+--- !u!1 &1702642399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5674530582686381612, guid: 6a190c4345a48a947912f2443c4e76ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 5674530584723208547}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1702642400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702642399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5e88451227fbb4e9088afe72140a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textElement: {fileID: 1702642402}
+  fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
+  fontCategory: 2
+  stringLibrary: {fileID: 0}
+  stringCategory: 0
+  stringIndex: 0
+--- !u!114 &1702642402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5674530582686381618, guid: 6a190c4345a48a947912f2443c4e76ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 5674530584723208547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702642399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1772538648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2789,10 +2825,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textElement: {fileID: 1960597547}
-  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
-  stringCategory: 1
   fontLibrary: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
   fontCategory: 2
+  stringLibrary: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+  stringCategory: 1
   stringIndex: 0
 --- !u!1 &2109205581
 GameObject:
