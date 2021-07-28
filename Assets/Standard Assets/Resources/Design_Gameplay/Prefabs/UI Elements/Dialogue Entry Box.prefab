@@ -52,6 +52,7 @@ MonoBehaviour:
   inputLineField: {fileID: 5674530583405502383}
   dialogueBox: {fileID: 5674530583276799311}
   CheatCodes: {fileID: 11400000, guid: 49857453873b8534eb32e233d6d660ab, type: 2}
+  stringValues: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
 --- !u!1 &5674530582686381612
 GameObject:
   m_ObjectHideFlags: 0
