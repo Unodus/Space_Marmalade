@@ -2264,7 +2264,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5674530584723208547}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1702642400
+--- !u!114 &1702642402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5674530582686381618, guid: 6a190c4345a48a947912f2443c4e76ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 5674530584723208547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702642399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1702642403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2282,18 +2294,6 @@ MonoBehaviour:
   stringLibrary: {fileID: 0}
   stringCategory: 0
   stringIndex: 0
---- !u!114 &1702642402 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5674530582686381618, guid: 6a190c4345a48a947912f2443c4e76ae,
-    type: 3}
-  m_PrefabInstance: {fileID: 5674530584723208547}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702642399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1772538648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2877,6 +2877,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue Entry Box
       objectReference: {fileID: 0}
+    - target: {fileID: 3862108417541905895, guid: 6a190c4345a48a947912f2443c4e76ae,
+        type: 3}
+      propertyPath: soundFiles
+      value: 
+      objectReference: {fileID: 11400000, guid: 849b2b3e95a018442a832b5e446e9aaa,
+        type: 2}
+    - target: {fileID: 3862108417541905895, guid: 6a190c4345a48a947912f2443c4e76ae,
+        type: 3}
+      propertyPath: eliasFiles
+      value: 
+      objectReference: {fileID: 11400000, guid: 423173561ff75254e83c9b84652fb906,
+        type: 2}
     - target: {fileID: 5674530582925895235, guid: 6a190c4345a48a947912f2443c4e76ae,
         type: 3}
       propertyPath: m_Text
