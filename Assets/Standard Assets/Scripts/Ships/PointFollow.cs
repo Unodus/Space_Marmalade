@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class PointFollow : MonoBehaviour
 {
+    public ScriptableGrid gridSettings;
+
+
+
     [SerializeField] SoundHelpers SoundManager;
 
     [SerializeField] GameObject[] CameraObjects = new GameObject[2];
@@ -14,12 +18,9 @@ public class PointFollow : MonoBehaviour
     [SerializeField] ScriptableGameEvents EventProfiler;
     [SerializeField] ScriptableElias EliasThemeNames;
 
-    [SerializeField]
-    GameObject EliasObject;
+
     EliasPlayer EliasComponent;
 
-
-    [SerializeField]GameObject Projector; 
 
 
     [SerializeField]  GameObject PlayerPrefab; // Refference to all the Ship prefabs, for instantiation
@@ -31,17 +32,13 @@ public class PointFollow : MonoBehaviour
 
     [SerializeField] GameObject PointPrefab; // Refference for each navigable point on the map
 
-    GridMath gridMath;          // Ref to the grid values
-    MyProjector projectorMath; // Ref to the generated point values
-
+    
     [SerializeField]
     GameObject TimerPrefab; // ref to the countdown slider
     Slider TimerObject; 
 
     int NumOfPoints; // The total amount of points in the grid
 
-    int MaxGridX, MinGridX, ColumnsPerManifold;
-    
     public enum NodeMode // Each point can have three states- whether it's empty, able to be selected, or has a ship on it
     {
         Empty,
@@ -145,24 +142,24 @@ public class PointFollow : MonoBehaviour
 
     public void SetMove()
     {
-        projectorMath.ChangeBool(true);
+  //      GridExtensions.ChangeBool(true);
     }
     public void SetAim()
     {
-        projectorMath.ChangeBool(false);
+//        GridExtensions.ChangeBool(false);
     }
 
     public void ToggleState()
     {
    
-        if (projectorMath.GetBool())
-        {
-            CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting);
-        }
-        else
-        {
-            CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
-        }
+        //if (GridExtensions.GetBool())
+        //{
+        //    CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting);
+        //}
+        //else
+        //{
+        //    CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
+        //}
     }
 
 
@@ -171,12 +168,8 @@ public class PointFollow : MonoBehaviour
         for (int i = 0; i < Objects.Length; i++)
         {
 
-            if (i == SelectedObject)
-
-            { Objects[i].SetActive(true); }
-            else
-            { Objects[i].SetActive(false); }
-
+            if (i == SelectedObject)            { Objects[i].SetActive(true); }
+            else            { Objects[i].SetActive(false); }
         }
     }
 
@@ -186,17 +179,10 @@ public class PointFollow : MonoBehaviour
     {
 
         if (!EliasComponent)
-            EliasObject.TryGetComponent(out EliasComponent);
-
-        projectorMath = Projector.GetComponent<MyProjector>();
-        gridMath = projectorMath.gridMath;
+            EliasComponent = FindObjectOfType<EliasPlayer>();
         InitiatePoints();
         PositionPoints(MyPoints);
 
-        ColumnsPerManifold = gridMath.Columns / gridMath.Manifolds;
-
-        MaxGridX = 3 * ColumnsPerManifold;
-        MinGridX = 2 * ColumnsPerManifold;
 
 
         List<MyPoint> TempList = new List<MyPoint>( MyPoints);
@@ -204,7 +190,7 @@ public class PointFollow : MonoBehaviour
         int RandomNumber;
         RandomNumber = Random.Range(0, TempList.Count);
 
-        MyPoints[RandomNumber] = CheckNodeIsWithinBounds(MyPoints[RandomNumber]);
+        MyPoints[RandomNumber] = MyPoints[RandomNumber];
 
 
         SpaceshipBases.Add(new Player(MyPoints[RandomNumber], PlayerPrefab));
@@ -213,7 +199,7 @@ public class PointFollow : MonoBehaviour
         RandomNumber = Random.Range(0, TempList.Count);
 
 
-        MyPoints[RandomNumber] = CheckNodeIsWithinBounds(MyPoints[RandomNumber]);
+        MyPoints[RandomNumber] = MyPoints[RandomNumber];
 
         SpaceshipBases.Add(new SmallEnemy(MyPoints[RandomNumber], SmallEnemyPrefab));
         TempList.RemoveAt(RandomNumber);
@@ -339,6 +325,9 @@ public class PointFollow : MonoBehaviour
     void UpdateByEvent()
     {
         ScriptableGameEvents.EventSettings currentEvent = EventProfiler.GetEventByPhase(CurrentTurn);
+
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+
         if (currentEvent == null) return;
 
 
@@ -354,14 +343,14 @@ public class PointFollow : MonoBehaviour
                     {
                         if (p.ShipType == 1)
                         {
-                            FindSelectableNodes(p.Movement * gridMath.Size, p);
+                            FindSelectableNodes(p.Movement * myGrid.Size, p);
                             ChangeNode(p, GetClosestNode(SpaceshipBases[0].ShipPrefab.transform.position, p, 0));
                             p.Movement = p.MaxMovement;
                         }
 
                         if (p.ShipType == 2)
                         {
-                            FindSelectableNodes(p.Movement * gridMath.Size, p);
+                            FindSelectableNodes(p.Movement * myGrid.Size, p);
                             ChangeNode(p, GetClosestNode(GetRandNode().p.transform.position, p, 0));
                             p.Movement = p.MaxMovement;
                         }
@@ -382,14 +371,14 @@ public class PointFollow : MonoBehaviour
                     {
                         if (p.ShipType == 1)
                         {
-                            FindSelectableNodes(p.Reach * gridMath.Size, p);
+                            FindSelectableNodes(p.Reach * myGrid.Size, p);
                             p.ShipPrefab.GetComponent<PlayerMovement>().Shoot(GetClosestNode(SpaceshipBases[0].ShipPrefab.transform.position, p, 0).p.transform.position);
                             LaunchMissiles(p, ScriptableGameEvents.TurnPhase.PlayerTurn_Start);
 
                         }
                         if (p.ShipType == 2)
                         {
-                            FindSelectableNodes(p.Reach * gridMath.Size, p);
+                            FindSelectableNodes(p.Reach * myGrid.Size, p);
                             ShipsToMake.Add(p.CurrentNode);
 
                         }
@@ -458,29 +447,29 @@ public class PointFollow : MonoBehaviour
 
     }
 
-    MyPoint CheckNodeIsWithinBounds(MyPoint NewPoint)// Moves a ship to a different part of the grid
-    {
-        if (NewPoint.Column < MinGridX || NewPoint.Column > MaxGridX)
-        {
-            int properColumn = (NewPoint.Column ) % (gridMath.Columns / gridMath.Manifolds);
-            properColumn = properColumn + MinGridX;
+    //MyPoint CheckNodeIsWithinBounds(MyPoint NewPoint)// Moves a ship to a different part of the grid
+    //{
+    //    if (NewPoint.Column < MinGridX || NewPoint.Column > MaxGridX)
+    //    {
+    //        int properColumn = (NewPoint.Column ) % (GridMath.Columns / GridMath.Manifolds);
+    //        properColumn = properColumn + MinGridX;
 
-            foreach(MyPoint i in MyPoints)
-            {
-                if (i.Column == properColumn && i.Row == NewPoint.Row)
-                {
-                    return i;
-                }
-            }
-            return NewPoint;
-        }
-        else
-        {
-            return NewPoint;
-        }
+    //        foreach(MyPoint i in MyPoints)
+    //        {
+    //            if (i.Column == properColumn && i.Row == NewPoint.Row)
+    //            {
+    //                return i;
+    //            }
+    //        }
+    //        return NewPoint;
+    //    }
+    //    else
+    //    {
+    //        return NewPoint;
+    //    }
 
 
-    }
+    //}
 
     void ChangeNode(SpaceshipBase Ship, MyPoint NewPoint)// Moves a ship to a different part of the grid
     { 
@@ -491,12 +480,13 @@ public class PointFollow : MonoBehaviour
         if (NewPoint == Ship.CurrentNode)
             return;
 
-        NewPoint = CheckNodeIsWithinBounds(NewPoint);
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+
 
         Ship.CurrentNode = NewPoint;
         Ship.ShipPrefab.transform.SetParent(NewPoint.p.transform);
 
-        Ship.Movement -= Vector3.Magnitude(Ship.ShipPrefab.transform.localPosition) *0.25f* gridMath.Size;
+        Ship.Movement -= Vector3.Magnitude(Ship.ShipPrefab.transform.localPosition) *0.25f* myGrid.Size;
 
 
 
@@ -565,6 +555,9 @@ public class PointFollow : MonoBehaviour
     }
     IEnumerator MissileCorourtine(GameObject MissileObject, SpaceshipBase Sender, ScriptableGameEvents.TurnPhase NextTurn) // Animates the moving of missiles at the end of each turn
     {
+
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+
         GameObject Missile = MissileObject.transform.GetChild(0).gameObject;
         LineRenderer Path =  MissileObject.transform.GetComponentInChildren<LineRenderer>();
         float Count = 0;
@@ -577,8 +570,8 @@ public class PointFollow : MonoBehaviour
                 Path.SetPosition(i, Path.GetPosition(CurrentPos));
             }
 
-            yield return new WaitForSeconds(gridMath.TransitionSpeed * Time.deltaTime); //Count is the amount of time in seconds that you want to wait.
-            Count += gridMath.TransitionSpeed * Time.deltaTime;
+            yield return new WaitForSeconds(myGrid.TransitionSpeed * Time.deltaTime); //Count is the amount of time in seconds that you want to wait.
+            Count += myGrid.TransitionSpeed * Time.deltaTime;
             foreach(SpaceshipBase p in SpaceshipBases)
             {
                 if (p != Sender)
@@ -596,15 +589,17 @@ public class PointFollow : MonoBehaviour
         yield return null;
 
     }
-    void InitiatePoints() // Instantiate Point gameobjects, based on gridmath data 
+    void InitiatePoints() // Instantiate Point gameobjects, based on GridMath data 
     {
-        NumOfPoints = gridMath.Columns * gridMath.Rows;
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
 
-        for (int i = 0; i < gridMath.Columns; i++)
+        NumOfPoints = myGrid.Columns * myGrid.Rows;
+
+        for (int i = 0; i < myGrid.Columns; i++)
         {
 
             MyPoint pp;
-            for (int j = 0; j < gridMath.Rows; j++)
+            for (int j = 0; j < myGrid.Rows; j++)
             {
                 pp = new MyPoint();
                 pp.Column = i;
@@ -617,9 +612,9 @@ public class PointFollow : MonoBehaviour
                 pp.p.tag = "Point";
                 ChangeNodeType(pp, NodeMode.Empty);
 
-                pp.p.transform.position = gridMath.SetPosition(i, j);
+                pp.p.transform.position = gridSettings.SetPosition(i, j);
 
-                Vector3 Displacement = new Vector3((2 * ((1.25f + gridMath.Columns) / gridMath.Columns)) * gridMath.Size * gridMath.ScreenRatio.x, 0, 0);
+                Vector3 Displacement = new Vector3((2 * ((1.25f + myGrid.Columns) / myGrid.Columns)) * myGrid.Size * myGrid.ScreenRatio.x, 0, 0);
 
                 MyPoints.Add(pp);
             }
@@ -737,25 +732,27 @@ public class PointFollow : MonoBehaviour
 
     void PositionShips(List<SpaceshipBase> TheseShips) // moves ships to the point they should be on, smoothly
     {
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+
         foreach (SpaceshipBase p in TheseShips)
         {
 
-            p.ShipPrefab.transform.LookAt(gridMath.SetPosition(p.CurrentNode.Column, -0.5f)); //Vector3.zero   );
+            p.ShipPrefab.transform.LookAt(gridSettings.SetPosition(p.CurrentNode.Column, -0.5f)); //Vector3.zero   );
 
             if (p.ShipPrefab.transform.localPosition == Vector3.zero)
             {
             }
             else if(Vector3.Distance(p.ShipPrefab.transform.localPosition, Vector3.zero) < 1.0f)
             {
-                FindSelectableNodes(p.Movement * gridMath.Size, p);
-                float MovementTime = gridMath.TransitionSpeed * Time.deltaTime;
+                FindSelectableNodes(p.Movement * myGrid.Size, p);
+                float MovementTime = myGrid.TransitionSpeed * Time.deltaTime;
                 p.ShipPrefab.transform.localPosition = Vector3.MoveTowards(p.ShipPrefab.transform.localPosition, Vector3.zero, MovementTime);
 
 
             }
             else
             {
-                float MovementTime = Vector3.Distance(p.ShipPrefab.transform.localPosition, Vector3.zero) * gridMath.TransitionSpeed * Time.deltaTime;
+                float MovementTime = Vector3.Distance(p.ShipPrefab.transform.localPosition, Vector3.zero) * myGrid.TransitionSpeed * Time.deltaTime;
                 p.ShipPrefab.transform.localPosition = Vector3.MoveTowards(p.ShipPrefab.transform.localPosition, Vector3.zero, MovementTime);
             }
 
@@ -766,12 +763,15 @@ public class PointFollow : MonoBehaviour
 
     void PositionPoints(List<MyPoint> ThesePoints) // moves points to positions they should be on, smoothly
     {
+
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+
         foreach (MyPoint p in ThesePoints)
         {
-            float MovementTime = Vector3.Distance(p.p.transform.position, gridMath.SetPosition(p.Column, p.Row)) * gridMath.TransitionSpeed * Time.deltaTime;
+            float MovementTime = Vector3.Distance(p.p.transform.position, gridSettings.SetPosition(p.Column, p.Row)) * myGrid.TransitionSpeed * Time.deltaTime;
 
-            Vector3 TargetPosition = Vector3.MoveTowards(p.p.transform.position, gridMath.SetPosition(p.Column, p.Row), MovementTime);
-            Vector3 TargetSize = Vector3.one * gridMath.Size * 0.1f;
+            Vector3 TargetPosition = Vector3.MoveTowards(p.p.transform.position, gridSettings.SetPosition(p.Column, p.Row), MovementTime);
+            Vector3 TargetSize = Vector3.one * myGrid.Size * 0.1f;
             p.p.transform.localScale = TargetSize;
             p.p.transform.position = TargetPosition;
 
@@ -788,9 +788,11 @@ public class PointFollow : MonoBehaviour
         }
         else
         {
-          //  CallEvent(ScriptableGameEvents.TurnPhase.Transition);
+            //  CallEvent(ScriptableGameEvents.TurnPhase.Transition);
 
-            StartCoroutine("Reset", (gridMath.TransitionSpeed * 1.0f));
+            ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+
+            StartCoroutine("Reset", (myGrid.TransitionSpeed * 1.0f));
         }
     }
     IEnumerator Reset(float Count) // This function waits for the appropriate time before allowing the selection to happen
@@ -799,26 +801,29 @@ public class PointFollow : MonoBehaviour
 
         if (Count == 0)
         {
-            yield return new WaitForSeconds(gridMath.TransitionSpeed * 2.0f);
+            ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+
+            yield return new WaitForSeconds(myGrid.TransitionSpeed * 2.0f);
 
             CallEvent(ScriptableGameEvents.TurnPhase.EnemyTurnShooting);
 
         }
         else
         {
+            ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
 
             if (CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Moving || CurrentTurn == ScriptableGameEvents.TurnPhase.PlayerTurn_Start)
             {
 
                 CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Moving);
-                FindSelectableNodes(SpaceshipBases[0].Movement * gridMath.Size, SpaceshipBases[0]);
+                FindSelectableNodes(SpaceshipBases[0].Movement * myGrid.Size, SpaceshipBases[0]);
 
 
             }
             else
             {
                 CallEvent(ScriptableGameEvents.TurnPhase.PlayerTurn_Shooting);
-                FindSelectableNodes(SpaceshipBases[0].Reach * gridMath.Size, SpaceshipBases[0]);
+                FindSelectableNodes(SpaceshipBases[0].Reach * myGrid.Size, SpaceshipBases[0]);
             }
 
 
@@ -830,7 +835,9 @@ public class PointFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (NumOfPoints == gridMath.Columns * gridMath.Rows)
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+
+        if (NumOfPoints == myGrid.Columns * myGrid.Rows)
             PositionPoints(MyPoints);
         else
             DeinitialisePoints(MyPoints);

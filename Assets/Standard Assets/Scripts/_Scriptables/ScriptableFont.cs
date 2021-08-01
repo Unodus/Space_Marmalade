@@ -6,7 +6,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "FontProfile", menuName = "ScriptableObjects/FontProfile")]
 
-public class ScriptableFont : ScriptableObject
+public class ScriptableFont : ScriptableBase
 {
 
 
@@ -39,14 +39,7 @@ public class ScriptableFont : ScriptableObject
 
     public FontCategory[] fontPalette;    // array of all palettes
 
-    public FontClass GetStyleByCategory(FontCategories myFontCategory)
-    {
-        foreach (FontCategory i in fontPalette)
-        {
-            if (i.myCategory == myFontCategory) return i.myFonts;
-        }
-        return null;
-    }
+
 
     void OnValidate()
     {
@@ -54,10 +47,7 @@ public class ScriptableFont : ScriptableObject
     }
     public void UpdateFonts()
     {
-
-
         StringSetter[] StringObjects = Resources.FindObjectsOfTypeAll<StringSetter>();
-
         foreach (StringSetter i in StringObjects)
         {
             i.UpdateFont();

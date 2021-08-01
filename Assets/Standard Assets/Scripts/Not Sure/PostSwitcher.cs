@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PostSwitcher : MonoBehaviour
 {
-    [SerializeField] MyProjector MyGrid;
     [SerializeField] GameObject[] Objects = new GameObject[2];
     [SerializeField] ScriptableElias EliasThemeNames;
     [SerializeField] string[] ThemeNames = new string[2];
-   
+
     bool MoveOrAiming;
 
     // EliasDemoEventTrigger EliasComponent;
@@ -21,7 +18,7 @@ public class PostSwitcher : MonoBehaviour
     {
         MoveOrAiming = true;
         SwitchOpenObject(0);
-        if(!EliasComponent)
+        if (!EliasComponent)
             EliasObject.TryGetComponent(out EliasComponent);
         SetMove();
     }
@@ -43,13 +40,13 @@ public class PostSwitcher : MonoBehaviour
     public void SetMove()
     {
         SwitchOpenObject(0);
-        MyGrid.ChangeBool(true);
-  
+//        GridExtensions.ChangeBool(true);
+
     }
     public void SetAim()
     {
         SwitchOpenObject(1);
-        MyGrid.ChangeBool(false);
+  //      GridExtensions.ChangeBool(false);
     }
 
 
@@ -67,5 +64,5 @@ public class PostSwitcher : MonoBehaviour
         }
     }
 
-   
+
 }

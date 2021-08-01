@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "CheatProfile", menuName = "ScriptableObjects/CheatProfile")]
-public class ScriptableCheatCodes : ScriptableObject
+public class ScriptableCheatCodes : ScriptableBase
 {
     [Serializable]
     public class CheatType
@@ -24,19 +24,5 @@ public class ScriptableCheatCodes : ScriptableObject
     PlaySound,
     EliasChange
     }
-
-
-    public CheatType GetCodeByName(string Code)
-    {
-        foreach (CheatType i in Commands)
-        {
-            if (i.CheatCode == Code)
-            {
-                return i;
-            }
-        }
-        return null;
-    }
-
 
 }
