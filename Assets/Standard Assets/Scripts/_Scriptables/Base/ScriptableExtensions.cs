@@ -161,15 +161,22 @@ public static class ScriptableExtensions
     {
         ScriptableGrid.GridSettings i = a.GetGridSettings();
 
+        return a.SetNormalizedPosition(position) * i.Size;
+    }
+
+    public static Vector3 SetNormalizedPosition(this ScriptableGrid a, in Vector2 position)
+    {
+        ScriptableGrid.GridSettings i = a.GetGridSettings();
+
         if (i.PolarActive)
         {
-            if (i.CachedPolarPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result * i.Size;            //If the dictionary contains an entry with key in it returns the found entry.
+            if (i.CachedPolarPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result ;            //If the dictionary contains an entry with key in it returns the found entry.
             i.CachedPolarPositions.Add(key: position, value: a.SetPosition(position.x, position.y));            //If not, it adds it and returns the result.
             return i.CachedPolarPositions[key: position];
         }
         else
         {
-            if (i.CachedGridPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result * i.Size;            //If the dictionary contains an entry with key in it returns the found entry.
+            if (i.CachedGridPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result ;            //If the dictionary contains an entry with key in it returns the found entry.
             i.CachedGridPositions.Add(key: position, value: a.SetPosition(position.x, position.y));            //If not, it adds it and returns the result.
             return i.CachedGridPositions[key: position];
         }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LineTemplates:
   - StyleName: 0
-    LinePrefab: {fileID: 5279941604410293325, guid: 982feb16dc3fcfe4283dacbd04cb5d7d,
+    LinePrefab: {fileID: 3636256756038235619, guid: f87ca8fc44590b842ab27a7efad7b00d,
       type: 3}
     NumOfSegments: 100
     LineWidth: 0.2

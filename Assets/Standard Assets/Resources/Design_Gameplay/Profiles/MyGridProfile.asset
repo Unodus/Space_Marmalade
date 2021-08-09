@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameGrid:
     ScreenRatio: {x: 1, y: 1}
-    PolarActive: 0
+    PolarActive: 1
     Columns: 5
     Rows: 5
-    Size: 2
-    TransitionSpeed: 0.5
+    Size: 3.99
+    TransitionSpeed: 2

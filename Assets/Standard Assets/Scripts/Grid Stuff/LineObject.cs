@@ -8,6 +8,7 @@ public class LineObject : MonoBehaviour
     public Vector2[] Positions;
     public GameObject p;
     public LineRenderer pp;
+    public Color[] lineColor = new Color[2];
 
     public void Init(ScriptableLines.LineStyle Style, ScriptableGrid grid)
     {
@@ -18,8 +19,12 @@ public class LineObject : MonoBehaviour
         pp = p.GetComponent<LineRenderer>();
         
         pp.widthMultiplier = Style.LineWidth;
-        pp.startColor = Style.LineColorStart;
-        pp.endColor = Style.LineColorEnd;
+
+        lineColor[0] = Style.LineColorStart;
+        lineColor[1] = Style.LineColorEnd;
+        pp.startColor = lineColor[0];
+        pp.endColor = lineColor[1];
+
         pp.positionCount = Style.NumOfSegments;
 
     }
@@ -42,6 +47,17 @@ public class LineObject : MonoBehaviour
             Vector3 FinalPosition = Vector3.MoveTowards(pp.GetPosition(i), checkedPosition, checkedDistance * MyGrid.TransitionSpeed * Time.deltaTime);
             pp.SetPosition(i, FinalPosition);
         }
+
+        Debug.Log(Input.mousePosition);
+        float StartMouseDistance = Vector3.Distance(Input.mousePosition, Positions[0]);
+        float EndMouseDistance = Vector3.Distance(Input.mousePosition, Positions[pp.positionCount -1]);
+        if (StartMouseDistance > 1 && EndMouseDistance > 1) return;
+    //    pp.startColor = Color.white; // Color.Lerp(Color.red, Color.clear, StartMouseDistance );
+      //  pp.endColor = Color.white;// Color.Lerp(Color.red, Color.clear, EndMouseDistance );
+        
+
+        
+
         return;
     }
 
