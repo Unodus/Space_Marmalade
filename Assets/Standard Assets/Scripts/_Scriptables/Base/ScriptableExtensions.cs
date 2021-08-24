@@ -7,6 +7,20 @@ public static class ScriptableExtensions
 {
 
     #region Scriptable Retrieval
+
+    public static ScriptableParticles.ParticleSettings GetParticleByName(this ScriptableParticles a, string myName)
+    {
+        foreach (ScriptableParticles.ParticleSettings i in a.Particles)
+        {
+            if (i.Name == myName)
+            {
+                return i;
+            }
+        }
+
+        Debug.LogWarning(myName + " is not registered in the profiler");
+        return null;
+    }
     public static ScriptableLines.LineStyle GetLineStyleFromPalette(this ScriptableLines a , ScriptableLines.StyleType style)
     {
         foreach (ScriptableLines.LineStyle i in a.LineTemplates)

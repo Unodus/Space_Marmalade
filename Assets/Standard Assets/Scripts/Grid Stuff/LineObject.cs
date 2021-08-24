@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LineObject : MonoBehaviour
+public class LineObject 
 {
     public ScriptableGrid gridSettings;
     public Vector2[] Positions;
@@ -14,7 +14,7 @@ public class LineObject : MonoBehaviour
     {
         gridSettings = grid;
 
-        p = Instantiate(Style.LinePrefab);
+        p = Object.Instantiate(Style.LinePrefab);
         
         pp = p.GetComponent<LineRenderer>();
         
@@ -31,8 +31,7 @@ public class LineObject : MonoBehaviour
 
     public void DeInit()
     {
-        Destroy(p);
-        Destroy(this);
+        Object.Destroy(p);
     }
 
     public void LineUpdate()
