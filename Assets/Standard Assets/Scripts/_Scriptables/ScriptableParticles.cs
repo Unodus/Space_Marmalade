@@ -5,7 +5,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "ParticleProfile", menuName = "ScriptableObjects/ParticleProfile", order = 3)]
 
-public class ScriptableParticles : ScriptableObject
+public class ScriptableParticles : ScriptableBase
 {
     [Serializable]
     public class ParticleSettings // Each palette
@@ -16,18 +16,6 @@ public class ScriptableParticles : ScriptableObject
 
     public ParticleSettings[] Particles;    // array of all palettes
 
-    public ParticleSettings GetParticleByName(string myName)
-    {
-        foreach (ParticleSettings i in Particles)
-        {
-            if (i.Name == myName)
-            {
-                return i;
-            }
-        }
 
-        Debug.LogWarning(myName + " is not registered in the profiler");
-        return null;
-    }
 
 }

@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e478946ff0042b6428cd4fa41e9c987f, type: 3}
   m_Name: MyParticleProfile
   m_EditorClassIdentifier: 
-  Particles: []
+  Particles:
+  - Name: Point
+    ParticlePrefab: {fileID: 2960824873681816880, guid: d01ba1c1e33eb9f419e3b1d6ceeb6282,
+      type: 3}

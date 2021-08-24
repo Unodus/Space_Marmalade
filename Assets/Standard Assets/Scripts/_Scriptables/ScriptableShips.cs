@@ -5,7 +5,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "SpaceshipProfile", menuName = "ScriptableObjects/SpaceshipProfile")]
 
-public class ScriptableShips : ScriptableObject
+public class ScriptableShips : ScriptableBase
 {
     
     [Serializable]
@@ -16,7 +16,7 @@ public class ScriptableShips : ScriptableObject
 
     public Spaceship[] Spaceships;    // array of all palettes
 
-    public Spaceship GetShipByName(string myName)
+    public Spaceship GetShipPartByName(string myName)
     {
         foreach (Spaceship i in Spaceships)
         {

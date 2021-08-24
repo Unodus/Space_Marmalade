@@ -42,27 +42,5 @@ public class ScriptableSounds : ScriptableObject
     public AudioMixerGroup DefaultAudioMixer; // refererence to the audio mixer
 
 
-    public SoundPalette GetSoundFromPalette(GameSounds soundName)
-    {
-        SoundPalette returnSound = new SoundPalette();
-
-        foreach (SoundGroup i in SoundGroups)
-        {
-            foreach (SoundPalette j in i.SoundFiles)
-            {
-                if (j.Name == soundName)
-                {
-                    CommandManager console = FindObjectOfType<CommandManager>();
-                    console.ProcessCommand(console.CheatCodes.GetCodeByName("PlaySound"), j.Name.ToString());
-
-
-                    returnSound = j;
-                    returnSound.volume = Mathf.Lerp(0, i.GroupVolume, returnSound.volume);
-                    return returnSound;
-                }
-            }
-        }
-        return returnSound;
-    } // finds a sound by an enum and returns it
 
 }

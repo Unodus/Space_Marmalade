@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     GameObject MissilePrefab, ExplosionPrefab, ImplosionPrefab, ShipSpriteRef, ShieldObject;
-    LineMaker LineComp;
 
 
     public float ShieldSize = 1 ;
@@ -14,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start() // plays an implosion effect on creation
     {
-        LineComp = GameObject.FindGameObjectWithTag("Finish").GetComponent<LineMaker>();
 
         ShipSpriteRef.SetActive(false);
         GameObject i = Instantiate(ImplosionPrefab, transform);
@@ -30,11 +28,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void Shoot(Vector3 Target) // Instantiates the missile object 
     {
-        GameObject pp = LineComp.GetLine(transform.position, Target);
-        GameObject p = Instantiate(MissilePrefab);
-        p.transform.SetParent(transform.parent);
-        p.transform.localPosition = Vector3.zero;
-        pp.transform.SetParent(p.transform);
+        //GameObject pp = LineMaker.GetLine(transform.position, Target);
+        //GameObject p = Instantiate(MissilePrefab);
+        //p.transform.SetParent(transform.parent);
+        //p.transform.localPosition = Vector3.zero;
+        //pp.transform.SetParent(p.transform);
     }
 
     public void DestroyMe() // Plays an explosion effect on Death
