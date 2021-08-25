@@ -7,10 +7,15 @@ using UnityEngine;
 
 public class ScriptableParticles : ScriptableBase
 {
+
+    public enum Particle
+    {
+        Point
+    }
     [Serializable]
     public class ParticleSettings // Each palette
     {
-        public string Name;
+        public Particle Name;
         public GameObject ParticlePrefab;
     }
 

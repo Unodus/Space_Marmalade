@@ -7,7 +7,7 @@ public class LineManager : MonoBehaviour
 
     // Ref to the line Object
 
-  //  public ScriptableLines LineStyles;
+    //  public ScriptableLines LineStyles;
     public GameObject LineHolder;
     public List<LineObject> MyLines = new List<LineObject>();
     public ScriptableGrid gridSettings;
@@ -17,7 +17,7 @@ public class LineManager : MonoBehaviour
         foreach (var Line in MyLines)
         {
             if (Line.p == null)
-            { 
+            {
                 MyLines.Remove(Line);
                 Line.DeInit();
                 return;
@@ -33,7 +33,7 @@ public class LineManager : MonoBehaviour
         ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
 
         LineObject lp = new LineObject();
-    
+
         lp.Init(Style, gridSettings);
         lp.p.transform.SetParent(LineHolder.transform);
         lp.p.name = "Line: " + Start + " to " + End;
@@ -59,7 +59,45 @@ public class LineManager : MonoBehaviour
         return lp;
     }
 
-    public  GameObject CreateLine(ScriptableLines.LineStyle Style, Vector3 cStart, Vector3 cEnd) // Converts two points in world space into a line game object, properly segmented
+    public LineObject CreateLine(ScriptableLines.LineStyle Style, Vector2[] Positions) // Converts two points in "grid space " into a line
+    {
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+
+        LineObject lp = new LineObject();
+
+        lp.Init(Style, gridSettings);
+        lp.p.transform.SetParent(LineHolder.transform);
+        lp.p.name = "Line: " + Positions[0];
+
+        lp.Positions = new Vector2[Style.NumOfSegments];
+
+
+        for (int i = 0; i < Style.NumOfSegments; i++)
+        {
+            float tempLerp = Mathf.Lerp(0, Positions.Length - 1.01f, (i / (Style.NumOfSegments - 1.0f)));
+            int j = (int)Mathf.Floor(tempLerp);
+                if (myGrid.PolarActive)
+                {
+                    Vector2 NewStart = gridSettings.SetPosition(Positions[j]);
+                    Vector2 NewEnd = gridSettings.SetPosition(Positions[j + 1]);
+                    Vector3 Interp = new Vector2(Mathf.Lerp(NewStart.x, NewEnd.x, i / (Style.NumOfSegments - 1.0f)), Mathf.Lerp(NewStart.y, NewEnd.y, (i / (Style.NumOfSegments - 1.0f))));
+                    lp.Positions[i] = gridSettings.GetPosition(Interp);
+                }
+                else
+                {
+
+                    lp.Positions[i] = Vector2.Lerp(Positions[j], Positions[j + 1],  (i / (Style.NumOfSegments - 1.0f))); // this needs to use a value that isn't i based, since i now covers the whole line
+                }
+                lp.pp.SetPosition(i, gridSettings.SetPosition(lp.Positions[i].x, lp.Positions[i].y));
+            
+        }
+
+        MyLines.Add(lp);
+        return lp;
+    }
+
+
+    public GameObject CreateLine(ScriptableLines.LineStyle Style, Vector3 cStart, Vector3 cEnd) // Converts two points in world space into a line game object, properly segmented
     {
 
         Vector2 Start = gridSettings.GetPosition(cStart);

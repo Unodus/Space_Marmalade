@@ -159,7 +159,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LineHolder: {fileID: 123256947}
-  MyLines: []
   gridSettings: {fileID: 11400000, guid: a1d77ac0e2bdb77419eb0434083a05e3, type: 2}
 --- !u!114 &123256949
 MonoBehaviour:
@@ -174,8 +173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridVisible: 0
-  gridLines: []
-  Outlines: []
   lineStyles: {fileID: 11400000, guid: 7ee61556a0404974ba95ef2fe1697345, type: 2}
   gridSettings: {fileID: 11400000, guid: a1d77ac0e2bdb77419eb0434083a05e3, type: 2}
   lineManager: {fileID: 123256948}
@@ -204,11 +201,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 123256947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8016ce7d3f6a9a84cb5cd740029f4fe1, type: 3}
+  m_Script: {fileID: 11500000, guid: f4facebc77e0934449a0e308776c48c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridref: {fileID: 0}
-  ShipParts: {fileID: 11400000, guid: 1f8773d8a5452ed478ba9b525b18c1be, type: 2}
+  PointPrefabs: {fileID: 11400000, guid: ab5aba3c70d7695449379bb4aebc4dbc, type: 2}
+  PointStyle: 0
+  gridSettings: {fileID: 11400000, guid: a1d77ac0e2bdb77419eb0434083a05e3, type: 2}
 --- !u!4 &149689797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8955468906408059596, guid: 7670226a3b4262c4cbb4a0db2d1361b8,
@@ -805,6 +803,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dotted Line
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636256756038235619, guid: f87ca8fc44590b842ab27a7efad7b00d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3636256756038235629, guid: f87ca8fc44590b842ab27a7efad7b00d,
         type: 3}

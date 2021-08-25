@@ -6,7 +6,7 @@ public class PointManager : MonoBehaviour
 {
 
     public ScriptableParticles PointPrefabs;
-    public string PointName = "Point";
+    public ScriptableParticles.Particle PointStyle;
     public List<PointObject> MyPoints = new List<PointObject>();
     public ScriptableGrid gridSettings;
 
@@ -76,7 +76,7 @@ public class PointManager : MonoBehaviour
                 pp = new PointObject
                 {
                     Pos = new Vector2(i, j),
-                    p = Instantiate(PointPrefabs.GetParticleByName(PointName).ParticlePrefab) 
+                    p = Instantiate(PointPrefabs.GetParticleByName(PointStyle).ParticlePrefab) 
 
                 };
                 pp.ChangeNodeType(PointObject.NodeMode.Empty);

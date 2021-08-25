@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_lineRenderer: {fileID: 3636256756038235618}
   Distance: 0
-  Repetitions: 0.1
+  Repetitions: 1
 --- !u!1001 &8876747331692366254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,6 +126,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.widthMultiplier
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279941604410293324, guid: 982feb16dc3fcfe4283dacbd04cb5d7d,
+        type: 3}
+      propertyPath: m_Loop
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5279941604410293325, guid: 982feb16dc3fcfe4283dacbd04cb5d7d,
         type: 3}

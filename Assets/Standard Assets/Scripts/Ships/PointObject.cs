@@ -35,7 +35,6 @@ public class PointObject
         Vector3 TargetSize = Vector3.one * gridSettings.GameGrid.Size * 0.1f;
         p.transform.localScale = TargetSize;
         p.transform.position = TargetPosition;
-
     }
 
     public void ChangeNodeType(NodeMode newMode) // Used to calculate whether a node on the map is selectable

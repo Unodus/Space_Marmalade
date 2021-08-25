@@ -8,7 +8,7 @@ public class GridObject : MonoBehaviour
     public bool gridVisible;
 
     public LineObject[] gridLines;
-    public LineObject[] Outlines;
+    public LineObject Outline;
     public ScriptableLines lineStyles;
     public ScriptableGrid gridSettings;
 
@@ -37,16 +37,19 @@ public class GridObject : MonoBehaviour
         ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
 
         List<LineObject> tempGridlines = new List<LineObject>();
-        Outlines = new LineObject[4];
+//        Outlines = new LineObject[4];
 
 
- 
+        List<Vector2> OutlinePositions = new List<Vector2>();
 
-        Outlines[0] = lineManager.CreateLine(outlineStyle, new Vector2(-0.5f, -0.5f), new Vector2(-0.5f, myGrid.Rows - 0.5f));
-        Outlines[1] = lineManager.CreateLine(outlineStyle, new Vector2(-0.5f, myGrid.Rows - 0.5f), new Vector2(myGrid.Columns - 0.5f, myGrid.Rows - 0.5f));
-        Outlines[2] = lineManager.CreateLine(outlineStyle, new Vector2(myGrid.Columns - 0.5f, myGrid.Rows - 0.5f), new Vector2(myGrid.Columns - 0.5f, -0.5f));
-        Outlines[3] = lineManager.CreateLine(outlineStyle, new Vector2(myGrid.Columns - 0.5f, -0.5f),  new Vector2(-0.5f, -0.5f));
+        OutlinePositions.Add(new Vector2(-0.5f, -0.5f));
+        OutlinePositions.Add(new Vector2(-0.5f, myGrid.Rows - 0.5f));
+        OutlinePositions.Add(new Vector2(myGrid.Columns - 0.5f, myGrid.Rows - 0.5f));
+        OutlinePositions.Add(new Vector2(myGrid.Columns - 0.5f, -0.5f));
+        OutlinePositions.Add(new Vector2(-0.5f, -0.5f));
 
+
+        lineManager.CreateLine(outlineStyle, OutlinePositions.ToArray());
 
         for (int i = 0; i < (myGrid.Columns ); i++)
         {
@@ -115,8 +118,8 @@ public class GridObject : MonoBehaviour
     public void DeInit() // Removes lines for if the grid changes size
     {
         for (int i = 0; i < (gridLines.Length); i++) Destroy(gridLines[i].p);
-        for (int i = 0; i < (Outlines.Length); i++) Destroy(Outlines[i].p);
-    }
+        Destroy(Outline.p);
+            }
 
     public void LateUpdate()
     {
