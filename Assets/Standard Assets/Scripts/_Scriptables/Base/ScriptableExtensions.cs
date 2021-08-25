@@ -8,7 +8,7 @@ public static class ScriptableExtensions
 
     #region Scriptable Retrieval
 
-    public static ScriptableParticles.ParticleSettings GetParticleByName(this ScriptableParticles a, string myName)
+    public static ScriptableParticles.ParticleSettings GetParticleByName(this ScriptableParticles a, ScriptableParticles.Particle myName)
     {
         foreach (ScriptableParticles.ParticleSettings i in a.Particles)
         {
