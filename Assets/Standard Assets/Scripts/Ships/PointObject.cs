@@ -18,10 +18,21 @@ public class PointObject
 
     ParticleSystem Component;
 
-    public void Init( Vector2 Position, ScriptableGrid grid)
+    public void Init( Vector2 Position, GameObject Style, ScriptableGrid grid)
     {
         Pos = Position;
+
+        p = Object.Instantiate(Style);
+        p.name = "Node:"+Position;
+        p.tag = "Point";
+
+        
         gridSettings = grid;
+        Debug.Log(Position);
+        p.transform.position = gridSettings.SetPosition(Position.x, Position.y);
+
+        p.TryGetComponent(out Component);
+        ChangeNodeType(NodeMode.Empty);
     }
     public void DeInit()
     {
@@ -29,17 +40,22 @@ public class PointObject
     }
     public void PointUpdate()
     {
-        float MovementTime = Vector3.Distance(p.transform.position, gridSettings.SetPosition(Pos)) * gridSettings.GameGrid.TransitionSpeed * Time.deltaTime;
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
 
-        Vector3 TargetPosition = Vector3.MoveTowards(p.transform.position, gridSettings.SetPosition(Pos), MovementTime);
-        Vector3 TargetSize = Vector3.one * gridSettings.GameGrid.Size * 0.1f;
-        p.transform.localScale = TargetSize;
+        float MovementTime = Vector3.Distance(p.transform.position, gridSettings.SetPosition(Pos.x,Pos.y)) * myGrid.TransitionSpeed * Time.deltaTime;
+
+        Vector3 TargetPosition = Vector3.MoveTowards(p.transform.position, gridSettings.SetPosition(Pos.x, Pos.y), MovementTime);
+       // Vector3 TargetSize = Vector3.one * myGrid.Size * 0.1f;
+    //    p.transform.localScale = TargetSize;
         p.transform.position = TargetPosition;
     }
 
     public void ChangeNodeType(NodeMode newMode) // Used to calculate whether a node on the map is selectable
     {
         Mode = newMode;
+
+        if (Component == null) return;
+
         ParticleSystem.MainModule settings = Component.main;
         if (Mode  == NodeMode.Empty)
         {

@@ -34,7 +34,7 @@ public class LineDotter : MonoBehaviour
 
         m_lineRenderer.sharedMaterial.SetTextureScale("_MainTex", new Vector2(Amount, 1.0f));
         //  m_lineRenderer.sharedMaterial. .SetTextureScale("_MainTex", new Vector2(repetition, 1.0f));
-        Debug.Log("Set repetition" );
+        //Debug.Log("Set repetition" );
 
     }
 }
