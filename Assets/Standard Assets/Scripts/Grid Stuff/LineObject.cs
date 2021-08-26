@@ -47,7 +47,7 @@ public class LineObject
             pp.SetPosition(i, FinalPosition);
         }
 
-        Debug.Log(Input.mousePosition);
+//        Debug.Log(Input.mousePosition);
         float StartMouseDistance = Vector3.Distance(Input.mousePosition, Positions[0]);
         float EndMouseDistance = Vector3.Distance(Input.mousePosition, Positions[pp.positionCount -1]);
         if (StartMouseDistance > 1 && EndMouseDistance > 1) return;

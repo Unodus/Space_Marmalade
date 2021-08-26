@@ -7,15 +7,17 @@ public class GridObject : MonoBehaviour
 
     public bool gridVisible;
 
-    public LineObject[] gridLines;
-    public LineObject Outline;
+    
     public ScriptableLines lineStyles;
     public ScriptableGrid gridSettings;
+    public ScriptableParticles pointStyles;
 
-    public LineManager lineManager;
+  //  public PointManager pointManager;
 
     [SerializeField]
     ScriptableLines.StyleType outsideStyle, insideStyle;
+    [SerializeField]
+    ScriptableParticles.Particle point;
 
 
     public void Start()
@@ -26,74 +28,15 @@ public class GridObject : MonoBehaviour
 
     public void Init() // Instantiates a grid of lines that go between each point, including 4 lines along the outside that make up the "border" of the game
     {
-        Vector2 Start;
-        Vector2 End;
 
 
+       
 
-        ScriptableLines.LineStyle outlineStyle = lineStyles.GetLineStyleFromPalette(outsideStyle);
-        ScriptableLines.LineStyle insideLine = lineStyles.GetLineStyleFromPalette(insideStyle);
-
-        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
-
-        List<LineObject> tempGridlines = new List<LineObject>();
-//        Outlines = new LineObject[4];
+        PointManager.Init(gridSettings, pointStyles);
+        LineManager.Init(gridSettings, lineStyles);
 
 
-        List<Vector2> OutlinePositions = new List<Vector2>();
-
-        OutlinePositions.Add(new Vector2(-0.5f, -0.5f));
-        OutlinePositions.Add(new Vector2(-0.5f, myGrid.Rows - 0.5f));
-        OutlinePositions.Add(new Vector2(myGrid.Columns - 0.5f, myGrid.Rows - 0.5f));
-        OutlinePositions.Add(new Vector2(myGrid.Columns - 0.5f, -0.5f));
-        OutlinePositions.Add(new Vector2(-0.5f, -0.5f));
-
-
-        lineManager.CreateLine(outlineStyle, OutlinePositions.ToArray());
-
-        for (int i = 0; i < (myGrid.Columns ); i++)
-        {
-
-            for (int j = 0; j < (myGrid.Rows ); j++)
-            {
-              
-                Start = new Vector2(i,j);
-
-                for (int xi = 0; xi <= 1; xi++)
-                {
-                    for (int yi = 0; yi <= 1; yi++)
-                    {
-                        if (xi == 0 && yi == 0) continue;
-                        if (xi == 1 && yi == 1) continue;
-                     //   if (xi == -1 && yi == -1) continue;
-                      //  if (xi == -1 && yi == 1) continue;
-                      //  if (xi == 1 && yi == -1) continue;
-                        if (j + yi < 0 || j + yi >= (myGrid.Rows )) continue;
-                        if (i + xi < 0) continue;
-
-                        if (i + xi >= (myGrid.Columns))
-                        {
-
-                            End = new Vector2(i + (xi * 0.5f), j + yi);
-                            tempGridlines.Add(lineManager.CreateLine(insideLine, new Vector2(0, j), new Vector2(0 - (xi * 0.5f), j+ yi)));
-                        }
-
-                        else
-                        {
-                            End = new Vector2(i + xi, j + yi);
-                        }
-
-
-                        tempGridlines.Add( lineManager.CreateLine(insideLine, Start, End));
-
-
-                    }
-                }
-            }
-
-        }
-
-        gridLines = tempGridlines.ToArray();
+      
 
 
         //for (int i = 0; i < (myGrid.Columns - 1); i++)
@@ -117,13 +60,15 @@ public class GridObject : MonoBehaviour
     }
     public void DeInit() // Removes lines for if the grid changes size
     {
-        for (int i = 0; i < (gridLines.Length); i++) Destroy(gridLines[i].p);
-        Destroy(Outline.p);
-            }
+        PointManager.Deinit ();
+        LineManager.DeInit();
+
+    }
 
     public void LateUpdate()
     {
-        lineManager.LineUpdate();
+        LineManager.LineUpdate();
+        PointManager.PointUpdate();
     }
 
 }

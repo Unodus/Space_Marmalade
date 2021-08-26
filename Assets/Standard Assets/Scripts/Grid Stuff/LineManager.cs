@@ -2,17 +2,107 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LineManager : MonoBehaviour
+public static class LineManager 
 {
-
+    
     // Ref to the line Object
 
-    //  public ScriptableLines LineStyles;
-    public GameObject LineHolder;
-    public List<LineObject> MyLines = new List<LineObject>();
-    public ScriptableGrid gridSettings;
+    static ScriptableLines LineStyles;
+    static ScriptableGrid gridSettings;
 
-    public void LineUpdate() // Every frame, go through the list of Lines and update their positions.
+    static LineObject[] gridLines;
+    static LineObject Outline;
+    
+    // public GameObject LineHolder;
+    static List<LineObject> MyLines = new List<LineObject>();
+  
+    public static void Init(ScriptableGrid grid, ScriptableLines lines)
+    {
+        LineStyles = lines;
+        gridSettings = grid;
+
+
+        CreateGrid();
+    }
+
+    public static void DeInit()
+    {
+        for (int i = 0; i < (gridLines.Length); i++) Object.Destroy(gridLines[i].p);
+        Object.Destroy(Outline.p);
+
+    }
+
+    static void CreateGrid()
+    {
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+        ScriptableLines.LineStyle outlineStyle = LineStyles.GetLineStyleFromPalette(ScriptableLines.StyleType.Outline);
+        ScriptableLines.LineStyle insideLine = LineStyles.GetLineStyleFromPalette(ScriptableLines.StyleType.InsideLine);
+
+
+
+        List<LineObject> tempGridlines = new List<LineObject>();
+        List<Vector2> OutlinePositions = new List<Vector2>();
+
+        OutlinePositions.Add(new Vector2(-0.5f, -0.5f));
+        OutlinePositions.Add(new Vector2(-0.5f, myGrid.Rows - 0.5f));
+        OutlinePositions.Add(new Vector2(myGrid.Columns - 0.5f, myGrid.Rows - 0.5f));
+        OutlinePositions.Add(new Vector2(myGrid.Columns - 0.5f, -0.5f));
+        OutlinePositions.Add(new Vector2(-0.5f, -0.5f));
+
+
+        CreateLine(outlineStyle, OutlinePositions.ToArray());
+        
+        Vector2 Start;
+        Vector2 End;
+
+        for (int i = 0; i < (myGrid.Columns); i++)
+        {
+
+            for (int j = 0; j < (myGrid.Rows); j++)
+            {
+
+                Start = new Vector2(i, j);
+
+                for (int xi = 0; xi <= 1; xi++)
+                {
+                    for (int yi = 0; yi <= 1; yi++)
+                    {
+                        if (xi == 0 && yi == 0) continue;
+                        if (xi == 1 && yi == 1) continue;
+                        //   if (xi == -1 && yi == -1) continue;
+                        //  if (xi == -1 && yi == 1) continue;
+                        //  if (xi == 1 && yi == -1) continue;
+                        if (j + yi < 0 || j + yi >= (myGrid.Rows)) continue;
+                        if (i + xi < 0) continue;
+
+                        if (i + xi >= (myGrid.Columns))
+                        {
+
+                            End = new Vector2(i + (xi * 0.5f), j + yi);
+                            tempGridlines.Add(CreateLine(insideLine, new Vector2(0, j), new Vector2(0 - (xi * 0.5f), j + yi)));
+                        }
+
+                        else
+                        {
+                            End = new Vector2(i + xi, j + yi);
+                        }
+
+
+                        tempGridlines.Add(CreateLine(insideLine, Start, End));
+
+
+                    }
+                }
+            }
+
+        }
+
+        gridLines = tempGridlines.ToArray();
+
+    }
+
+
+    public static void LineUpdate() // Every frame, go through the list of Lines and update their positions.
     {
         foreach (var Line in MyLines)
         {
@@ -28,14 +118,14 @@ public class LineManager : MonoBehaviour
 
 
 
-    public LineObject CreateLine(ScriptableLines.LineStyle Style, Vector2 Start, Vector2 End) // Converts two points in "grid space " into a line
+    public static LineObject CreateLine(ScriptableLines.LineStyle Style, Vector2 Start, Vector2 End) // Converts two points in "grid space " into a line
     {
         ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
 
         LineObject lp = new LineObject();
 
         lp.Init(Style, gridSettings);
-        lp.p.transform.SetParent(LineHolder.transform);
+//        lp.p.transform.SetParent(LineHolder.transform);
         lp.p.name = "Line: " + Start + " to " + End;
         lp.Positions = new Vector2[Style.NumOfSegments];
 
@@ -59,14 +149,14 @@ public class LineManager : MonoBehaviour
         return lp;
     }
 
-    public LineObject CreateLine(ScriptableLines.LineStyle Style, Vector2[] Positions) // Converts two points in "grid space " into a line
+    public static LineObject CreateLine(ScriptableLines.LineStyle Style, Vector2[] Positions) // Converts two points in "grid space " into a line
     {
         ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
 
         LineObject lp = new LineObject();
 
         lp.Init(Style, gridSettings);
-        lp.p.transform.SetParent(LineHolder.transform);
+//        lp.p.transform.SetParent(LineHolder.transform);
         lp.p.name = "Line: " + Positions[0];
 
         lp.Positions = new Vector2[Style.NumOfSegments];
@@ -97,7 +187,7 @@ public class LineManager : MonoBehaviour
     }
 
 
-    public GameObject CreateLine(ScriptableLines.LineStyle Style, Vector3 cStart, Vector3 cEnd) // Converts two points in world space into a line game object, properly segmented
+    public static GameObject CreateLine(ScriptableLines.LineStyle Style, Vector3 cStart, Vector3 cEnd) // Converts two points in world space into a line game object, properly segmented
     {
 
         Vector2 Start = gridSettings.GetPosition(cStart);

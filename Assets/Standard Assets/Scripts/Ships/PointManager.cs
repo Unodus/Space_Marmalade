@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointManager : MonoBehaviour
+public static class PointManager
 {
 
-    public ScriptableParticles PointPrefabs;
-    public ScriptableParticles.Particle PointStyle;
-    public List<PointObject> MyPoints = new List<PointObject>();
-    public ScriptableGrid gridSettings;
+     static ScriptableParticles PointPrefabs;
+     static ScriptableGrid gridSettings;
+     static ScriptableParticles.Particle PointStyle;
+     static List<PointObject> MyPoints = new List<PointObject>();
 
-    int NumOfPoints;
+    static int NumOfPoints;
 
-    public void Start()
-    {
-        InitiatePoints();
-    }
-    public void PointUpdate() // Every frame, go through the list of Lines and update their positions.
+    
+    public static void PointUpdate() // Every frame, go through the list of Lines and update their positions.
     {
         foreach (var Point in MyPoints)
         {
@@ -30,18 +27,18 @@ public class PointManager : MonoBehaviour
         }
     }
 
-    public PointObject CreatePoint(Vector2 Position) // Converts two points in "grid space " into a line
+    static public PointObject CreatePoint(Vector2 Position) // Converts two points in "grid space " into a line
     {
         PointObject i = new PointObject();
         return i;
     }
 
-    public PointObject GetRandomPoint()
+    static public PointObject GetRandomPoint()
     {
         return GetRandomPoints(1)[0];
     }
 
-    public PointObject[] GetRandomPoints(int NumberOfPoints)
+    static public PointObject[] GetRandomPoints(int NumberOfPoints)
     {
 
         int RandomNumber;
@@ -61,44 +58,38 @@ public class PointManager : MonoBehaviour
 
     }
 
-    void InitiatePoints() // Instantiate Point gameobjects, based on GridMath data 
+    static public void Init(ScriptableGrid grid, ScriptableParticles particles) // Instantiate Point gameobjects, based on GridMath data 
     {
-        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+        PointPrefabs = particles;
+        gridSettings = grid;
+        ScriptableGrid.GridSettings myGrid = grid.GetGridSettings();
 
         NumOfPoints = myGrid.Columns * myGrid.Rows;
 
         for (int i = 0; i < myGrid.Columns; i++)
         {
 
-            PointObject pp;
+            // PointObject pp;
             for (int j = 0; j < myGrid.Rows; j++)
             {
-                pp = new PointObject
-                {
-                    Pos = new Vector2(i, j),
-                    p = Instantiate(PointPrefabs.GetParticleByName(PointStyle).ParticlePrefab) 
-
-                };
-                pp.ChangeNodeType(PointObject.NodeMode.Empty);
-                pp.p.transform.SetParent(transform);
-                pp.p.name = i + ", " + j;
-                pp.p.tag = "Point";
-
-                pp.p.transform.position = gridSettings.SetPosition(i, j);
-
-                Vector3 Displacement = new Vector3((2 * ((1.25f + myGrid.Columns) / myGrid.Columns)) * myGrid.Size * myGrid.ScreenRatio.x, 0, 0);
-
+                PointObject pp = new PointObject();
+                pp.Init(new Vector2(i, j ), PointPrefabs.GetParticleByName(PointStyle).ParticlePrefab, gridSettings);
+        //        pp.p.transform.SetParent(transform);
                 MyPoints.Add(pp);
+
+                //       Vector3 Displacement = new Vector3((2 * ((1.25f + myGrid.Columns) / myGrid.Columns)) * myGrid.Size * myGrid.ScreenRatio.x, 0, 0);
+
+
             }
         }
     }
 
-    void ResetPoints()
+    static void ResetPoints()
     {
-        DeinitialisePoints();
-        InitiatePoints();
+        Deinit();
+        Init(gridSettings, PointPrefabs);
     }
-    void DeinitialisePoints() // When a grid is resized/deleted, this function clears the gameobjects that have been instantiated
+    public static void Deinit() // When a grid is resized/deleted, this function clears the gameobjects that have been instantiated
     {
         foreach (var p in MyPoints)
         {
@@ -108,7 +99,7 @@ public class PointManager : MonoBehaviour
 
     }
 
-    void HighlightNodes(Vector3 ObjectPosition, float Range)
+    static void HighlightNodes(Vector3 ObjectPosition, float Range)
     {
         foreach (PointObject p in MyPoints)
         {
@@ -123,7 +114,7 @@ public class PointManager : MonoBehaviour
         }
     }
 
-    PointObject[] NodesInRange(Vector3 ObjectPosition, float Range) // Makes nodes within a certain range selectable
+    static PointObject[] NodesInRange(Vector3 ObjectPosition, float Range) // Makes nodes within a certain range selectable
     {
         List<PointObject> returnNodes = new List<PointObject>();
 
@@ -133,7 +124,7 @@ public class PointManager : MonoBehaviour
         }
         return returnNodes.ToArray();
     }
-    PointObject[] NodesInRange(Vector3 ObjectPosition, float Range, PointObject.NodeMode nodeType) // Makes nodes within a certain range selectable
+    static PointObject[] NodesInRange(Vector3 ObjectPosition, float Range, PointObject.NodeMode nodeType) // Makes nodes within a certain range selectable
     {
         List<PointObject> returnNodes = new List<PointObject>();
 
@@ -146,10 +137,10 @@ public class PointManager : MonoBehaviour
         }
         return returnNodes.ToArray();
     }
-    PointObject SearchNodes(PointObject[] nodes, Vector3 ObjectPosition, bool ClosestOrFurthest)
+    static PointObject SearchNodes(PointObject[] nodes, Vector3 ObjectPosition, bool ClosestOrFurthest)
     {
-        PointObject closestNode = nodes[0];     
-        if(ClosestOrFurthest)
+        PointObject closestNode = nodes[0];
+        if (ClosestOrFurthest)
         {
             foreach (var node in nodes)
             {
@@ -166,25 +157,25 @@ public class PointManager : MonoBehaviour
         return closestNode;
 
     }
-    PointObject GetClosestNode(Vector3 ObjectPosition, float CutOff) // Function for finding the closest node, usually for when a node has been clicked
+    static PointObject GetClosestNode(Vector3 ObjectPosition, float CutOff) // Function for finding the closest node, usually for when a node has been clicked
     {
         PointObject[] nodes = NodesInRange(ObjectPosition, CutOff);
         if (nodes.Length == 0) return null;
         return SearchNodes(nodes, ObjectPosition, true);
     }
-    PointObject GetClosestNode(Vector3 ObjectPosition, float CutOff, PointObject.NodeMode nodeType) // Function for finding the closest node, usually for when a node has been clicked
+    static PointObject GetClosestNode(Vector3 ObjectPosition, float CutOff, PointObject.NodeMode nodeType) // Function for finding the closest node, usually for when a node has been clicked
     {
         PointObject[] nodes = NodesInRange(ObjectPosition, CutOff, nodeType);
-        if (nodes.Length == 0) return null; 
+        if (nodes.Length == 0) return null;
         return SearchNodes(nodes, ObjectPosition, true);
     }
-    PointObject GetFurthestNode(Vector3 ObjectPosition, float CutOff) // Function for finding the furest node, usually for ships trying to flee
+    static PointObject GetFurthestNode(Vector3 ObjectPosition, float CutOff) // Function for finding the furest node, usually for ships trying to flee
     {
         PointObject[] nodes = NodesInRange(ObjectPosition, CutOff);
         if (nodes.Length == 0) return null;
         return SearchNodes(nodes, ObjectPosition, false);
     }
-    PointObject GetFurthestNode(Vector3 ObjectPosition, float CutOff, PointObject.NodeMode nodeType) // Function for finding the furest node, usually for ships trying to flee
+    static PointObject GetFurthestNode(Vector3 ObjectPosition, float CutOff, PointObject.NodeMode nodeType) // Function for finding the furest node, usually for ships trying to flee
     {
         PointObject[] nodes = NodesInRange(ObjectPosition, CutOff, nodeType);
         if (nodes.Length == 0) return null;
