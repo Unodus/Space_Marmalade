@@ -58,11 +58,11 @@ public static class PointManager
 
     }
 
-    static public void Init(ScriptableGrid grid, ScriptableParticles particles) // Instantiate Point gameobjects, based on GridMath data 
+    static public void Init() // Instantiate Point gameobjects, based on GridMath data 
     {
-        PointPrefabs = particles;
-        gridSettings = grid;
-        ScriptableGrid.GridSettings myGrid = grid.GetGridSettings();
+        PointPrefabs = ScriptableExtensions.m_ScriptableParticles;
+        gridSettings = ScriptableExtensions.m_ScriptableGrid;
+        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
 
         NumOfPoints = myGrid.Columns * myGrid.Rows;
 
@@ -87,7 +87,7 @@ public static class PointManager
     static void ResetPoints()
     {
         Deinit();
-        Init(gridSettings, PointPrefabs);
+        Init();
     }
     public static void Deinit() // When a grid is resized/deleted, this function clears the gameobjects that have been instantiated
     {

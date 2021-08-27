@@ -9,5 +9,5 @@ public interface Scriptable
 }
 public class ScriptableBase : ScriptableObject, Scriptable
 {
-
+    
 }
