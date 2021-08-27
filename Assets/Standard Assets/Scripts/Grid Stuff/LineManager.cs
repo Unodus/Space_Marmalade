@@ -16,11 +16,12 @@ public static class LineManager
     // public GameObject LineHolder;
     static List<LineObject> MyLines = new List<LineObject>();
   
-    public static void Init(ScriptableGrid grid, ScriptableLines lines)
+ 
+    public static void Init()
     {
-        LineStyles = lines;
-        gridSettings = grid;
-
+        LineStyles = ScriptableExtensions.m_ScriptableLines;
+        gridSettings = ScriptableExtensions.m_ScriptableGrid;
+ 
 
         CreateGrid();
     }

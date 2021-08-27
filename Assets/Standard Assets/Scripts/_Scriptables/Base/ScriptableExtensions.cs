@@ -3,9 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ScriptableExtensions 
+public static class ScriptableExtensions
 {
+    #region StaticScriptables
+    public static ScriptableCheatCodes m_ScriptableCheatCodes;
+    public static ScriptableElias m_ScriptableElias;
+    public static ScriptableFont m_ScriptableFont;
+    public static ScriptableGameEvents m_ScriptableGameEvents;
+    public static ScriptableGrid m_ScriptableGrid;
+    public static ScriptableLines m_ScriptableLines;
+    public static ScriptableParticles m_ScriptableParticles;
+    public static ScriptableScenes m_ScriptableScenes;
+    public static ScriptableShipParts m_ScriptableShipParts;
+    public static ScriptableShips m_ScriptableShips;
+    public static ScriptableSounds m_ScriptableSounds;
+    public static ScriptableStrings m_ScriptableStrings;
 
+    static ScriptableExtensions()
+    {
+        ScriptableScripts i = ScriptableSingleton.Instance.scriptableScripts;
+        m_ScriptableCheatCodes = i.scriptables.m_ScriptableCheatCodes;
+        m_ScriptableElias = i.scriptables.m_ScriptableElias;
+        m_ScriptableFont = i.scriptables.m_ScriptableFont;
+        m_ScriptableGameEvents = i.scriptables.m_ScriptableGameEvents;
+        m_ScriptableGrid = i.scriptables.m_ScriptableGrid;
+        m_ScriptableLines = i.scriptables.m_ScriptableLines;
+        m_ScriptableParticles = i.scriptables.m_ScriptableParticles;
+        m_ScriptableScenes = i.scriptables.m_ScriptableScenes;
+        m_ScriptableShipParts = i.scriptables.m_ScriptableShipParts;
+        m_ScriptableShips = i.scriptables.m_ScriptableShips;
+        m_ScriptableSounds = i.scriptables.m_ScriptableSounds;
+        m_ScriptableStrings = i.scriptables.m_ScriptableStrings;
+
+    }
+
+    #endregion
     #region Scriptable Retrieval
 
     public static ScriptableParticles.ParticleSettings GetParticleByName(this ScriptableParticles a, ScriptableParticles.Particle myName)
@@ -21,7 +53,7 @@ public static class ScriptableExtensions
         Debug.LogWarning(myName + " is not registered in the profiler");
         return null;
     }
-    public static ScriptableLines.LineStyle GetLineStyleFromPalette(this ScriptableLines a , ScriptableLines.StyleType style)
+    public static ScriptableLines.LineStyle GetLineStyleFromPalette(this ScriptableLines a, ScriptableLines.StyleType style)
     {
         foreach (ScriptableLines.LineStyle i in a.LineTemplates)
         {
@@ -89,7 +121,6 @@ public static class ScriptableExtensions
     }
 
     #endregion
-
 
     #region Grid Extensions
     public static ScriptableGrid.GridSettings GetGridSettings(this ScriptableGrid a)
@@ -184,20 +215,20 @@ public static class ScriptableExtensions
 
         if (i.PolarActive)
         {
-            if (i.CachedPolarPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result ;            //If the dictionary contains an entry with key in it returns the found entry.
+            if (i.CachedPolarPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result;            //If the dictionary contains an entry with key in it returns the found entry.
             i.CachedPolarPositions.Add(key: position, value: a.SetPosition(position.x, position.y));            //If not, it adds it and returns the result.
             return i.CachedPolarPositions[key: position];
         }
         else
         {
-            if (i.CachedGridPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result ;            //If the dictionary contains an entry with key in it returns the found entry.
+            if (i.CachedGridPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result;            //If the dictionary contains an entry with key in it returns the found entry.
             i.CachedGridPositions.Add(key: position, value: a.SetPosition(position.x, position.y));            //If not, it adds it and returns the result.
             return i.CachedGridPositions[key: position];
         }
     }
 
 
-    public static Vector3 SetPosition(this ScriptableGrid a, float x, float y) 
+    public static Vector3 SetPosition(this ScriptableGrid a, float x, float y)
     {
         ScriptableGrid.GridSettings gridSettings = a.GetGridSettings();
 
@@ -248,7 +279,7 @@ public static class ScriptableExtensions
     {
         ScriptableGrid.GridSettings i = a.GetGridSettings();
 
-        
+
         Vector2 MaxValue = new Vector2(i.Columns, i.Rows);
 
         if (i.PolarActive)
