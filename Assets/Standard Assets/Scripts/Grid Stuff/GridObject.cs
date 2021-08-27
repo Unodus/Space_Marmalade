@@ -8,6 +8,7 @@ public class GridObject : MonoBehaviour
     public bool gridVisible;
 
     
+ 
 
 
   //  public PointManager pointManager;
@@ -16,6 +17,7 @@ public class GridObject : MonoBehaviour
     //ScriptableLines.StyleType outsideStyle, insideStyle;
     //[SerializeField]
     //ScriptableParticles.Particle point;
+ 
 
 
     public void Start()
@@ -30,8 +32,10 @@ public class GridObject : MonoBehaviour
 
        
 
+ 
         PointManager.Init();
         LineManager.Init();
+ 
 
 
       
