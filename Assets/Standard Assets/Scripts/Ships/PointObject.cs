@@ -18,17 +18,16 @@ public class PointObject
 
     ParticleSystem Component;
 
-    public void Init( Vector2 Position, GameObject Style, ScriptableGrid grid)
+    public void Init( Vector2 Position, GameObject Style)
     {
         Pos = Position;
 
-        p = Object.Instantiate(Style);
+        p = Object.Instantiate(Style, GridManager.currentGrid.transform);
         p.name = "Node:"+Position;
         p.tag = "Point";
 
-        
-        gridSettings = grid;
-        Debug.Log(Position);
+        gridSettings = ScriptableExtensions.m_ScriptableGrid;
+
         p.transform.position = gridSettings.SetPosition(Position.x, Position.y);
 
         p.TryGetComponent(out Component);
@@ -41,12 +40,8 @@ public class PointObject
     public void PointUpdate()
     {
         ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
-
         float MovementTime = Vector3.Distance(p.transform.position, gridSettings.SetPosition(Pos.x,Pos.y)) * myGrid.TransitionSpeed * Time.deltaTime;
-
         Vector3 TargetPosition = Vector3.MoveTowards(p.transform.position, gridSettings.SetPosition(Pos.x, Pos.y), MovementTime);
-       // Vector3 TargetSize = Vector3.one * myGrid.Size * 0.1f;
-    //    p.transform.localScale = TargetSize;
         p.transform.position = TargetPosition;
     }
 

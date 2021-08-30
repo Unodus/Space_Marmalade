@@ -156,13 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea52a595fd75ad94ca2e563ea29f6465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridVisible: 0
-  lineStyles: {fileID: 11400000, guid: 7ee61556a0404974ba95ef2fe1697345, type: 2}
-  gridSettings: {fileID: 11400000, guid: a1d77ac0e2bdb77419eb0434083a05e3, type: 2}
-  pointStyles: {fileID: 11400000, guid: ab5aba3c70d7695449379bb4aebc4dbc, type: 2}
-  outsideStyle: 0
-  insideStyle: 1
-  point: 0
 --- !u!4 &123256950
 Transform:
   m_ObjectHideFlags: 0
@@ -199,7 +192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &491968955
 MonoBehaviour:
   m_ObjectHideFlags: 0

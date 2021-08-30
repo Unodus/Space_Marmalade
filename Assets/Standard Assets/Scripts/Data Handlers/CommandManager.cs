@@ -7,12 +7,7 @@ public class CommandManager : MonoBehaviour
 {
     [SerializeField] InputField inputLineField;
     [SerializeField] DialogueRecorder dialogueBox;
-    [SerializeField] public ScriptableCheatCodes CheatCodes;
-    [SerializeField] ScriptableStrings stringValues;
-
-    [SerializeField] ScriptableSounds soundFiles;
-    [SerializeField] ScriptableElias eliasFiles;
-
+ 
     public void AddLineFromInput()
     {
         if (inputLineField == null) return;
@@ -23,16 +18,12 @@ public class CommandManager : MonoBehaviour
         string code = inputLineField.text;
         inputLineField.text = "";
 
-        if (CheatCodes == null) return;
-
-        ProcessCommand(CheatCodes.GetCodeByName(code));
-
-
+        ProcessCommand(ScriptableExtensions.m_ScriptableCheatCodes.GetCodeByName(code));
     }
 
     public void ProcessCommand(ScriptableCheatCodes.CheatType input)
     {
-        dialogueBox.AddLineOfText(stringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference));
+        dialogueBox.AddLineOfText(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference));
 
         switch (input.InternalCode)
         {
@@ -55,7 +46,7 @@ public class CommandManager : MonoBehaviour
 
     public void ProcessCommand(ScriptableCheatCodes.CheatType input, string inputString)
     {
-        dialogueBox.AddLineOfText(stringValues.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference) + inputString);
+        dialogueBox.AddLineOfText(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference) + inputString);
 
         switch (input.InternalCode)
         {

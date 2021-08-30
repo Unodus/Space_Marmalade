@@ -16,7 +16,7 @@ public class ScriptableGrid : ScriptableBase
         [Range(2, 100)]
         public int Columns, Rows;
 
-        [Range(0.0f, 10.0f)]
+        [Range(0.0f, 100.0f)]
         public float Size; //Size of cell dots
         public float TransitionSpeed;
 
