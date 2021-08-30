@@ -10,14 +10,11 @@ public class LineObject
     public LineRenderer pp;
     public Color[] lineColor = new Color[2];
 
-    public void Init(ScriptableLines.LineStyle Style, ScriptableGrid grid)
+    public void Init(ScriptableLines.LineStyle Style)
     {
-        gridSettings = grid;
-
-        p = Object.Instantiate(Style.LinePrefab);
-        
+        gridSettings = ScriptableExtensions.m_ScriptableGrid;
+        p = Object.Instantiate(Style.LinePrefab, GridManager.currentGrid.transform);
         pp = p.GetComponent<LineRenderer>();
-        
         pp.widthMultiplier = Style.LineWidth;
 
         lineColor[0] = Style.LineColorStart;
@@ -26,6 +23,7 @@ public class LineObject
         pp.endColor = lineColor[1];
 
         pp.positionCount = Style.NumOfSegments;
+
 
     }
 
@@ -47,7 +45,6 @@ public class LineObject
             pp.SetPosition(i, FinalPosition);
         }
 
-//        Debug.Log(Input.mousePosition);
         float StartMouseDistance = Vector3.Distance(Input.mousePosition, Positions[0]);
         float EndMouseDistance = Vector3.Distance(Input.mousePosition, Positions[pp.positionCount -1]);
         if (StartMouseDistance > 1 && EndMouseDistance > 1) return;

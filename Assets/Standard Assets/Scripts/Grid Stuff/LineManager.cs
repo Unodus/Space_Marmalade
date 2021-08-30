@@ -2,26 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class LineManager 
+public static class LineManager
 {
-    
+
     // Ref to the line Object
+
+
 
     static ScriptableLines LineStyles;
     static ScriptableGrid gridSettings;
-
     static LineObject[] gridLines;
     static LineObject Outline;
-    
-    // public GameObject LineHolder;
     static List<LineObject> MyLines = new List<LineObject>();
-  
- 
+
+    static Pool<PooledItem> LineObjects;
     public static void Init()
     {
         LineStyles = ScriptableExtensions.m_ScriptableLines;
         gridSettings = ScriptableExtensions.m_ScriptableGrid;
- 
 
         CreateGrid();
     }
@@ -39,8 +37,6 @@ public static class LineManager
         ScriptableLines.LineStyle outlineStyle = LineStyles.GetLineStyleFromPalette(ScriptableLines.StyleType.Outline);
         ScriptableLines.LineStyle insideLine = LineStyles.GetLineStyleFromPalette(ScriptableLines.StyleType.InsideLine);
 
-
-
         List<LineObject> tempGridlines = new List<LineObject>();
         List<Vector2> OutlinePositions = new List<Vector2>();
 
@@ -51,8 +47,8 @@ public static class LineManager
         OutlinePositions.Add(new Vector2(-0.5f, -0.5f));
 
 
-        CreateLine(outlineStyle, OutlinePositions.ToArray());
-        
+        Outline = CreateLine(outlineStyle, OutlinePositions.ToArray());
+
         Vector2 Start;
         Vector2 End;
 
@@ -125,8 +121,8 @@ public static class LineManager
 
         LineObject lp = new LineObject();
 
-        lp.Init(Style, gridSettings);
-//        lp.p.transform.SetParent(LineHolder.transform);
+        lp.Init(Style);
+        //        lp.p.transform.SetParent(LineHolder.transform);
         lp.p.name = "Line: " + Start + " to " + End;
         lp.Positions = new Vector2[Style.NumOfSegments];
 
@@ -156,31 +152,50 @@ public static class LineManager
 
         LineObject lp = new LineObject();
 
-        lp.Init(Style, gridSettings);
-//        lp.p.transform.SetParent(LineHolder.transform);
+        lp.Init(Style);
         lp.p.name = "Line: " + Positions[0];
-
         lp.Positions = new Vector2[Style.NumOfSegments];
 
+        // Get the total distance of lines and add to list of vecs
+        List<float> distances = new List<float>();
+        float TotalDistance = 0;
+        Vector2 TempVector = Positions[0];
+
+        foreach (Vector2 i in Positions)
+        {
+            TotalDistance += Vector2.Distance(TempVector, i);
+            distances.Add(TotalDistance);
+            TempVector = i;
+        }
 
         for (int i = 0; i < Style.NumOfSegments; i++)
         {
-            float tempLerp = Mathf.Lerp(0, Positions.Length - 1.01f, (i / (Style.NumOfSegments - 1.0f)));
-            int j = (int)Mathf.Floor(tempLerp);
-                if (myGrid.PolarActive)
+            float tempLerp = Mathf.Lerp(0, TotalDistance, (i / (Style.NumOfSegments - 1.0f)));
+            int j = 0;
+            float tempLerp2 = 0;
+            for (int i2 = distances.Count - 1; i2 >= 0; i2--)
+            {
+                if (tempLerp > distances[i2] )
                 {
-                    Vector2 NewStart = gridSettings.SetPosition(Positions[j]);
-                    Vector2 NewEnd = gridSettings.SetPosition(Positions[j + 1]);
-                    Vector3 Interp = new Vector2(Mathf.Lerp(NewStart.x, NewEnd.x, i / (Style.NumOfSegments - 1.0f)), Mathf.Lerp(NewStart.y, NewEnd.y, (i / (Style.NumOfSegments - 1.0f))));
-                    lp.Positions[i] = gridSettings.GetPosition(Interp);
+                    j = i2;
+                    tempLerp2 = Mathf.InverseLerp(distances[i2], distances[i2 + 1], tempLerp);
+                    i2 = 0;
                 }
-                else
-                {
+            }
 
-                    lp.Positions[i] = Vector2.Lerp(Positions[j], Positions[j + 1],  (i / (Style.NumOfSegments - 1.0f))); // this needs to use a value that isn't i based, since i now covers the whole line
-                }
-                lp.pp.SetPosition(i, gridSettings.SetPosition(lp.Positions[i].x, lp.Positions[i].y));
-            
+            if (myGrid.PolarActive)
+            {
+                Vector2 NewStart = gridSettings.SetPosition(Positions[j]);
+                Vector2 NewEnd = gridSettings.SetPosition(Positions[j + 1]);
+                Vector3 Interp = new Vector2(Mathf.Lerp(NewStart.x, NewEnd.x, tempLerp2), Mathf.Lerp(NewStart.y, NewEnd.y, tempLerp2));
+                lp.Positions[i] = gridSettings.GetPosition(Interp);
+            }
+            else
+            {
+                lp.Positions[i] = Vector2.Lerp(Positions[j], Positions[j + 1], tempLerp2); // this needs to use a value that isn't i based, since i now covers the whole line
+            }
+            lp.pp.SetPosition(i, gridSettings.SetPosition(lp.Positions[i].x, lp.Positions[i].y));
+        //    Debug.Log(i + " = " +  j+ ": "+ tempLerp2);
         }
 
         MyLines.Add(lp);

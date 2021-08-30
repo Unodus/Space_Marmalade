@@ -65,23 +65,14 @@ public static class PointManager
         gridSettings = ScriptableExtensions.m_ScriptableGrid;
         ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
  
-
         NumOfPoints = myGrid.Columns * myGrid.Rows;
-
         for (int i = 0; i < myGrid.Columns; i++)
         {
-
-            // PointObject pp;
             for (int j = 0; j < myGrid.Rows; j++)
             {
                 PointObject pp = new PointObject();
-                pp.Init(new Vector2(i, j ), PointPrefabs.GetParticleByName(PointStyle).ParticlePrefab, gridSettings);
-        //        pp.p.transform.SetParent(transform);
+                pp.Init(new Vector2(i, j ), PointPrefabs.GetParticleByName(PointStyle).ParticlePrefab);
                 MyPoints.Add(pp);
-
-                //       Vector3 Displacement = new Vector3((2 * ((1.25f + myGrid.Columns) / myGrid.Columns)) * myGrid.Size * myGrid.ScreenRatio.x, 0, 0);
-
-
             }
         }
     }
@@ -89,9 +80,7 @@ public static class PointManager
     static void ResetPoints()
     {
         Deinit();
- 
         Init();
- 
     }
     public static void Deinit() // When a grid is resized/deleted, this function clears the gameobjects that have been instantiated
     {
@@ -100,7 +89,6 @@ public static class PointManager
             p.DeInit();
         }
         MyPoints.Clear();
-
     }
 
     static void HighlightNodes(Vector3 ObjectPosition, float Range)
