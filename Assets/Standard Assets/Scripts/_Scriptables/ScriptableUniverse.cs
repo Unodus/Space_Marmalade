@@ -9,6 +9,7 @@ public class ScriptableUniverse : ScriptableBase
 {
     public enum SpaceClass
     {
+        None,
         Universe,
         Galaxy,
         Star,
@@ -23,10 +24,11 @@ public class ScriptableUniverse : ScriptableBase
         public string Name;
         public SpaceClass Classification;
         public Vector2 PositionInParentGrid;
-        public ScriptableGrid Grid;
+        public ScriptableGrid.GridSettings Grid;
         public RecursiveUniverse[] recursiveUniverses;
         
     }
 
-    public RecursiveUniverse currentGrid;    // array of all palettes
+    public RecursiveUniverse currentGrids;    // array of all palettes
+    public ScriptableGrid displayGrid;
 }

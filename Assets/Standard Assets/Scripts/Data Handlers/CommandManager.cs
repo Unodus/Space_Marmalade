@@ -18,12 +18,12 @@ public class CommandManager : MonoBehaviour
         string code = inputLineField.text;
         inputLineField.text = "";
 
-        ProcessCommand(ScriptableExtensions.m_ScriptableCheatCodes.GetCodeByName(code));
+        ProcessCommand(ScriptableExtensions.s.scriptable.CheatCodes.GetCodeByName(code));
     }
 
     public void ProcessCommand(ScriptableCheatCodes.CheatType input)
     {
-        dialogueBox.AddLineOfText(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference));
+        dialogueBox.AddLineOfText(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference));
 
         switch (input.InternalCode)
         {
@@ -46,7 +46,7 @@ public class CommandManager : MonoBehaviour
 
     public void ProcessCommand(ScriptableCheatCodes.CheatType input, string inputString)
     {
-        dialogueBox.AddLineOfText(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference) + inputString);
+        dialogueBox.AddLineOfText(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference) + inputString);
 
         switch (input.InternalCode)
         {

@@ -15,8 +15,8 @@ public class LineDotter : MonoBehaviour
     }
     private void LateUpdate() // Update at runtime 
     {
-        Repetitions = ScriptableExtensions.m_ScriptableGrid.GameGrid.Size;
-        if (ScriptableExtensions.m_ScriptableGrid.GameGrid.PolarActive) Repetitions *= 2;
+        Repetitions = ScriptableExtensions.s.scriptable.Grids.GameGrid.Size;
+        if (ScriptableExtensions.s.scriptable.Grids.GameGrid.PolarActive) Repetitions *= 2;
         UpdateWidths();
     }
 

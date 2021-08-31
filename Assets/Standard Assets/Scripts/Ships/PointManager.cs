@@ -61,8 +61,8 @@ public static class PointManager
  
     static public void Init() // Instantiate Point gameobjects, based on GridMath data 
     {
-        PointPrefabs = ScriptableExtensions.m_ScriptableParticles;
-        gridSettings = ScriptableExtensions.m_ScriptableGrid;
+        PointPrefabs = ScriptableExtensions.s.scriptable.Particles;
+        gridSettings = ScriptableExtensions.s.scriptable.Grids;
         ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
  
         NumOfPoints = myGrid.Columns * myGrid.Rows;

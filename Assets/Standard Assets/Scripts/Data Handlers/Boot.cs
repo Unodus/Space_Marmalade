@@ -21,7 +21,7 @@ public class Boot : MonoBehaviour
 
     public void StartBoot()
     {
-        LogToConsole(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 1));
+        LogToConsole(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 1));
         StartUpProcesses = new List<IEnumerator>();
         #region
         // Put Startup Enumerators here:
@@ -31,12 +31,12 @@ public class Boot : MonoBehaviour
         // ^^^^^
         #endregion
         StartCoroutine(Startup(StartUpProcesses.ToArray()));
-        LogToConsole(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 2));
+        LogToConsole(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 2));
     }
 
     public void LoadBuild()
     {
-        LogToConsole(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 3));
+        LogToConsole(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 3));
         StartUpProcesses = new List<IEnumerator>();
         #region
         // Put Build Enumerators here:
@@ -53,7 +53,7 @@ public class Boot : MonoBehaviour
 
     public void UnloadBuild()
     {
-        LogToConsole(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 4));
+        LogToConsole(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 4));
         StartUpProcesses = new List<IEnumerator>();
         #region
         // Put Build Enumerators here:
@@ -96,14 +96,14 @@ public class Boot : MonoBehaviour
 
         GameLoaded = false;
 
-        LogToConsole(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 5));
+        LogToConsole(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 5));
         yield return null;
     }
     
     IEnumerator LoadBootScenes()
     {
-        if (!GameLoaded) LogToConsole(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 6));
-        else LogToConsole(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 7));
+        if (!GameLoaded) LogToConsole(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 6));
+        else LogToConsole(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 7));
 
 
         if (GameLoaded) yield return null;
@@ -111,7 +111,7 @@ public class Boot : MonoBehaviour
         else
         {
 
-            foreach (ScriptableScenes.SceneType i in ScriptableExtensions.m_ScriptableScenes.ScenesToLoadOnBoot)
+            foreach (ScriptableScenes.SceneType i in ScriptableExtensions.s.scriptable.Scenes.ScenesToLoadOnBoot)
             {
                 if (i.SceneName == null) continue;
                 SceneManager.LoadScene(i.SceneName, LoadSceneMode.Additive);
@@ -126,13 +126,13 @@ public class Boot : MonoBehaviour
     
     IEnumerator UnloadBootScenes()
     {
-        if (GameLoaded) LogToConsole(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 6));
-        else LogToConsole(ScriptableExtensions.m_ScriptableStrings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 7));
+        if (GameLoaded) LogToConsole(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 6));
+        else LogToConsole(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, 7));
 
         if (!GameLoaded) yield return null;
         else
         {
-            foreach (ScriptableScenes.SceneType i in ScriptableExtensions.m_ScriptableScenes.ScenesToLoadOnBoot)
+            foreach (ScriptableScenes.SceneType i in ScriptableExtensions.s.scriptable.Scenes.ScenesToLoadOnBoot)
             {
                 if (i.SceneName == null) continue;
                 SceneManager.UnloadSceneAsync(i.SceneName);

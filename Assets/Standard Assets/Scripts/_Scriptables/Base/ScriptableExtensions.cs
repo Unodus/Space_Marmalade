@@ -6,35 +6,13 @@ using UnityEngine;
 public static class ScriptableExtensions
 {
     #region StaticScriptables
-    public static ScriptableCheatCodes m_ScriptableCheatCodes;
-    public static ScriptableElias m_ScriptableElias;
-    public static ScriptableFont m_ScriptableFont;
-    public static ScriptableGameEvents m_ScriptableGameEvents;
-    public static ScriptableGrid m_ScriptableGrid;
-    public static ScriptableLines m_ScriptableLines;
-    public static ScriptableParticles m_ScriptableParticles;
-    public static ScriptableScenes m_ScriptableScenes;
-    public static ScriptableShipParts m_ScriptableShipParts;
-    public static ScriptableShips m_ScriptableShips;
-    public static ScriptableSounds m_ScriptableSounds;
-    public static ScriptableStrings m_ScriptableStrings;
 
+    public static ScriptableScripts s;
+
+ 
     static ScriptableExtensions()
     {
-        ScriptableScripts i = ScriptableSingleton.Instance.scriptableScripts;
-        m_ScriptableCheatCodes = i.scriptables.m_ScriptableCheatCodes;
-        m_ScriptableElias = i.scriptables.m_ScriptableElias;
-        m_ScriptableFont = i.scriptables.m_ScriptableFont;
-        m_ScriptableGameEvents = i.scriptables.m_ScriptableGameEvents;
-        m_ScriptableGrid = i.scriptables.m_ScriptableGrid;
-        m_ScriptableLines = i.scriptables.m_ScriptableLines;
-        m_ScriptableParticles = i.scriptables.m_ScriptableParticles;
-        m_ScriptableScenes = i.scriptables.m_ScriptableScenes;
-        m_ScriptableShipParts = i.scriptables.m_ScriptableShipParts;
-        m_ScriptableShips = i.scriptables.m_ScriptableShips;
-        m_ScriptableSounds = i.scriptables.m_ScriptableSounds;
-        m_ScriptableStrings = i.scriptables.m_ScriptableStrings;
-
+        s = ScriptableSingleton.Instance.scriptableScripts;
     }
 
     #endregion
@@ -123,6 +101,19 @@ public static class ScriptableExtensions
     #endregion
 
     #region Grid Extensions
+    
+    public static void LoadGridFromUniverse(this ScriptableGrid a, ScriptableUniverse.RecursiveUniverse universe)
+    {
+        a.Deinit();
+        a.GameGrid = universe.GetGridFromUniverse();
+        a.Init();
+    }
+    
+    public static ScriptableGrid.GridSettings GetGridFromUniverse(this ScriptableUniverse.RecursiveUniverse universe)
+    {
+        return universe.Grid;
+    }
+
     public static ScriptableGrid.GridSettings GetGridSettings(this ScriptableGrid a)
     {
         return a.GameGrid;

@@ -9,6 +9,7 @@ public static class GridManager
     {
         currentGrid = i.gameObject;
 
+        ScriptableExtensions.s.scriptable.Grids.Init();
         PointManager.Init();
         LineManager.Init();
     }

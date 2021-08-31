@@ -18,8 +18,8 @@ public static class LineManager
     static Pool<PooledItem> LineObjects;
     public static void Init()
     {
-        LineStyles = ScriptableExtensions.m_ScriptableLines;
-        gridSettings = ScriptableExtensions.m_ScriptableGrid;
+        LineStyles = ScriptableExtensions.s.scriptable.Lines;
+        gridSettings = ScriptableExtensions.s.scriptable.Grids;
 
         CreateGrid();
     }
