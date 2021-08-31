@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: MyGridProfile
   m_EditorClassIdentifier: 
   GameGrid:
-    ScreenRatio: {x: 1, y: 1}
     PolarActive: 1
-    Columns: 10
-    Rows: 10
-    Size: 5.5
-    TransitionSpeed: 2
+    Columns: 5
+    Rows: 100
+    Size: 37.4
+    ScreenRatio: {x: 0.25, y: 5}
+    TransitionSpeed: 3

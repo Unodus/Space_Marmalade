@@ -12,7 +12,7 @@ public class LineObject
 
     public void Init(ScriptableLines.LineStyle Style)
     {
-        gridSettings = ScriptableExtensions.m_ScriptableGrid;
+        gridSettings = ScriptableExtensions.s.scriptable.Grids;
         p = Object.Instantiate(Style.LinePrefab, GridManager.currentGrid.transform);
         pp = p.GetComponent<LineRenderer>();
         pp.widthMultiplier = Style.LineWidth;

@@ -26,7 +26,7 @@ public class PointObject
         p.name = "Node:"+Position;
         p.tag = "Point";
 
-        gridSettings = ScriptableExtensions.m_ScriptableGrid;
+        gridSettings = ScriptableExtensions.s.scriptable.Grids;
 
         p.transform.position = gridSettings.SetPosition(Position.x, Position.y);
 

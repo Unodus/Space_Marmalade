@@ -12,20 +12,21 @@ public class ScriptableScripts : ScriptableBase
     [Serializable]
     public class ScriptableScript
     {
-        public ScriptableCheatCodes m_ScriptableCheatCodes;
-        public ScriptableElias m_ScriptableElias;
-        public ScriptableFont m_ScriptableFont;
-        public ScriptableGameEvents m_ScriptableGameEvents;
-        public ScriptableGrid m_ScriptableGrid;
-        public ScriptableLines m_ScriptableLines;
-        public ScriptableParticles m_ScriptableParticles;
-        public ScriptableScenes m_ScriptableScenes;
-        public ScriptableShipParts m_ScriptableShipParts;
-        public ScriptableShips m_ScriptableShips;
-        public ScriptableSounds m_ScriptableSounds;
-        public ScriptableStrings m_ScriptableStrings;
+        public ScriptableCheatCodes  CheatCodes;
+        public ScriptableElias  Elias;
+        public ScriptableFont  Fonts;
+        public ScriptableGameEvents GameEvents;
+        public ScriptableGrid Grids;
+        public ScriptableLines Lines;
+        public ScriptableParticles Particles;
+        public ScriptableScenes Scenes;
+        public ScriptableShipParts ShipParts;
+        public ScriptableShips Ships;
+        public ScriptableSounds Sounds;
+        public ScriptableStrings Strings;
+        public ScriptableUniverse Universe;
     }
 
-    public ScriptableScript scriptables;    // array of all palettes
+    public ScriptableScript scriptable;    // array of all palettes
 
 }

@@ -10,7 +10,7 @@ public class ScriptableGrid : ScriptableBase
     [Serializable]
     public class GridSettings
     {
-        public Vector2 ScreenRatio; // Vertical/Horizontal = actual screen size. Columns/Rows = grid space
+       
         public bool PolarActive; //Polar quality on/off
 
         [Range(2, 100)]
@@ -18,6 +18,10 @@ public class ScriptableGrid : ScriptableBase
 
         [Range(0.0f, 100.0f)]
         public float Size; //Size of cell dots
+
+        [HideInInspector]
+        public Vector2 ScreenRatio; // Vertical/Horizontal = actual screen size. Columns/Rows = grid space
+        [HideInInspector]
         public float TransitionSpeed;
 
         public  Dictionary<Vector2, Vector2> CachedGridPositions = new Dictionary<Vector2, Vector2>();
