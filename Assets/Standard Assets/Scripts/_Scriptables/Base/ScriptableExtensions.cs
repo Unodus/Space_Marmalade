@@ -19,7 +19,6 @@ public static class ScriptableExtensions
 
     #region Scriptable Retrieval
 
-
     public static ScriptableGameEvents.TurnEventSettings GetEventByName(ScriptableGameEvents a , string myName)
     {
         foreach (ScriptableGameEvents.TurnEventSettings i in a.TurnEvents)
@@ -36,9 +35,7 @@ public static class ScriptableExtensions
         foreach (ScriptableGameEvents.TurnEventSettings i in a.TurnEvents)
         {
             if (i.turnPhase == myEnum) return i;
-
         }
-
         Debug.LogWarning(myEnum + " is not registered in the profiler");
         return null;
     }
@@ -211,20 +208,23 @@ public static class ScriptableExtensions
     static Vector3 SetPosition(this ScriptableGrid i, int newx, int newy) // Plots a point on the Grid
     {
         ScriptableGrid.GridSettings gridSettings = i.GetGridSettings();
-        return i.SetPosition(new Vector2(newx, newy));
+        return i.SetPosition(new Vector2(newx, newy), false);
     }
 
 
-    public static Vector3 SetPosition(this ScriptableGrid a, in Vector2 position)
+    public static Vector3 SetPosition(this ScriptableGrid a, in Vector2 position, bool Wrap)
     {
         ScriptableGrid.GridSettings i = a.GetGridSettings();
+        Vector2 Pos = position;
+        if (Wrap)
+        {
+            float ModifiedX = i.ColDisplacement + position.x;
+            if (ModifiedX > 0) ModifiedX = ModifiedX % i.Columns;
+            else ModifiedX = i.Columns - ((ModifiedX * -1) % i.Columns);
+            Pos = new Vector2(ModifiedX, position.y);
+        }
 
-        float ModifiedX = i.ColDisplacement + position.x;
-        if (ModifiedX > 0) ModifiedX = ModifiedX % i.Columns;
-        else ModifiedX = i.Columns - ((ModifiedX * -1) % i.Columns);
-        Vector2 ModifiedPos = new Vector2(ModifiedX, position.y);
-
-        return a.SetNormalizedPosition(ModifiedPos) * i.Size;
+        return a.SetNormalizedPosition(Pos) * i.Size;
     }
 
     static Vector3 SetPosition(this ScriptableGrid a, float x, float y)

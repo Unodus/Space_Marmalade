@@ -28,7 +28,7 @@ public class PointObject
 
         gridSettings = ScriptableExtensions.s.scriptable.Grids;
 
-        p.transform.position = gridSettings.SetPosition(new Vector2(Position.x, Position.y));
+        p.transform.position = gridSettings.SetPosition(new Vector2(Position.x, Position.y), true);
 
         p.TryGetComponent(out Component);
         ChangeNodeType(NodeMode.Empty);
@@ -40,8 +40,8 @@ public class PointObject
     public void PointUpdate()
     {
         ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
-        float MovementTime = Vector3.Distance(p.transform.position, gridSettings.SetPosition(new Vector2(Pos.x,Pos.y))) * myGrid.TransitionSpeed * Time.deltaTime;
-        Vector3 TargetPosition = Vector3.MoveTowards(p.transform.position, gridSettings.SetPosition(new Vector2(Pos.x, Pos.y)), MovementTime);
+        float MovementTime = Vector3.Distance(p.transform.position, gridSettings.SetPosition(new Vector2(Pos.x,Pos.y), true)) * myGrid.TransitionSpeed * Time.deltaTime;
+        Vector3 TargetPosition = Vector3.MoveTowards(p.transform.position, gridSettings.SetPosition(new Vector2(Pos.x, Pos.y), true), MovementTime);
         p.transform.position = TargetPosition;
     }
 
