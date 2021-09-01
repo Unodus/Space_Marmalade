@@ -29,6 +29,8 @@ public class ScriptableLines : ScriptableObject
         // Multiplier for line width
         public float LineWidth;
 
+        public bool Wrap;
+
         // Colour of the default Line (some lines use other colours to stand out)
         public Color LineColorStart, LineColorEnd;
     }

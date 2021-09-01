@@ -9,6 +9,7 @@ public class LineObject
     public GameObject p;
     public LineRenderer pp;
     public Color[] lineColor = new Color[2];
+    public bool wrap;
 
     public void Init(ScriptableLines.LineStyle Style)
     {
@@ -23,7 +24,7 @@ public class LineObject
         pp.endColor = lineColor[1];
 
         pp.positionCount = Style.NumOfSegments;
-
+        wrap = Style.Wrap;
 
     }
 
@@ -39,8 +40,8 @@ public class LineObject
 
         for (int i = 0; i < pp.positionCount; i++)
         {
-            Vector3 checkedPosition = gridSettings.SetPosition(new Vector2(Positions[i].x, Positions[i].y));
-            float checkedDistance = Vector3.Distance(pp.GetPosition(i), gridSettings.SetPosition(new Vector2(Positions[i].x, Positions[i].y)));
+            Vector3 checkedPosition = gridSettings.SetPosition(new Vector2(Positions[i].x, Positions[i].y), wrap);
+            float checkedDistance = Vector3.Distance(pp.GetPosition(i), gridSettings.SetPosition(new Vector2(Positions[i].x, Positions[i].y), wrap));
             Vector3 FinalPosition = Vector3.MoveTowards(pp.GetPosition(i), checkedPosition, checkedDistance * MyGrid.TransitionSpeed * Time.deltaTime);
             pp.SetPosition(i, FinalPosition);
         }

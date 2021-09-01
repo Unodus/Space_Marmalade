@@ -19,13 +19,12 @@ public class ScriptableGrid : ScriptableBase
         [Range(0.1f, 50.0f)]
         public float Size;
 
-        [Range(-10f, 10.0f)]
-
+        [Range(-5f, 5f)]
         public float ColDisplacement; //Size of cell dots and column scrolling
 
         [HideInInspector]
         public Vector2 ScreenRatio; // Vertical/Horizontal = actual screen size. Columns/Rows = grid space
-        [HideInInspector]
+ 
         public float TransitionSpeed;
 
         public  Dictionary<Vector2, Vector2> CachedGridPositions = new Dictionary<Vector2, Vector2>();

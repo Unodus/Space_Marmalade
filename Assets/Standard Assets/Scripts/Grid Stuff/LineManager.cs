@@ -130,8 +130,8 @@ public static class LineManager
         {
             if (myGrid.PolarActive)
             {
-                Vector2 NewStart = gridSettings.SetPosition(new Vector2(Start.x, Start.y));
-                Vector2 NewEnd = gridSettings.SetPosition(new Vector2(End.x, End.y));
+                Vector2 NewStart = gridSettings.SetPosition(new Vector2(Start.x, Start.y), Style.Wrap);
+                Vector2 NewEnd = gridSettings.SetPosition(new Vector2(End.x, End.y), Style.Wrap);
                 Vector3 Interp = new Vector2(Mathf.Lerp(NewStart.x, NewEnd.x, i / (Style.NumOfSegments - 1.0f)), Mathf.Lerp(NewStart.y, NewEnd.y, (i / (Style.NumOfSegments - 1.0f))));
                 lp.Positions[i] = gridSettings.GetPosition(Interp);
             }
@@ -139,7 +139,7 @@ public static class LineManager
             {
                 lp.Positions[i] = new Vector2(Mathf.Lerp(Start.x, End.x, (i / (Style.NumOfSegments - 1.0f))), Mathf.Lerp(Start.y, End.y, (i / (Style.NumOfSegments - 1.0f))));
             }
-            lp.pp.SetPosition(i, gridSettings.SetPosition(new Vector2(lp.Positions[i].x, lp.Positions[i].y)));
+            lp.pp.SetPosition(i, gridSettings.SetPosition(new Vector2(lp.Positions[i].x, lp.Positions[i].y), Style.Wrap));
         }
 
         MyLines.Add(lp);
@@ -185,8 +185,8 @@ public static class LineManager
 
             if (myGrid.PolarActive)
             {
-                Vector2 NewStart = gridSettings.SetPosition(Positions[j]);
-                Vector2 NewEnd = gridSettings.SetPosition(Positions[j + 1]);
+                Vector2 NewStart = gridSettings.SetPosition(Positions[j], Style.Wrap);
+                Vector2 NewEnd = gridSettings.SetPosition(Positions[j + 1], Style.Wrap);
                 Vector3 Interp = new Vector2(Mathf.Lerp(NewStart.x, NewEnd.x, tempLerp2), Mathf.Lerp(NewStart.y, NewEnd.y, tempLerp2));
                 lp.Positions[i] = gridSettings.GetPosition(Interp);
             }
@@ -194,7 +194,7 @@ public static class LineManager
             {
                 lp.Positions[i] = Vector2.Lerp(Positions[j], Positions[j + 1], tempLerp2); // this needs to use a value that isn't i based, since i now covers the whole line
             }
-            lp.pp.SetPosition(i, gridSettings.SetPosition(new Vector2(lp.Positions[i].x, lp.Positions[i].y)));
+            lp.pp.SetPosition(i, gridSettings.SetPosition(new Vector2(lp.Positions[i].x, lp.Positions[i].y), Style.Wrap));
         //    Debug.Log(i + " = " +  j+ ": "+ tempLerp2);
         }
 
