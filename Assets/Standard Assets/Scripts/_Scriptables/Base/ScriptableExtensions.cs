@@ -16,7 +16,43 @@ public static class ScriptableExtensions
     }
 
     #endregion
+
     #region Scriptable Retrieval
+
+
+    public static ScriptableGameEvents.TurnEventSettings GetEventByName(ScriptableGameEvents a , string myName)
+    {
+        foreach (ScriptableGameEvents.TurnEventSettings i in a.TurnEvents)
+        {
+            if (i.Name == myName) return i;
+
+        }
+
+        Debug.LogWarning(myName + " is not registered in the profiler");
+        return null;
+    }
+    public static ScriptableGameEvents.TurnEventSettings GetEventByPhase(this ScriptableGameEvents a, ScriptableGameEvents.TurnPhase myEnum)
+    {
+        foreach (ScriptableGameEvents.TurnEventSettings i in a.TurnEvents)
+        {
+            if (i.turnPhase == myEnum) return i;
+
+        }
+
+        Debug.LogWarning(myEnum + " is not registered in the profiler");
+        return null;
+    }
+    public static ScriptableGameEvents.InputEventSettings GetEventByType(this ScriptableGameEvents a, ScriptableGameEvents.InputEventType myEnum)
+    {
+        foreach (ScriptableGameEvents.InputEventSettings i in a.InputEvents)
+        {
+            if (i.InputType == myEnum) return i;
+        }
+
+        Debug.LogWarning(myEnum + " is not registered in the profiler");
+        return null;
+    }
+
 
     public static ScriptableParticles.ParticleSettings GetParticleByName(this ScriptableParticles a, ScriptableParticles.Particle myName)
     {
@@ -175,21 +211,7 @@ public static class ScriptableExtensions
     static Vector3 SetPosition(this ScriptableGrid i, int newx, int newy) // Plots a point on the Grid
     {
         ScriptableGrid.GridSettings gridSettings = i.GetGridSettings();
-
-        Vector3 returnVector;
-        if (gridSettings.PolarActive)
-        {
-            float angle = Mathf.Lerp(0, 2 * Mathf.PI, ((newx * -1) / (float)(gridSettings.Columns))); // = x (between 0 and 2*pi)
-            float radius = Mathf.Lerp(0, gridSettings.Size * gridSettings.ScreenRatio.y, ((newy) / (float)(gridSettings.Rows)));  // = y (between 0 and 0.5*vertical)
-            returnVector = new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
-        }
-        else
-        {
-            float column = Mathf.Lerp(-gridSettings.Size * gridSettings.ScreenRatio.x, gridSettings.Size * gridSettings.ScreenRatio.x, (newx) / (float)(gridSettings.Columns - 1.0f));  // x (between +/- 0.5*vertical)
-            float row = Mathf.Lerp(-gridSettings.Size * gridSettings.ScreenRatio.y, gridSettings.Size * gridSettings.ScreenRatio.y, (newy) / (float)(gridSettings.Rows - 1.0f));   // y (between +/- 0.5*horizontal)
-            returnVector = new Vector3(column, row, 0);
-        }
-        return returnVector;
+        return i.SetPosition(new Vector2(newx, newy));
     }
 
 
@@ -197,7 +219,24 @@ public static class ScriptableExtensions
     {
         ScriptableGrid.GridSettings i = a.GetGridSettings();
 
-        return a.SetNormalizedPosition(position) * i.Size;
+        float ModifiedX = i.ColDisplacement + position.x;
+        if (ModifiedX > 0) ModifiedX = ModifiedX % i.Columns;
+        else ModifiedX = i.Columns - ((ModifiedX * -1) % i.Columns);
+        Vector2 ModifiedPos = new Vector2(ModifiedX, position.y);
+
+        return a.SetNormalizedPosition(ModifiedPos) * i.Size;
+    }
+
+    static Vector3 SetPosition(this ScriptableGrid a, float x, float y)
+    {
+        ScriptableGrid.GridSettings gridSettings = a.GetGridSettings();
+
+        Vector2 Pos = new Vector2(x, y);
+        Pos = a.CalculateRatio(Pos);
+
+        if (gridSettings.PolarActive) return a.CoordtoPolar(Pos);
+        else return a.CoordtoGrid(Pos) * 0.5f;
+
     }
 
     public static Vector3 SetNormalizedPosition(this ScriptableGrid a, in Vector2 position)
@@ -219,17 +258,7 @@ public static class ScriptableExtensions
     }
 
 
-    public static Vector3 SetPosition(this ScriptableGrid a, float x, float y)
-    {
-        ScriptableGrid.GridSettings gridSettings = a.GetGridSettings();
 
-        Vector2 Pos = new Vector2(x, y);
-        Pos = a.CalculateRatio(Pos);
-
-        if (gridSettings.PolarActive) return a.CoordtoPolar(Pos);
-        else return a.CoordtoGrid(Pos) * 0.5f;
-
-    }
     public static Vector2 GetPosition(this ScriptableGrid a, Vector3 CurrentPosition)// get the position on a grid from a worldspace coordinate
     {
         ScriptableGrid.GridSettings gridSettings = a.GetGridSettings();

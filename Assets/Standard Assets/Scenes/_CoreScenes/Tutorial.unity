@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f707e769aa5a9254eb735eb5c99dfd81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundZ: 0
+  inputEvent: 0
 --- !u!1001 &667101000285065235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -762,6 +762,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3636256756038235618, guid: f87ca8fc44590b842ab27a7efad7b00d,
+        type: 3}
+      propertyPath: m_Parameters.generateLightingData
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3636256756038235619, guid: f87ca8fc44590b842ab27a7efad7b00d,
         type: 3}
       propertyPath: m_Name

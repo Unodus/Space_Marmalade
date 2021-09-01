@@ -14,6 +14,6 @@ public class GridObject : MonoBehaviour
     }
     public void LateUpdate()
     {
-        this.Update();
+        this.GridUpdate();
     }
 }

@@ -39,8 +39,8 @@ public class LineObject
 
         for (int i = 0; i < pp.positionCount; i++)
         {
-            Vector3 checkedPosition = gridSettings.SetPosition(Positions[i].x, Positions[i].y);
-            float checkedDistance = Vector3.Distance(pp.GetPosition(i), gridSettings.SetPosition(Positions[i].x, Positions[i].y));
+            Vector3 checkedPosition = gridSettings.SetPosition(new Vector2(Positions[i].x, Positions[i].y));
+            float checkedDistance = Vector3.Distance(pp.GetPosition(i), gridSettings.SetPosition(new Vector2(Positions[i].x, Positions[i].y)));
             Vector3 FinalPosition = Vector3.MoveTowards(pp.GetPosition(i), checkedPosition, checkedDistance * MyGrid.TransitionSpeed * Time.deltaTime);
             pp.SetPosition(i, FinalPosition);
         }

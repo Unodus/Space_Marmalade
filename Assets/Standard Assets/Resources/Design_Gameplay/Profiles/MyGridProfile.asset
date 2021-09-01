@@ -15,7 +15,8 @@ MonoBehaviour:
   GameGrid:
     PolarActive: 1
     Columns: 5
-    Rows: 100
-    Size: 37.4
-    ScreenRatio: {x: 0.25, y: 5}
+    Rows: 6
+    Size: 1
+    ColDisplacement: -7.5
+    ScreenRatio: {x: 4.1666665, y: 5}
     TransitionSpeed: 3

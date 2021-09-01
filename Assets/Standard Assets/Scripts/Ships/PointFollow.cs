@@ -208,7 +208,7 @@ public class PointFollow : MonoBehaviour
     void CallEvent(ScriptableGameEvents.TurnPhase turnPhase)
     {
 
-        ScriptableGameEvents.EventSettings currentEvent = EventProfiler.GetEventByPhase(turnPhase);
+        ScriptableGameEvents.TurnEventSettings currentEvent = EventProfiler.GetEventByPhase(turnPhase);
         if (currentEvent == null) return;
 
       
@@ -318,7 +318,7 @@ public class PointFollow : MonoBehaviour
 
     void UpdateByEvent()
     {
-        ScriptableGameEvents.EventSettings currentEvent = EventProfiler.GetEventByPhase(CurrentTurn);
+        ScriptableGameEvents.TurnEventSettings currentEvent = EventProfiler.GetEventByPhase(CurrentTurn);
 
         ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
 

@@ -1,43 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class CameraPan : MonoBehaviour
 {
+    // Camera cam;
+    [SerializeField]
+    ScriptableGameEvents.InputEventType inputEvent = ScriptableGameEvents.InputEventType.MapDrag;
 
-    private Vector3 touchStart;
-    Camera cam;
-    public float groundZ = 0;
+    UnityAction<Vector3> unityAction;
 
-    // Update is called once per frame
-    void Update()
+ 
+    public void Start()
     {
+        EventDictionary.StartListening(ScriptableExtensions.s.scriptable.GameEvents.GetEventByType(inputEvent).Name, unityAction);
 
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            touchStart = GetWorldPosition(groundZ);
-        }
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 direction = touchStart - GetWorldPosition(groundZ);
-            transform.position += direction;
-        }
     }
-
-    private Vector3 GetWorldPosition(float z)
+    public void UpdatePos(Vector3 direction)
     {
-        cam = Camera.main;
-        Ray mousePos = cam.ScreenPointToRay(Input.mousePosition);
-        Plane ground = new Plane(Vector3.forward, new Vector3(0, 0, z));
-        float distance;
-        ground.Raycast(mousePos, out distance);
-        return mousePos.GetPoint(distance);
+        transform.position += direction;
+    }
+ 
+    public void OnEnable()
+    {
+        unityAction += UpdatePos;
+      }
+
+    public void OnDisable()
+    {
+        unityAction -= UpdatePos;
     }
 }

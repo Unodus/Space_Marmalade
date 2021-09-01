@@ -12,39 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0d3352ba5c7bc409f1c8ae6231bef0, type: 3}
   m_Name: MyGameEventProfiler
   m_EditorClassIdentifier: 
-  Events:
-  - Name: Enemy Turn Shooting
+  InputEvents:
+  - Name: displacementDrag
+    InputType: 1
+  - Name: mapDrag
+    InputType: 0
+  TurnEvents:
+  - Name: 
     turnPhase: 0
-    ReturnToCentre: 1
-    TriggerEliasProfiler: 
-    CameraMode: 0
-  - Name: Enemy Turn Moving
-    turnPhase: 1
     ReturnToCentre: 0
     TriggerEliasProfiler: 
-    CameraMode: 0
-  - Name: Player Turn Shooting
-    turnPhase: 3
-    ReturnToCentre: 0
-    TriggerEliasProfiler: Combat
-    CameraMode: 1
-  - Name: Player Turn Moving
-    turnPhase: 2
-    ReturnToCentre: 0
-    TriggerEliasProfiler: Strategy
-    CameraMode: 0
-  - Name: Transition
-    turnPhase: 4
-    ReturnToCentre: 0
-    TriggerEliasProfiler: 
-    CameraMode: 1
-  - Name: Player Turn Start
-    turnPhase: 5
-    ReturnToCentre: 0
-    TriggerEliasProfiler: 
-    CameraMode: 0
-  - Name: Player Turn End
-    turnPhase: 6
-    ReturnToCentre: 0
-    TriggerEliasProfiler: Mode
     CameraMode: 0

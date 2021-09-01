@@ -13,11 +13,15 @@ public class ScriptableGrid : ScriptableBase
        
         public bool PolarActive; //Polar quality on/off
 
-        [Range(2, 100)]
+        [Range(2, 50)]
         public int Columns, Rows;
 
-        [Range(0.0f, 100.0f)]
-        public float Size; //Size of cell dots
+        [Range(0.1f, 50.0f)]
+        public float Size;
+
+        [Range(-10f, 10.0f)]
+
+        public float ColDisplacement; //Size of cell dots and column scrolling
 
         [HideInInspector]
         public Vector2 ScreenRatio; // Vertical/Horizontal = actual screen size. Columns/Rows = grid space

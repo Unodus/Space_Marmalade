@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604bd62e6116f2f47a0c20c1f9dc918b, type: 3}
   m_Name: TutorialProfile
   m_EditorClassIdentifier: 
-  currentGrid:
-    Name: Factions
+  currentGrids:
+    Name: 
     Classification: 0
     PositionInParentGrid: {x: 0, y: 0}
     Grid:
@@ -23,92 +23,4 @@ MonoBehaviour:
       Size: 0
       ScreenRatio: {x: 0, y: 0}
       TransitionSpeed: 0
-    recursiveUniverses:
-    - Name: Ship Creator
-      Classification: 0
-      PositionInParentGrid: {x: 0, y: 0}
-      Grid:
-        PolarActive: 0
-        Columns: 0
-        Rows: 0
-        Size: 0
-        ScreenRatio: {x: 0, y: 0}
-        TransitionSpeed: 0
-      recursiveUniverses:
-      - Name: Lower
-        Classification: 0
-        PositionInParentGrid: {x: 0, y: 0}
-        Grid:
-          PolarActive: 0
-          Columns: 0
-          Rows: 0
-          Size: 0
-          ScreenRatio: {x: 0, y: 0}
-          TransitionSpeed: 0
-        recursiveUniverses: []
-      - Name: Wings
-        Classification: 0
-        PositionInParentGrid: {x: 0, y: 0}
-        Grid:
-          PolarActive: 0
-          Columns: 0
-          Rows: 0
-          Size: 0
-          ScreenRatio: {x: 0, y: 0}
-          TransitionSpeed: 0
-        recursiveUniverses: []
-      - Name: Body
-        Classification: 0
-        PositionInParentGrid: {x: 0, y: 0}
-        Grid:
-          PolarActive: 0
-          Columns: 0
-          Rows: 0
-          Size: 0
-          ScreenRatio: {x: 0, y: 0}
-          TransitionSpeed: 0
-        recursiveUniverses: []
-      - Name: Nose
-        Classification: 0
-        PositionInParentGrid: {x: 0, y: 0}
-        Grid:
-          PolarActive: 0
-          Columns: 0
-          Rows: 0
-          Size: 0
-          ScreenRatio: {x: 0, y: 0}
-          TransitionSpeed: 0
-        recursiveUniverses: []
-      - Name: Thruster
-        Classification: 0
-        PositionInParentGrid: {x: 0, y: 0}
-        Grid:
-          PolarActive: 0
-          Columns: 0
-          Rows: 0
-          Size: 0
-          ScreenRatio: {x: 0, y: 0}
-          TransitionSpeed: 0
-        recursiveUniverses: []
-      - Name: Higher
-        Classification: 0
-        PositionInParentGrid: {x: 0, y: 0}
-        Grid:
-          PolarActive: 0
-          Columns: 0
-          Rows: 0
-          Size: 0
-          ScreenRatio: {x: 0, y: 0}
-          TransitionSpeed: 0
-        recursiveUniverses: []
-      - Name: Window
-        Classification: 0
-        PositionInParentGrid: {x: 0, y: 0}
-        Grid:
-          PolarActive: 0
-          Columns: 0
-          Rows: 0
-          Size: 0
-          ScreenRatio: {x: 0, y: 0}
-          TransitionSpeed: 0
-        recursiveUniverses: []
+  displayGrid: {fileID: 0}
