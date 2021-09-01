@@ -12,26 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba5026aea4b4b3429eb83f33d7833e4, type: 3}
   m_Name: _MyScriptProfile
   m_EditorClassIdentifier: 
-  scriptables:
-    m_ScriptableCheatCodes: {fileID: 11400000, guid: 49857453873b8534eb32e233d6d660ab,
-      type: 2}
-    m_ScriptableElias: {fileID: 11400000, guid: 423173561ff75254e83c9b84652fb906,
-      type: 2}
-    m_ScriptableFont: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
-    m_ScriptableGameEvents: {fileID: 11400000, guid: aff4546ba7e82f447bea762d56bac703,
-      type: 2}
-    m_ScriptableGrid: {fileID: 11400000, guid: a1d77ac0e2bdb77419eb0434083a05e3, type: 2}
-    m_ScriptableLines: {fileID: 11400000, guid: 7ee61556a0404974ba95ef2fe1697345,
-      type: 2}
-    m_ScriptableParticles: {fileID: 11400000, guid: ab5aba3c70d7695449379bb4aebc4dbc,
-      type: 2}
-    m_ScriptableScenes: {fileID: 11400000, guid: d03e9926dc42c8741919c94f23628951,
-      type: 2}
-    m_ScriptableShipParts: {fileID: 11400000, guid: 1f8773d8a5452ed478ba9b525b18c1be,
-      type: 2}
-    m_ScriptableShips: {fileID: 11400000, guid: 809d2563025cd394985d7ef57209ad07,
-      type: 2}
-    m_ScriptableSounds: {fileID: 11400000, guid: 849b2b3e95a018442a832b5e446e9aaa,
-      type: 2}
-    m_ScriptableStrings: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090,
-      type: 2}
+  scriptable:
+    CheatCodes: {fileID: 11400000, guid: 49857453873b8534eb32e233d6d660ab, type: 2}
+    Elias: {fileID: 11400000, guid: 423173561ff75254e83c9b84652fb906, type: 2}
+    Fonts: {fileID: 11400000, guid: 2105532f27f31c74db50a0d00b934d51, type: 2}
+    GameEvents: {fileID: 11400000, guid: aff4546ba7e82f447bea762d56bac703, type: 2}
+    Grids: {fileID: 11400000, guid: a1d77ac0e2bdb77419eb0434083a05e3, type: 2}
+    Lines: {fileID: 11400000, guid: 7ee61556a0404974ba95ef2fe1697345, type: 2}
+    Particles: {fileID: 11400000, guid: ab5aba3c70d7695449379bb4aebc4dbc, type: 2}
+    Scenes: {fileID: 11400000, guid: d03e9926dc42c8741919c94f23628951, type: 2}
+    ShipParts: {fileID: 11400000, guid: 1f8773d8a5452ed478ba9b525b18c1be, type: 2}
+    Ships: {fileID: 11400000, guid: 809d2563025cd394985d7ef57209ad07, type: 2}
+    Sounds: {fileID: 11400000, guid: 849b2b3e95a018442a832b5e446e9aaa, type: 2}
+    Strings: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
+    Universe: {fileID: 11400000, guid: ea7b0fdc641ad88469cba72a989c4e5d, type: 2}

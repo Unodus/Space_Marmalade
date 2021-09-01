@@ -16,7 +16,7 @@ MonoBehaviour:
   - StyleName: 0
     LinePrefab: {fileID: 3636256756038235619, guid: f87ca8fc44590b842ab27a7efad7b00d,
       type: 3}
-    NumOfSegments: 100
+    NumOfSegments: 200
     LineWidth: 0.2
     LineColorStart: {r: 1, g: 1, b: 1, a: 1}
     LineColorEnd: {r: 1, g: 1, b: 1, a: 1}
