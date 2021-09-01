@@ -18,6 +18,41 @@ public static class ScriptableExtensions
     #endregion
     #region Scriptable Retrieval
 
+
+    public static ScriptableGameEvents.TurnEventSettings GetEventByName(ScriptableGameEvents a , string myName)
+    {
+        foreach (ScriptableGameEvents.TurnEventSettings i in a.TurnEvents)
+        {
+            if (i.Name == myName) return i;
+
+        }
+
+        Debug.LogWarning(myName + " is not registered in the profiler");
+        return null;
+    }
+    public static ScriptableGameEvents.TurnEventSettings GetEventByPhase(this ScriptableGameEvents a, ScriptableGameEvents.TurnPhase myEnum)
+    {
+        foreach (ScriptableGameEvents.TurnEventSettings i in a.TurnEvents)
+        {
+            if (i.turnPhase == myEnum) return i;
+
+        }
+
+        Debug.LogWarning(myEnum + " is not registered in the profiler");
+        return null;
+    }
+    public static ScriptableGameEvents.InputEventSettings GetEventByType(this ScriptableGameEvents a, ScriptableGameEvents.InputEventType myEnum)
+    {
+        foreach (ScriptableGameEvents.InputEventSettings i in a.InputEvents)
+        {
+            if (i.InputType == myEnum) return i;
+        }
+
+        Debug.LogWarning(myEnum + " is not registered in the profiler");
+        return null;
+    }
+
+
     public static ScriptableParticles.ParticleSettings GetParticleByName(this ScriptableParticles a, ScriptableParticles.Particle myName)
     {
         foreach (ScriptableParticles.ParticleSettings i in a.Particles)

@@ -25,7 +25,7 @@ public class ScriptableUniverse : ScriptableBase
         public SpaceClass Classification;
         public Vector2 PositionInParentGrid;
         public ScriptableGrid.GridSettings Grid;
-        public RecursiveUniverse[] recursiveUniverses;
+      //  public RecursiveUniverse[] recursiveUniverses;
         
     }
 

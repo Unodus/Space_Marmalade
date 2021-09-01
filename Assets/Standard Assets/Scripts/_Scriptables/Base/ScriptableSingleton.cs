@@ -18,6 +18,7 @@ public class ScriptableSingleton : MonoBehaviour
         else
         {
             _instance = this;
+            EventDictionary.Init();
         }
     }
 }

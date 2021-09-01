@@ -5,7 +5,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameEventProfile", menuName = "ScriptableObjects/GameEventProfile", order = 2)]
 
-public class ScriptableGameEvents : ScriptableObject
+public class ScriptableGameEvents : ScriptableBase
 {
 
     public enum TurnPhase // Turns are divided into different segments, to filter out user inputs.
@@ -18,10 +18,14 @@ public class ScriptableGameEvents : ScriptableObject
         PlayerTurn_Start,
         PlayerTurn_End
     }
-
+    public enum InputEventType  
+    {
+     MapDrag,
+     DisplacementDrag
+    }
 
     [Serializable]
-    public class EventSettings // Each palette
+    public class TurnEventSettings // Each palette
     {
         public string Name;
         public TurnPhase turnPhase;
@@ -29,34 +33,15 @@ public class ScriptableGameEvents : ScriptableObject
         public string TriggerEliasProfiler;
         public int CameraMode;
        }
-
-    public EventSettings[] Events;    // array of all palettes
-
-    public EventSettings GetEventByName(string myName)
+    [Serializable]
+    public class InputEventSettings // Each palette
     {
-        foreach (EventSettings i in Events)
-        {
-            if (i.Name == myName)
-            {
-                return i;
-            }
-        }
-
-        Debug.LogWarning(myName + " is not registered in the profiler");
-        return null;
-    }
-    public EventSettings GetEventByPhase(TurnPhase myEnum)
-    {
-        foreach (EventSettings i in Events)
-        {
-            if (i.turnPhase == myEnum)
-            {
-                return i;
-            }
-        }
-
-        Debug.LogWarning(myEnum + " is not registered in the profiler");
-        return null;
+        public string Name;
+        public InputEventType InputType;
     }
 
+    public InputEventSettings[] InputEvents;    // array of all palettes
+
+    public TurnEventSettings[] TurnEvents;    // array of all palettes
+  
 }
