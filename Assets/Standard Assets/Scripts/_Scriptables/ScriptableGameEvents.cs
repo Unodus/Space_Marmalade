@@ -21,7 +21,8 @@ public class ScriptableGameEvents : ScriptableBase
     public enum InputEventType  
     {
      MapDrag,
-     DisplacementDrag
+     DisplacementDrag,
+     UpdateGrid
     }
 
     [Serializable]

@@ -15,16 +15,16 @@ public static class PointManager
     
     public static void PointUpdate() // Every frame, go through the list of Lines and update their positions.
     {
-        foreach (var Point in MyPoints)
-        {
-            if (Point.p == null)
-            {
-                MyPoints.Remove(Point);
-                Point.DeInit();
-                return;
-            }
-            Point.PointUpdate();
-        }
+        //foreach (var Point in MyPoints)
+        //{
+        //    if (Point.p == null)
+        //    {
+        //        MyPoints.Remove(Point);
+        //        Point.DeInit();
+        //        return;
+        //    }
+        //    Point.PointUpdate();
+        //}
     }
 
     static public PointObject CreatePoint(Vector2 Position) // Converts two points in "grid space " into a line

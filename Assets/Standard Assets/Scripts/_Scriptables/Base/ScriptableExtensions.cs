@@ -41,8 +41,10 @@ public static class ScriptableExtensions
     }
     public static ScriptableGameEvents.InputEventSettings GetEventByType(this ScriptableGameEvents a, ScriptableGameEvents.InputEventType myEnum)
     {
+    
         foreach (ScriptableGameEvents.InputEventSettings i in a.InputEvents)
         {
+            
             if (i.InputType == myEnum) return i;
         }
 
@@ -218,9 +220,13 @@ public static class ScriptableExtensions
         Vector2 Pos = position;
         if (Wrap)
         {
+             
             float ModifiedX = i.ColDisplacement + position.x;
-            if (ModifiedX > 0) ModifiedX = ModifiedX % i.Columns;
-            else ModifiedX = i.Columns - ((ModifiedX * -1) % i.Columns);
+            ModifiedX += 0.5f; // this is kind of a magic number to make the grid centre at 0
+
+            float Max = i.Columns ;
+            if (ModifiedX > 0) ModifiedX = ModifiedX % Max;
+            else ModifiedX = Max - ((ModifiedX * -1) % Max);
             Pos = new Vector2(ModifiedX, position.y);
         }
 
