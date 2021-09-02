@@ -17,12 +17,5 @@ public class ScriptableCheatCodes : ScriptableBase
 
     public CheatType[] Commands;    // array of all palettes
 
-    public enum CommandType 
-    { 
-    None,
-    CheatEnable,
-    PlaySound,
-    EliasChange
-    }
-
+ 
 }

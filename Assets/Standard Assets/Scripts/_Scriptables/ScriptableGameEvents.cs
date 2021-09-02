@@ -8,23 +8,7 @@ using UnityEngine;
 public class ScriptableGameEvents : ScriptableBase
 {
 
-    public enum TurnPhase // Turns are divided into different segments, to filter out user inputs.
-    {
-        EnemyTurnShooting,
-        EnemyTurnMoving,
-        PlayerTurn_Moving,
-        PlayerTurn_Shooting,
-        Transition,
-        PlayerTurn_Start,
-        PlayerTurn_End
-    }
-    public enum InputEventType  
-    {
-     MapDrag,
-     DisplacementDrag,
-     UpdateGrid
-    }
-
+ 
     [Serializable]
     public class TurnEventSettings // Each palette
     {
