@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PointObject 
 {
@@ -11,12 +12,28 @@ public class PointObject
         Occupied
     }
 
-    public ScriptableGrid gridSettings;
+    //public ScriptableGrid gridSettings;
     public Vector2 Pos;
     public GameObject p;
     public NodeMode Mode;
-
     ParticleSystem Component;
+    public UnityAction PointUpdateEvent;
+    public PointObject()
+    {
+        OnEnable();
+        EventDictionary.StartListening(ScriptableExtensions.s.scriptable.GameEvents.GetEventByType(ScriptableGameEvents.InputEventType.UpdateGrid).Name, PointUpdateEvent);
+    }
+
+    public void OnEnable()
+    {
+        PointUpdateEvent += PointUpdate;
+    }
+    public void OnDisable()
+    {
+        PointUpdateEvent -= PointUpdate;
+    }
+
+
 
     public void Init( Vector2 Position, GameObject Style)
     {
@@ -26,7 +43,7 @@ public class PointObject
         p.name = "Node:"+Position;
         p.tag = "Point";
 
-        gridSettings = ScriptableExtensions.s.scriptable.Grids;
+        ScriptableGrid gridSettings = ScriptableExtensions.s.scriptable.Grids;
 
         p.transform.position = gridSettings.SetPosition(new Vector2(Position.x, Position.y), true);
 
@@ -39,9 +56,9 @@ public class PointObject
     }
     public void PointUpdate()
     {
-        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
-        float MovementTime = Vector3.Distance(p.transform.position, gridSettings.SetPosition(new Vector2(Pos.x,Pos.y), true)) * myGrid.TransitionSpeed * Time.deltaTime;
-        Vector3 TargetPosition = Vector3.MoveTowards(p.transform.position, gridSettings.SetPosition(new Vector2(Pos.x, Pos.y), true), MovementTime);
+        ScriptableGrid.GridSettings myGrid = ScriptableExtensions.s.scriptable.Grids.GetGridSettings();
+        float MovementTime = Vector3.Distance(p.transform.position, ScriptableExtensions.s.scriptable.Grids.SetPosition(new Vector2(Pos.x,Pos.y), true)) * myGrid.TransitionSpeed * Time.deltaTime;
+        Vector3 TargetPosition = Vector3.MoveTowards(p.transform.position, ScriptableExtensions.s.scriptable.Grids.SetPosition(new Vector2(Pos.x, Pos.y), true), MovementTime);
         p.transform.position = TargetPosition;
     }
 

@@ -17,6 +17,8 @@ MonoBehaviour:
     InputType: 1
   - Name: mapDrag
     InputType: 0
+  - Name: updateGrid
+    InputType: 2
   TurnEvents:
   - Name: 
     turnPhase: 0

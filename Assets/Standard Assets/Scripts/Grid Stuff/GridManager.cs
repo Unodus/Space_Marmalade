@@ -21,8 +21,7 @@ public static class GridManager
 
     public static void GridUpdate(this GridObject i)
     {
-        LineManager.LineUpdate();
-        PointManager.PointUpdate();
+        EventDictionary.TriggerEvent(ScriptableExtensions.s.scriptable.GameEvents.GetEventByType(ScriptableGameEvents.InputEventType.UpdateGrid).Name);
     }
 
 }

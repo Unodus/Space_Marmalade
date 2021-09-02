@@ -19,8 +19,10 @@ public static class EventDictionary
     public static void TriggerEvent(string eventName)
     {
         UnityEvent thisEvent = null;
+
         if (eventDictionary.TryGetValue(eventName, out thisEvent))
         {
+           
             thisEvent.Invoke();
         }
     } // Triggers an event in the dictionary with the given name
@@ -28,6 +30,7 @@ public static class EventDictionary
     // Triggers an event in the dictionary with the given name
     public static void StartListening(string eventName, UnityAction listener)
     {
+
         if (eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
         {
             thisEvent.AddListener(listener);
@@ -67,7 +70,7 @@ public static class EventDictionary
     }
     public static void StartListening(string eventName, UnityAction<Vector3> listener)
     {
-  
+
         if (eventVec3Dictionary.TryGetValue(eventName, out UnityVector3Event thisEvent))
         {
             thisEvent.AddListener(listener);

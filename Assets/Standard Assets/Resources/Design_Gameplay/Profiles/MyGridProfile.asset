@@ -17,6 +17,6 @@ MonoBehaviour:
     Columns: 7
     Rows: 4
     Size: 1
-    ColDisplacement: -5
+    ColDisplacement: 4.52
     ScreenRatio: {x: 8.75, y: 5}
     TransitionSpeed: 5

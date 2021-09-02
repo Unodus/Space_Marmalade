@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class LineManager
 {
@@ -40,11 +41,11 @@ public static class LineManager
         List<LineObject> tempGridlines = new List<LineObject>();
         List<Vector2> OutlinePositions = new List<Vector2>();
 
-        OutlinePositions.Add(new Vector2(-0.5f, -0.5f));
-        OutlinePositions.Add(new Vector2(-0.5f, myGrid.Rows - 0.5f));
-        OutlinePositions.Add(new Vector2(myGrid.Columns - 0.5f, myGrid.Rows - 0.5f));
-        OutlinePositions.Add(new Vector2(myGrid.Columns - 0.5f, -0.5f));
-        OutlinePositions.Add(new Vector2(-0.5f, -0.5f));
+        OutlinePositions.Add(new Vector2(-0.49f, -0.5f));
+        OutlinePositions.Add(new Vector2(-0.49f, myGrid.Rows - 0.5f));
+        OutlinePositions.Add(new Vector2(myGrid.Columns - 0.51f, myGrid.Rows - 0.5f));
+        OutlinePositions.Add(new Vector2(myGrid.Columns - 0.51f, -0.5f));
+        OutlinePositions.Add(new Vector2(-0.49f, -0.5f));
 
 
         Outline = CreateLine(outlineStyle, OutlinePositions.ToArray());
@@ -101,16 +102,17 @@ public static class LineManager
 
     public static void LineUpdate() // Every frame, go through the list of Lines and update their positions.
     {
-        foreach (var Line in MyLines)
-        {
-            if (Line.p == null)
-            {
-                MyLines.Remove(Line);
-                Line.DeInit();
-                return;
-            }
-            Line.LineUpdate();
-        }
+     
+        //foreach (var Line in MyLines)
+        //{
+        //    if (Line.p == null)
+        //    {
+        //        MyLines.Remove(Line);
+        //        Line.DeInit();
+        //        return;
+        //    }
+        //    Line.LineUpdate();
+        //}
     }
 
 
