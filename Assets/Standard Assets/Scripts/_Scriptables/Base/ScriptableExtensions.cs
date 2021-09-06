@@ -19,6 +19,17 @@ public static class ScriptableExtensions
 
     #region Scriptable Retrieval
 
+    public static ScriptableObject GetEnum(this ScriptableEnums a , GlobalEnum globalEnum, int index)
+    {
+        foreach (ScriptableEnums.ScriptableEnum i in a.enums)
+        {
+            if (globalEnum == i.EnumName) return i.Enum[index];
+        }
+
+        Debug.Log("No Enum found for " + globalEnum.ToString() + " at " + index);
+        return null;
+    }
+
     public static ScriptableGameEvents.TurnEventSettings GetEventByName(ScriptableGameEvents a , string myName)
     {
         foreach (ScriptableGameEvents.TurnEventSettings i in a.TurnEvents)
@@ -30,7 +41,7 @@ public static class ScriptableExtensions
         Debug.LogWarning(myName + " is not registered in the profiler");
         return null;
     }
-    public static ScriptableGameEvents.TurnEventSettings GetEventByPhase(this ScriptableGameEvents a, ScriptableGameEvents.TurnPhase myEnum)
+    public static ScriptableGameEvents.TurnEventSettings GetEventByPhase(this ScriptableGameEvents a, ScriptableObject myEnum)
     {
         foreach (ScriptableGameEvents.TurnEventSettings i in a.TurnEvents)
         {
@@ -39,7 +50,7 @@ public static class ScriptableExtensions
         Debug.LogWarning(myEnum + " is not registered in the profiler");
         return null;
     }
-    public static ScriptableGameEvents.InputEventSettings GetEventByType(this ScriptableGameEvents a, ScriptableGameEvents.InputEventType myEnum)
+    public static ScriptableGameEvents.InputEventSettings GetEventByType(this ScriptableGameEvents a, ScriptableObject myEnum)
     {
     
         foreach (ScriptableGameEvents.InputEventSettings i in a.InputEvents)
@@ -98,25 +109,27 @@ public static class ScriptableExtensions
         return returnSound;
     } // finds a sound by an enum and returns it
 
-    public static ScriptableCheatCodes.CheatType GetCodeByName(this ScriptableCheatCodes a, string Code)
+    //todo - reimplemen this!
+
+    public static CheatType GetCodeByName(this ScriptableCheatCodes a, string Code)
     {
-        foreach (ScriptableCheatCodes.CheatType i in a.Commands)
+        foreach (ScriptableCheatCodes.CommandType i in a.Commands)
         {
-            if (i.CheatCode == Code)
+            if (i.Name == Code)
             {
-                return i;
+                return i.InternalCode;
             }
         }
         return null;
     }
 
-    public static ScriptableElias.EliasPalettes GetEliasName(this ScriptableElias a, string myTheme)
+    public static EliasObject GetEliasName(this ScriptableElias a, string myTheme)
     {
         foreach (ScriptableElias.EliasPalettes i in a.eliasPalette)
         {
             if (i.Name == myTheme)
             {
-                return i;
+                return i.eliasObject;
             }
         }
 
@@ -136,18 +149,18 @@ public static class ScriptableExtensions
     #endregion
 
     #region Grid Extensions
-    
-    public static void LoadGridFromUniverse(this ScriptableGrid a, ScriptableUniverse.RecursiveUniverse universe)
-    {
-        a.Deinit();
-        a.GameGrid = universe.GetGridFromUniverse();
-        a.Init();
-    }
-    
-    public static ScriptableGrid.GridSettings GetGridFromUniverse(this ScriptableUniverse.RecursiveUniverse universe)
-    {
-        return universe.Grid;
-    }
+
+    //public static void LoadGridFromUniverse(this ScriptableGrid a, UniverseObject universe)
+    //{
+    //    a.Deinit();
+    //    a.GameGrid = universe.GetGridFromUniverse();
+    //    a.Init();
+    //}
+
+    //public static ScriptableGrid.GridSettings GetGridFromUniverse(this UniverseObject universe)
+    //{
+    //    return universe.Grid;
+    //}
 
     public static ScriptableGrid.GridSettings GetGridSettings(this ScriptableGrid a)
     {
@@ -392,7 +405,7 @@ public static class ScriptableExtensions
     #region Elias Extensions
     public static void ChangeElias(this ScriptableElias a, EliasPlayer eliasPlayer, string myTheme)
     {
-        ScriptableElias.EliasPalettes i = a.GetEliasName(myTheme);
+        EliasObject i = a.GetEliasName(myTheme);
 
         if (i.useSetLevel)
         {

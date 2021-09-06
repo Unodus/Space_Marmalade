@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputEvents:
   - Name: displacementDrag
-    InputType: 1
+    InputType: {fileID: 11400000, guid: 54035c2273544df4bae96e00ff2fbd77, type: 2}
   - Name: mapDrag
-    InputType: 0
+    InputType: {fileID: 11400000, guid: 9859d9bcd3d8aa34b9e0f91b59cd37c0, type: 2}
   - Name: updateGrid
-    InputType: 2
+    InputType: {fileID: 11400000, guid: 4404e3640165b4b4b8a6ef9227b72d7d, type: 2}
   TurnEvents:
   - Name: 
-    turnPhase: 0
+    turnPhase: {fileID: 0}
     ReturnToCentre: 0
     TriggerEliasProfiler: 
     CameraMode: 0

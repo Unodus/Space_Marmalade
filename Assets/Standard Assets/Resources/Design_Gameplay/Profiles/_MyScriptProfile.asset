@@ -26,3 +26,4 @@ MonoBehaviour:
     Sounds: {fileID: 11400000, guid: 849b2b3e95a018442a832b5e446e9aaa, type: 2}
     Strings: {fileID: 11400000, guid: 7e27456dcb50bab40bfe5f2c5da8e090, type: 2}
     Universe: {fileID: 11400000, guid: ea7b0fdc641ad88469cba72a989c4e5d, type: 2}
+    Enums: {fileID: 11400000, guid: 54912828dbfc4e74b9f16449894caacb, type: 2}

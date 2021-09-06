@@ -25,7 +25,9 @@ public class PointerManager : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector3 direction = touchStart - GetWorldPosition(groundZ);
-            EventDictionary.TriggerEvent(ScriptableExtensions.s.scriptable.GameEvents.GetEventByType(ScriptableGameEvents.InputEventType.MapDrag).Name, direction);
+
+            ScriptableScripts.ScriptableScript s = ScriptableExtensions.s.scriptable;
+            EventDictionary.TriggerEvent(s.GameEvents.GetEventByType(s.Enums.GetEnum(GlobalEnum.InputEvent, 2)).Name, direction);
         }
     }
 
