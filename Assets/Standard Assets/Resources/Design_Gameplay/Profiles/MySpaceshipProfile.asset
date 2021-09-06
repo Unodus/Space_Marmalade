@@ -14,23 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Spaceships:
   - Name: 
-    ShipPrefab: {fileID: 0}
-    Movement: 0
-    MaxMovement: 0
-    Reach: 0
-    Shots: 0
-    ShipType: 0
   - Name: 
-    ShipPrefab: {fileID: 0}
-    Movement: 0
-    MaxMovement: 0
-    Reach: 0
-    Shots: 0
-    ShipType: 0
   - Name: 
-    ShipPrefab: {fileID: 0}
-    Movement: 0
-    MaxMovement: 0
-    Reach: 0
-    Shots: 0
-    ShipType: 0

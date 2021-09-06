@@ -21,46 +21,46 @@ public class CommandManager : MonoBehaviour
         ProcessCommand(ScriptableExtensions.s.scriptable.CheatCodes.GetCodeByName(code));
     }
 
-    public void ProcessCommand(ScriptableCheatCodes.CheatType input)
+    public void ProcessCommand(CheatType input)
     {
         dialogueBox.AddLineOfText(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference));
 
-        switch (input.InternalCode)
-        {
-            case ScriptableCheatCodes.CommandType.None:
+        //switch (input.InternalCode)
+        //{
+        //    //case ScriptableCheatCodes.CommandType.None:
 
-                // No Command inputted
+        //    //    // No Command inputted
 
-                break;
-            case ScriptableCheatCodes.CommandType.CheatEnable:
+        //    //    break;
+        //    //case ScriptableCheatCodes.CommandType.CheatEnable:
 
 
-                break;
+        //    //    break;
 
-            default:
-                break;
-        }
+        //    //default:
+        //    //    break;
+        //}
 
 
     }
 
-    public void ProcessCommand(ScriptableCheatCodes.CheatType input, string inputString)
+    public void ProcessCommand(CheatType input, string inputString)
     {
         dialogueBox.AddLineOfText(ScriptableExtensions.s.scriptable.Strings.GetStringByIdentifier(ScriptableStrings.StringCategories.ConsoleMessages, input.CommandMessageReference) + inputString);
 
-        switch (input.InternalCode)
-        {
-            case ScriptableCheatCodes.CommandType.None:
+        //switch (input.InternalCode)
+        //{
+        //    //case ScriptableCheatCodes.CommandType.None:
 
-                // No Command inputted
+        //    //    // No Command inputted
 
-                break;
-            case ScriptableCheatCodes.CommandType.PlaySound:
+        //    //    break;
+        //    //case ScriptableCheatCodes.CommandType.PlaySound:
                 
-                break;
+        //    //    break;
 
-            default:
-                break;
-        }
+        //    //default:
+        //    //    break;
+        //}
     }
 }

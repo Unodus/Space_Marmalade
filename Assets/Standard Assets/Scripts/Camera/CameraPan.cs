@@ -8,13 +8,14 @@ public class CameraPan : MonoBehaviour
 {
     // Camera cam;
     [SerializeField]
-    ScriptableGameEvents.InputEventType inputEvent = ScriptableGameEvents.InputEventType.MapDrag;
+    InputEventType inputEvent;
 
     UnityAction<Vector3> unityAction;
 
  
     public void Start()
     {
+       
         EventDictionary.StartListening(ScriptableExtensions.s.scriptable.GameEvents.GetEventByType(inputEvent).Name, unityAction);
 
     }

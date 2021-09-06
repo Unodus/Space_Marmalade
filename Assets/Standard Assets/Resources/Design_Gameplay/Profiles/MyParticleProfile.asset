@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MyParticleProfile
   m_EditorClassIdentifier: 
   Particles:
-  - Name: Point
+  - Name: 0
     ParticlePrefab: {fileID: 2960824873681816880, guid: d01ba1c1e33eb9f419e3b1d6ceeb6282,
       type: 3}

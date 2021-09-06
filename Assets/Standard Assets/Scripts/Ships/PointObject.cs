@@ -21,7 +21,12 @@ public class PointObject
     public PointObject()
     {
         OnEnable();
-        EventDictionary.StartListening(ScriptableExtensions.s.scriptable.GameEvents.GetEventByType(ScriptableGameEvents.InputEventType.UpdateGrid).Name, PointUpdateEvent);
+
+
+        ScriptableScripts.ScriptableScript s = ScriptableExtensions.s.scriptable;
+
+ 
+        EventDictionary.StartListening(s.GameEvents.GetEventByType(s.Enums.GetEnum(GlobalEnum.InputEvent, 2)).Name, PointUpdateEvent);
     }
 
     public void OnEnable()
