@@ -34,7 +34,7 @@ public static class LineManager
 
     static void CreateGrid()
     {
-        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+        GridObject myGrid = gridSettings.GetGridSettings().gridObject;
         ScriptableLines.LineStyle outlineStyle = LineStyles.GetLineStyleFromPalette(ScriptableLines.StyleType.Outline);
         ScriptableLines.LineStyle insideLine = LineStyles.GetLineStyleFromPalette(ScriptableLines.StyleType.InsideLine);
 
@@ -119,7 +119,7 @@ public static class LineManager
 
     public static LineObject CreateLine(ScriptableLines.LineStyle Style, Vector2 Start, Vector2 End) // Converts two points in "grid space " into a line
     {
-        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
+        GridSettings myGrid = gridSettings.GetGridSettings().settings;
 
         LineObject lp = new LineObject();
 
@@ -150,8 +150,7 @@ public static class LineManager
 
     public static LineObject CreateLine(ScriptableLines.LineStyle Style, Vector2[] Positions) // Converts two points in "grid space " into a line
     {
-        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
-
+        GridSettings myGrid = gridSettings.GetGridSettings().settings;
         LineObject lp = new LineObject();
 
         lp.Init(Style);

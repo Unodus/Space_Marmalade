@@ -7,10 +7,8 @@ using UnityEngine.UI;
 
 public class AdPrompter : MonoBehaviour
 {
-    [SerializeField]
-    GameObject DisplayButton;
-    [SerializeField]
-    float Threshold;
+    public    GameObject DisplayButton;
+    public    float Threshold;
     // Start is called before the first frame update
     void Start()
     {

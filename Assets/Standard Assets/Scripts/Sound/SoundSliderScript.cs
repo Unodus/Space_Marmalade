@@ -8,9 +8,9 @@ public class SoundSliderScript : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] GameObject SliderPrefab;
-    [SerializeField] AudioMixer[] MyMixers;
-    [SerializeField] float Max, Min, DefaultVal;
+public GameObject SliderPrefab;
+    public AudioMixer[] MyMixers;
+    public  float Max, Min, DefaultVal;
     void Start()
     {
         for ( int i = 0; i < MyMixers.Length; i++)

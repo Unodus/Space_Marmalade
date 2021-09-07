@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class Boot : MonoBehaviour
 {
 
-    [SerializeField]  DialogueRecorder ConsoleLog;
+    public  DialogueRecorder ConsoleLog;
 
     List<IEnumerator> StartUpProcesses;
     WaitForEndOfFrame RestFrame;
 
-    [SerializeField] bool GameLoaded;
+    public bool GameLoaded;
 
     void Start()
     {

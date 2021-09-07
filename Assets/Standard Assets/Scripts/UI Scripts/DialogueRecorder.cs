@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class DialogueRecorder : MonoBehaviour
 {
     [TextArea(15, 20)]
-    [SerializeField] string TextContent;
-    [SerializeField] Text TextComponent;
+    public string TextContent;
+    public Text TextComponent;
 
-    [SerializeField] uint MinLine, LineStart, LineAmount, MaxLine;
+    public uint MinLine, LineStart, LineAmount, MaxLine;
 
 
     // To DO: Work out why lines occassionally are allowed above LineAmount. Work out how to calculate LineAmount at runtime

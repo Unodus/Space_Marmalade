@@ -61,7 +61,7 @@ public class PointObject
     }
     public void PointUpdate()
     {
-        ScriptableGrid.GridSettings myGrid = ScriptableExtensions.s.scriptable.Grids.GetGridSettings();
+        GridSettings myGrid = ScriptableExtensions.s.scriptable.Grids.GetGridSettings().settings;
         float MovementTime = Vector3.Distance(p.transform.position, ScriptableExtensions.s.scriptable.Grids.SetPosition(new Vector2(Pos.x,Pos.y), true)) * myGrid.TransitionSpeed * Time.deltaTime;
         Vector3 TargetPosition = Vector3.MoveTowards(p.transform.position, ScriptableExtensions.s.scriptable.Grids.SetPosition(new Vector2(Pos.x, Pos.y), true), MovementTime);
         p.transform.position = TargetPosition;

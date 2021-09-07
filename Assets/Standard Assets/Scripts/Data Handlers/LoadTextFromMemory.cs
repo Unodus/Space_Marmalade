@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class LoadTextFromMemory : MonoBehaviour
 {
-    [SerializeField] TextAsset txt;
-    [SerializeField] int Line;
+    public TextAsset txt;
+    public int Line;
     
 
 

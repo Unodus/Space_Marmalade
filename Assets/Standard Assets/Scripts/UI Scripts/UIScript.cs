@@ -9,12 +9,12 @@ public class UIScript : MonoBehaviour
 {
     AudioSource MyAudio;
 
-    [SerializeField]
-    GameObject TurnCounterObject;
+
+    public GameObject TurnCounterObject;
 
 
     int TurnCounter = 0;
-    [SerializeField] float PitchVariation;
+    public float PitchVariation;
     float Pitch;
     public void Start()
     {

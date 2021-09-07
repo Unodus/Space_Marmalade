@@ -7,7 +7,7 @@ public static class PointManager
 
      static ScriptableParticles PointPrefabs;
      static ScriptableGrid gridSettings;
-     static ScriptableParticles.Particle PointStyle;
+     static int PointStyle = 0;
      static List<PointObject> MyPoints = new List<PointObject>();
 
     static int NumOfPoints;
@@ -63,15 +63,14 @@ public static class PointManager
     {
         PointPrefabs = ScriptableExtensions.s.scriptable.Particles;
         gridSettings = ScriptableExtensions.s.scriptable.Grids;
-        ScriptableGrid.GridSettings myGrid = gridSettings.GetGridSettings();
- 
+        GridObject myGrid = gridSettings.GetGridSettings().gridObject;
         NumOfPoints = myGrid.Columns * myGrid.Rows;
         for (int i = 0; i < myGrid.Columns; i++)
         {
             for (int j = 0; j < myGrid.Rows; j++)
             {
                 PointObject pp = new PointObject();
-                pp.Init(new Vector2(i, j ), PointPrefabs.GetParticleByName(PointStyle).ParticlePrefab);
+                pp.Init(new Vector2(i, j ), PointPrefabs.GetParticleByInt(PointStyle).ParticlePrefab);
                 MyPoints.Add(pp);
             }
         }

@@ -6,9 +6,9 @@ using TMPro;
 
 public class CornerPopUp : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI myText;
-    [SerializeField] Vector3 TargetPos;
-    [SerializeField] float TransitionTime;
+    public TextMeshProUGUI myText;
+    public Vector3 TargetPos;
+    public float TransitionTime;
     RectTransform MyTransform;
     float Speed;
     public void CustomStart(string text )

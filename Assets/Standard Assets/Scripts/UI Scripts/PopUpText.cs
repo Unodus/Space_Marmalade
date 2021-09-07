@@ -15,9 +15,9 @@ using TMPro;
 public class PopUpText : PopUpObject
 {
 
-    [SerializeField] string[] text = new string[1];
-    [SerializeField] Color textcolor = Color.white;
-    [SerializeField] Font textFont;
+    public string[] text = new string[1];
+    public Color textcolor = Color.white;
+    public Font textFont;
 
     protected override void InstantiateAsset()  // Instantiates a gameobject using the image, scale, etc provided in the inspector, ready for use 
     {

@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af91be82d94ca8640b84ecba7c40284c, type: 3}
-  m_Name: MyGridProfile
+  m_Script: {fileID: 11500000, guid: e478946ff0042b6428cd4fa41e9c987f, type: 3}
+  m_Name: MyParticleProfile
   m_EditorClassIdentifier: 
-  GameGrid:
-    PolarActive: 0
-    Columns: 7
-    Rows: 4
-    Size: 1
-    ColDisplacement: 4.52
-    ScreenRatio: {x: 8.75, y: 5}
-    TransitionSpeed: 5
+  Particles:
+  - Name: 
+    particle: {fileID: 0}

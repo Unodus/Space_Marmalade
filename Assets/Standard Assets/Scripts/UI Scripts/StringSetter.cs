@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class StringSetter : MonoBehaviour
 {
-    [SerializeField] Text textElement;
-    [SerializeField] ScriptableFont fontLibrary;
-    [SerializeField] ScriptableFont.FontCategories fontCategory;
-    [SerializeField] ScriptableStrings stringLibrary;
-    [SerializeField] ScriptableStrings.StringCategories stringCategory;
+    public Text textElement;
+    public ScriptableFont fontLibrary;
+    public ScriptableFont.FontCategories fontCategory;
+    public ScriptableStrings stringLibrary;
+    public ScriptableStrings.StringCategories stringCategory;
 
 
 
-    [SerializeField] int stringIndex;
+    public int stringIndex;
 
 
     private void Start()

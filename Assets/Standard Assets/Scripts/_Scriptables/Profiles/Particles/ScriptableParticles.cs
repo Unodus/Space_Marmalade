@@ -8,15 +8,11 @@ using UnityEngine;
 public class ScriptableParticles : ScriptableBase
 {
 
-    public enum Particle
-    {
-        Point
-    }
     [Serializable]
     public class ParticleSettings // Each palette
     {
-        public Particle Name;
-        public GameObject ParticlePrefab;
+        public string Name;
+        public ParticleObject particle;
     }
 
     public ParticleSettings[] Particles;    // array of all palettes

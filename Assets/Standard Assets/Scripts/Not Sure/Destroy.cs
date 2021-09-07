@@ -3,17 +3,15 @@ using UnityEngine;
 
 public class Destroy : MonoBehaviour
 {
-    [SerializeField]
-    float decay;
+    public float decay;
 
     float clock =0;
 
 
-    [SerializeField]
-    Vector3 Displacement;
+  
+public    Vector3 Displacement;
 
-    [SerializeField]
-    int Mode;
+public    int Mode;
 
     Vector3 StartPosition;
     Vector3 EndPosition;
