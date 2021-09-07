@@ -63,7 +63,7 @@ public class LineObject
         }
 
 
-        ScriptableGrid.GridSettings MyGrid = ScriptableExtensions.s.scriptable.Grids.GetGridSettings();
+        GridSettings MyGrid = ScriptableExtensions.s.scriptable.Grids.GetGridSettings().settings;
 
         for (int i = 0; i < pp.positionCount; i++)
         {

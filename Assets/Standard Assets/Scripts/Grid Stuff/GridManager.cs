@@ -8,7 +8,7 @@ public static class GridManager
     public static string GridUpdateEvent;
     public static void Init(this GridObject i)
     {
-        currentGrid = i.gameObject;
+        currentGrid = ScriptableExtensions.s.scriptable.Grids.GameGrid.settings.GameObjectRef;
         GridUpdateEvent = ScriptableExtensions.s.scriptable.GameEvents.GetEventByType( ScriptableExtensions.s.scriptable.Enums.GetEnum(GlobalEnum.InputEvent, 2)).Name;
         ScriptableExtensions.s.scriptable.Grids.Init();
         PointManager.Init();
@@ -18,6 +18,8 @@ public static class GridManager
     {
         PointManager.Deinit();
         LineManager.DeInit();
+
+
     }
 
     public static void GridUpdate(this GridObject i)

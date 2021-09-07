@@ -5,8 +5,8 @@ using UnityEngine;
 public class IsometricSwitcher : MonoBehaviour
 {
 
-    [SerializeField] Vector3 NormalPosition, IsometricPosition;
-    [SerializeField] Vector3 NormalRotation, IsometricRotation;
+    public Vector3 NormalPosition, IsometricPosition;
+    public Vector3 NormalRotation, IsometricRotation;
 
     bool isometricMode;
     bool isRunning;

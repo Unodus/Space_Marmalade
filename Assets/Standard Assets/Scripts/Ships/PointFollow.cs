@@ -10,30 +10,30 @@ public class PointFollow : MonoBehaviour
 
 
 
-    //    [SerializeField] SoundHelpers SoundManager;
+    //    public SoundHelpers SoundManager;
 
-    //    [SerializeField] GameObject[] CameraObjects = new GameObject[2];
+    //    public GameObject[] CameraObjects = new GameObject[2];
 
 
-    //    [SerializeField] ScriptableGameEvents EventProfiler;
-    //    [SerializeField] ScriptableElias EliasThemeNames;
+    //    public ScriptableGameEvents EventProfiler;
+    //    public ScriptableElias EliasThemeNames;
 
 
     //    EliasPlayer EliasComponent;
 
 
 
-    //    [SerializeField]  GameObject PlayerPrefab; // Refference to all the Ship prefabs, for instantiation
-    //    [SerializeField]  GameObject SmallEnemyPrefab;
-    //    [SerializeField]  GameObject LargeEnemyPrefab;
+    //    public  GameObject PlayerPrefab; // Refference to all the Ship prefabs, for instantiation
+    //    public  GameObject SmallEnemyPrefab;
+    //    public  GameObject LargeEnemyPrefab;
 
 
-    //  //  [SerializeField] PostSwitcher postSwitcher;
+    //  //  public PostSwitcher postSwitcher;
 
-    //    [SerializeField] GameObject PointPrefab; // Refference for each navigable point on the map
+    //    public GameObject PointPrefab; // Refference for each navigable point on the map
 
 
-    //    [SerializeField]
+    //    public
     //    GameObject TimerPrefab; // ref to the countdown slider
     //    Slider TimerObject; 
 

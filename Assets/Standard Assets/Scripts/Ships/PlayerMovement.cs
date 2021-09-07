@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    GameObject MissilePrefab, ExplosionPrefab, ImplosionPrefab, ShipSpriteRef, ShieldObject;
+    public GameObject MissilePrefab, ExplosionPrefab, ImplosionPrefab, ShipSpriteRef, ShieldObject;
 
 
     public float ShieldSize = 1 ;

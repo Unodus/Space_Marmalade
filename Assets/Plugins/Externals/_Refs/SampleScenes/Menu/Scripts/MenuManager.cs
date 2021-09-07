@@ -15,8 +15,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField]
-    GameObject[] MenuObjects;
+    
+    public GameObject[] MenuObjects;
 
 
     public void Start()

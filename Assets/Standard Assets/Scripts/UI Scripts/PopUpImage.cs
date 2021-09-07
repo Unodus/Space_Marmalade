@@ -14,8 +14,8 @@ using UnityEngine.UI;
 public class PopUpImage : PopUpObject
 {
 
-    [SerializeField] Sprite[] sprites = new Sprite[1];
-    [SerializeField] Color spritecolor = Color.white;
+    public Sprite[] sprites = new Sprite[1];
+    public Color spritecolor = Color.white;
 
     protected override void InstantiateAsset()  // Instantiates a gameobject using the image, scale, etc provided in the inspector, ready for use 
     {

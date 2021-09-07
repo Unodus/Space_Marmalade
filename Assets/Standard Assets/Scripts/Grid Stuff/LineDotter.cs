@@ -5,18 +5,18 @@ using UnityEngine;
 public class LineDotter : MonoBehaviour
 {
 
-    [SerializeField] LineRenderer m_lineRenderer; //Attach the LineRenderer in the Inspector
+    public LineRenderer m_lineRenderer; //Attach the LineRenderer in the Inspector
 
-[SerializeField]    float Distance;
-[SerializeField]    float Repetitions;
+public    float Distance;
+public    float Repetitions;
     public void OnValidate() // Used to update in the Inspector
     {
         UpdateWidths();
     }
     private void LateUpdate() // Update at runtime 
     {
-        Repetitions = ScriptableExtensions.s.scriptable.Grids.GameGrid.Size * 5;
-        if (ScriptableExtensions.s.scriptable.Grids.GameGrid.PolarActive) Repetitions *= 2;
+        Repetitions = ScriptableExtensions.s.scriptable.Grids.GameGrid.settings.Size * 5;
+        if (ScriptableExtensions.s.scriptable.Grids.GameGrid.settings.PolarActive) Repetitions *= 2;
         UpdateWidths();
     }
 

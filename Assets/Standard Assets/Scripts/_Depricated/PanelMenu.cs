@@ -10,20 +10,17 @@ public class PanelMenu : MonoBehaviour
 {
     private static PanelMenu instance = null;
 
-    [SerializeField]
-    Vector3 Onscreen, Offscreen;
+    public Vector3 Onscreen, Offscreen;
 
-    [SerializeField]
-    GameObject MyTile;
+    public GameObject MyTile;
 
     RectTransform MyTileTransform;
 
-    [SerializeField]
-    float TransitionTime;
+    public float TransitionTime;
 
 
-    [SerializeField]
-    AudioMixer masterMixer;
+
+    public AudioMixer masterMixer;
 
     static Dictionary<string, KeyCode> keyMapping;
     static string[] keyMaps = new string[5]
@@ -72,7 +69,7 @@ public class PanelMenu : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
 
-     }
+    }
     private void Start()
     {
         MyTileTransform = MyTile.GetComponent<RectTransform>();
@@ -103,7 +100,7 @@ public class PanelMenu : MonoBehaviour
         }
     }
 
-    public void MoveMenu(bool Displayed )
+    public void MoveMenu(bool Displayed)
     {
         Visible = Displayed;
         if (!Visible)
@@ -115,13 +112,13 @@ public class PanelMenu : MonoBehaviour
     {
 
         if (Visible)
-            MyTileTransform.anchoredPosition = Vector3.Lerp(Offscreen, Onscreen,  Tween.EaseInOut(Counter));
+            MyTileTransform.anchoredPosition = Vector3.Lerp(Offscreen, Onscreen, Tween.EaseInOut(Counter));
         else
             MyTileTransform.anchoredPosition = Vector3.Lerp(Onscreen, Offscreen, Tween.EaseInOut(Counter));
 
 
         yield return new WaitForSeconds(Time.deltaTime * Speed);
-        
+
         if (Counter < 1)
         {
             StartCoroutine(Lerper(Counter + (Speed * Time.deltaTime), Speed));
@@ -141,7 +138,7 @@ public class PanelMenu : MonoBehaviour
     }
 
     public void SetMusicLevel(float musicLvl)
-    { 
+    {
         masterMixer.SetFloat("volMusic", musicLvl);
     }
 

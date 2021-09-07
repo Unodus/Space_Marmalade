@@ -2,15 +2,15 @@
 
 public class PostSwitcher : MonoBehaviour
 {
-    [SerializeField] GameObject[] Objects = new GameObject[2];
-    [SerializeField] ScriptableElias EliasThemeNames;
-    [SerializeField] string[] ThemeNames = new string[2];
+    public GameObject[] Objects = new GameObject[2];
+    public ScriptableElias EliasThemeNames;
+    public string[] ThemeNames = new string[2];
 
     bool MoveOrAiming;
 
     // EliasDemoEventTrigger EliasComponent;
 
-    [SerializeField]
+    public
     GameObject EliasObject;
     EliasPlayer EliasComponent;
 

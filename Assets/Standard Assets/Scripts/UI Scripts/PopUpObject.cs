@@ -15,19 +15,19 @@ public class PopUpObject: MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
 
     //Refference to the asset that will appear as a tooltip (assigned in inspector)
-    [SerializeField] GameObject Prefab;
+    public GameObject Prefab;
 
     //Refference to the object after being created by this script
     protected GameObject MyGameObject;
 
     // Allows the tooltip to be resized as appropriate on creation (assigned in inspector)
-    [SerializeField] Vector3 Scale = Vector3.one;
+    public Vector3 Scale = Vector3.one;
 
     // Allows the tooltip to be recoloured, intended for elements that should be slightly translucent via assigning a colour with lower alpha. Leave as white if undesired (assigned in inspector)
-    [SerializeField] protected Color OverlayColor = Color.white;
+    protected Color OverlayColor = Color.white;
 
     // Allows the designer to decide how the tooltip should be presented in relation to the cursor (assigned in inspector)
-    [SerializeField] Orientation Offset;
+     public Orientation Offset;
 
     // Refference to the tooltips position and scale, relative to the inspector
     RectTransform MyTransform;
@@ -35,7 +35,7 @@ public class PopUpObject: MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     // Vector used to store the offset of the tooltip, which is stored on instantiation
     Vector2 Displacement;
 
-    enum Orientation    // Options for the tooltips relative placement, can be expanded on if neccessary 
+    public enum Orientation    // Options for the tooltips relative placement, can be expanded on if neccessary 
 
     {
         Centre,

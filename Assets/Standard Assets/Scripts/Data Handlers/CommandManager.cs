@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class CommandManager : MonoBehaviour
 {
-    [SerializeField] InputField inputLineField;
-    [SerializeField] DialogueRecorder dialogueBox;
+    public InputField inputLineField;
+    public DialogueRecorder dialogueBox;
  
     public void AddLineFromInput()
     {

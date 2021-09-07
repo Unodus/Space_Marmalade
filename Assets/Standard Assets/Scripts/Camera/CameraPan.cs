@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 public class CameraPan : MonoBehaviour
 {
     // Camera cam;
-    [SerializeField]
-    InputEventType inputEvent;
+
+public     InputEventType inputEvent;
 
     UnityAction<Vector3> unityAction;
 
