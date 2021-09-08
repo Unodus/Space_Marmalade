@@ -13,6 +13,22 @@ public class PointerManager : MonoBehaviour
     void Update()
     {
 
+
+
+        //This stuff needs to be put in the optimized input manager
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    gridtype.ChangeBool(!grid.settings.PolarActive);
+        //}        
+        //if(Input.GetKey(KeyCode.I))
+        //{
+        //    gridtype.UpdateSize(grid.settings.Size - (1f * Time.deltaTime));
+        //}        
+        //if(Input.GetKey(KeyCode.O))
+        //{
+        //    gridtype.UpdateSize(grid.settings.Size + (1f * Time.deltaTime));
+        //}    
+
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;

@@ -19,6 +19,8 @@ public class GridSettings : ScriptableObject
 
     public float TransitionSpeed;
 
+    public Dictionary<Vector2, Vector2> CachedGridPositions = new Dictionary<Vector2, Vector2>();
+    public Dictionary<Vector2, Vector2> CachedPolarPositions = new Dictionary<Vector2, Vector2>();
 
     /// Gives you access to a reusable list of positions, so you only have to calculate each position    
 }

@@ -8,10 +8,7 @@ public class UniverseObject : ScriptableObject
     //    public UniverseObject UniqueIdentifier;
     public SpaceClass Classification;
     public Vector2 PositionInContainerGrid;
-    public Vector2 InteriorGridSize;
     public UniverseObject ContainerIdentifier;
-    public UniverseObject[] containedIdentities;
-    
-    
+    public GridObject InsideGrid;
 
 }

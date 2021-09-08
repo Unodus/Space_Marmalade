@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MyParticleProfile
   m_EditorClassIdentifier: 
   Particles:
-  - Name: 
-    particle: {fileID: 0}
+  - Name: Point
+    particle: {fileID: 11400000, guid: ea3778ac2619b9848a5c80a07b3d407a, type: 2}

@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 491968956}
   - component: {fileID: 491968955}
   m_Layer: 8
-  m_Name: DebugGrid
+  m_Name: DebugUniverse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de13eafd0f559214db819c0c528eabb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridtype: {fileID: 11400000, guid: a1d77ac0e2bdb77419eb0434083a05e3, type: 2}
+  gridverse: {fileID: 11400000, guid: ea7b0fdc641ad88469cba72a989c4e5d, type: 2}
 --- !u!4 &491968956
 Transform:
   m_ObjectHideFlags: 0

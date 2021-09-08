@@ -18,8 +18,6 @@ public static class GridManager
     {
         PointManager.Deinit();
         LineManager.DeInit();
-
-
     }
 
     public static void GridUpdate(this GridObject i)

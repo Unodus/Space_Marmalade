@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f893506e309a2a4448b4dcec06aa2e38, type: 3}
-  m_Name: MyGridSettings
+  m_Script: {fileID: 11500000, guid: 4f0359dcb7a508c40b2f92d2b7752149, type: 3}
+  m_Name: Point
   m_EditorClassIdentifier: 
-  GameObjectRef: {fileID: 0}
-  PolarActive: 0
-  Size: 1.3
-  ColDisplacement: 0
-  ScreenRatio: {x: 5, y: 5}
-  TransitionSpeed: 5
+  ParticlePrefab: {fileID: 2960824873681816880, guid: d01ba1c1e33eb9f419e3b1d6ceeb6282,
+    type: 3}
