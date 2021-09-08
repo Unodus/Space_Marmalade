@@ -268,20 +268,20 @@ public static class ScriptableExtensions
 
     public static Vector3 SetNormalizedPosition(this ScriptableGrid a, in Vector2 position)
     {
-        GridObject i = a.GetGridSettings().gridObject;
+    
         GridSettings j = a.GetGridSettings().settings;
 
         if (j.PolarActive)
         {
-            if (i.CachedPolarPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result;            //If the dictionary contains an entry with key in it returns the found entry.
-            i.CachedPolarPositions.Add(key: position, value: a.SetPosition(position.x, position.y));            //If not, it adds it and returns the result.
-            return i.CachedPolarPositions[key: position];
+            if (j.CachedPolarPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result;            //If the dictionary contains an entry with key in it returns the found entry.
+            j.CachedPolarPositions.Add(key: position, value: a.SetPosition(position.x, position.y));            //If not, it adds it and returns the result.
+            return j.CachedPolarPositions[key: position];
         }
         else
         {
-            if (i.CachedGridPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result;            //If the dictionary contains an entry with key in it returns the found entry.
-            i.CachedGridPositions.Add(key: position, value: a.SetPosition(position.x, position.y));            //If not, it adds it and returns the result.
-            return i.CachedGridPositions[key: position];
+            if (j.CachedGridPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result;            //If the dictionary contains an entry with key in it returns the found entry.
+            j.CachedGridPositions.Add(key: position, value: a.SetPosition(position.x, position.y));            //If not, it adds it and returns the result.
+            return j.CachedGridPositions[key: position];
         }
     }
 

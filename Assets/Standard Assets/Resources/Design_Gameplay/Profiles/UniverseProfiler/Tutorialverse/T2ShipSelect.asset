@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Classification: {fileID: 11400000, guid: 478f05b150b05704292c6a7f4b51e0c6, type: 2}
   PositionInContainerGrid: {x: 0, y: 0}
-  InteriorGridSize: {x: 0, y: 0}
   ContainerIdentifier: {fileID: 11400000, guid: 7cdd672ea02ea224682576796134d1d7,
     type: 2}
-  containedIdentities:
-  - {fileID: 11400000, guid: 800045e78a9cdcf429028ecbd36aa470, type: 2}
+  InsideGrid: {fileID: 11400000, guid: 929de752613a21342a8ffbeb6c2a7e6e, type: 2}
