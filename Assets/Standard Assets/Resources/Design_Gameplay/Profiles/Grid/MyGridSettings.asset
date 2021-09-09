@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameObjectRef: {fileID: 0}
   PolarActive: 0
-  Size: 1.3
+  Size: 1
   ColDisplacement: 0
-  ScreenRatio: {x: 5, y: 5}
+  ScreenRatio: {x: 1.1111112, y: 5}
   TransitionSpeed: 5
