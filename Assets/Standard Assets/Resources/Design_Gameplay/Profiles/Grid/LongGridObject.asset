@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea52a595fd75ad94ca2e563ea29f6465, type: 3}
   m_Name: LongGridObject
   m_EditorClassIdentifier: 
-  Columns: 0
-  Rows: 0
+  Columns: 2
+  Rows: 9
   ObjectsInGrid: []

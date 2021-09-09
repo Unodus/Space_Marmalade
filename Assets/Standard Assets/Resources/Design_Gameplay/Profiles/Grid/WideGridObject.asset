@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea52a595fd75ad94ca2e563ea29f6465, type: 3}
   m_Name: WideGridObject
   m_EditorClassIdentifier: 
-  Columns: 3
-  Rows: 8
+  Columns: 8
+  Rows: 3
   ObjectsInGrid: []
