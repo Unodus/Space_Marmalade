@@ -9,8 +9,9 @@ public class GridDebugger : MonoBehaviour
     void Awake()
     {
         ScriptableGrid gridprofile = gridverse.displayGrid;
-        gridprofile.GameGrid.settings.GameObjectRef = gameObject;
-        gridprofile.GameGrid.settings.PolarActive = false;
+
+        UniverseManager.UniverseCentre = gameObject;
+
         gridverse.Init();
     }
     private void OnDestroy()
@@ -20,5 +21,11 @@ public class GridDebugger : MonoBehaviour
     void LateUpdate()
     {
         gridverse.UniverseUpdate();
+    }
+
+    [ContextMenu("Leave Universe")]
+    void LeaveUniverse()
+    {
+        StartCoroutine(gridverse.ZoomFarChange(0.0f, 50.0f, 1));
     }
 }
