@@ -33,12 +33,12 @@ public static class UniverseManager
     }
 
 
-    public static IEnumerator ZoomFarChange(this ScriptableUniverse i, float beforeZoom, float afterZoom, float Speed)
+    public static IEnumerator ZoomFarChange(this ScriptableUniverse i, UniverseObject newUniverse, float beforeZoom, float afterZoom, float Speed)
     {
         float CurrentZoom = i.displayGrid.GameGrid.settings.Size;
         yield return ZoomLerp(i.displayGrid.GameGrid.settings, CurrentZoom, beforeZoom, Speed);
         yield return new WaitForSeconds(0.1f);
-        i.SwitchUniverse(currentUniverse.ContainerIdentifier);
+        i.SwitchUniverse(newUniverse);
         yield return ZoomLerp(i.displayGrid.GameGrid.settings, afterZoom, CurrentZoom, Speed);
 
         yield return null;

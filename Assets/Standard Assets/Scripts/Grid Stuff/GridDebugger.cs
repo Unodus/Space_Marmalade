@@ -26,6 +26,12 @@ public class GridDebugger : MonoBehaviour
     [ContextMenu("Leave Universe")]
     void LeaveUniverse()
     {
-        StartCoroutine(gridverse.ZoomFarChange(0.0f, 50.0f, 1));
+        StartCoroutine(gridverse.ZoomFarChange(UniverseManager.currentUniverse.ContainerIdentifier, 0.0f, 50.0f, 1));
+    }
+
+    [ContextMenu("Enter Universe")]
+    void EnterUniverse()
+    {
+        StartCoroutine(gridverse.ZoomFarChange(UniverseManager.currentUniverse.ContainerIdentifier, 50.0f, 0.0f, 1));
     }
 }
