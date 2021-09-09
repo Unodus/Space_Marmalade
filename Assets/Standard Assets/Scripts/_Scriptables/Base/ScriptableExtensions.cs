@@ -243,14 +243,17 @@ public static class ScriptableExtensions
         {
 
             float ModifiedX = i.ColDisplacement + position.x;
+
             ModifiedX += 0.5f; // this is kind of a magic number to make the grid centre at 0
 
             float Max = j.Columns;
             if (ModifiedX > 0) ModifiedX = ModifiedX % Max;
             else ModifiedX = Max - ((ModifiedX * -1) % Max);
             Pos = new Vector2(ModifiedX, position.y);
-        }
 
+
+        }
+      
         return a.SetNormalizedPosition(Pos) * i.Size;
     }
 
@@ -270,7 +273,7 @@ public static class ScriptableExtensions
     {
     
         GridSettings j = a.GetGridSettings().settings;
-
+        
         if (j.PolarActive)
         {
             if (j.CachedPolarPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result;            //If the dictionary contains an entry with key in it returns the found entry.
@@ -281,6 +284,7 @@ public static class ScriptableExtensions
         {
             if (j.CachedGridPositions.TryGetValue(key: position, value: out Vector2 __result)) return __result;            //If the dictionary contains an entry with key in it returns the found entry.
             j.CachedGridPositions.Add(key: position, value: a.SetPosition(position.x, position.y));            //If not, it adds it and returns the result.
+         
             return j.CachedGridPositions[key: position];
         }
     }
@@ -315,6 +319,9 @@ public static class ScriptableExtensions
         GridObject GridObject = i.GetGridSettings().gridObject;
 
         float Ratio;
+
+        if (GridObject.Columns == 0) GridObject.Columns = 1;
+        if (GridObject.Rows == 0) GridObject.Rows = 1;
 
         Ratio = GridObject.Columns / (float)GridObject.Rows;
 

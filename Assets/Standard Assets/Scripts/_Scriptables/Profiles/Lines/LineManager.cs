@@ -27,9 +27,11 @@ public static class LineManager
 
     public static void DeInit()
     {
+        LineStyles = null;
+        gridSettings = null;
         for (int i = 0; i < (gridLines.Length); i++) Object.Destroy(gridLines[i].p);
         Object.Destroy(Outline.p);
-
+        
     }
 
     static void CreateGrid()
@@ -195,9 +197,9 @@ public static class LineManager
             {
                 lp.Positions[i] = Vector2.Lerp(Positions[j], Positions[j + 1], tempLerp2); // this needs to use a value that isn't i based, since i now covers the whole line
             }
+        
             lp.pp.SetPosition(i, gridSettings.SetPosition(new Vector2(lp.Positions[i].x, lp.Positions[i].y), Style.Wrap));
-        //    Debug.Log(i + " = " +  j+ ": "+ tempLerp2);
-        }
+                }
 
         MyLines.Add(lp);
         return lp;

@@ -13,21 +13,25 @@ public class PointerManager : MonoBehaviour
     void Update()
     {
 
+        ScriptableScripts.ScriptableScript s = ScriptableExtensions.s.scriptable;
 
 
-        //This stuff needs to be put in the optimized input manager
-        //if(Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    gridtype.ChangeBool(!grid.settings.PolarActive);
-        //}        
-        //if(Input.GetKey(KeyCode.I))
-        //{
-        //    gridtype.UpdateSize(grid.settings.Size - (1f * Time.deltaTime));
-        //}        
-        //if(Input.GetKey(KeyCode.O))
-        //{
-        //    gridtype.UpdateSize(grid.settings.Size + (1f * Time.deltaTime));
-        //}    
+        // This stuff needs to be put in the optimized input manager
+        ScriptableGrid gridtype = s.Grids;
+        ScriptableGrid.GridProfile grid= s.Grids.GameGrid;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            gridtype.ChangeBool(!grid.settings.PolarActive);
+        }
+        if (Input.GetKey(KeyCode.I))
+        {
+            gridtype.UpdateSize(grid.settings.Size - (1f * Time.deltaTime));
+        }
+        if (Input.GetKey(KeyCode.O))
+        {
+            gridtype.UpdateSize(grid.settings.Size + (1f * Time.deltaTime));
+        }
 
         if (EventSystem.current.IsPointerOverGameObject())
         {
@@ -42,8 +46,8 @@ public class PointerManager : MonoBehaviour
         {
             Vector3 direction = touchStart - GetWorldPosition(groundZ);
 
-            ScriptableScripts.ScriptableScript s = ScriptableExtensions.s.scriptable;
-            EventDictionary.TriggerEvent(s.GameEvents.GetEventByType(s.Enums.GetEnum(GlobalEnum.InputEvent, 2)).Name, direction);
+            Debug.Log("Dragging");
+            EventDictionary.TriggerEvent(s.GameEvents.GetEventByType(s.Enums.GetEnum(GlobalEnum.InputEvent, 1)).Name, direction);
         }
     }
 
