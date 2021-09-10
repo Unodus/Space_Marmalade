@@ -30,7 +30,7 @@ public class LineObject
     {
         LineUpdateEvent -= LineUpdate;
     }
-    public void Init(ScriptableLines.LineStyle Style)
+    public void Init(LineType Style)
     {
     
         ScriptableGrid gridSettings = ScriptableExtensions.s.scriptable.Grids;

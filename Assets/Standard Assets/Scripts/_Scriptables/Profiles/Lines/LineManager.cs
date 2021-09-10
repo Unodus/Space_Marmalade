@@ -37,8 +37,8 @@ public static class LineManager
     static void CreateGrid()
     {
         GridObject myGrid = gridSettings.GetGridSettings().gridObject;
-        ScriptableLines.LineStyle outlineStyle = LineStyles.GetLineStyleFromPalette(ScriptableLines.StyleType.Outline);
-        ScriptableLines.LineStyle insideLine = LineStyles.GetLineStyleFromPalette(ScriptableLines.StyleType.InsideLine);
+        LineType outlineStyle = LineStyles.GetLineStyleFromPalette(0);
+        LineType insideLine = LineStyles.GetLineStyleFromPalette(1);
 
         List<LineObject> tempGridlines = new List<LineObject>();
         List<Vector2> OutlinePositions = new List<Vector2>();
@@ -119,7 +119,7 @@ public static class LineManager
 
 
 
-    public static LineObject CreateLine(ScriptableLines.LineStyle Style, Vector2 Start, Vector2 End) // Converts two points in "grid space " into a line
+    public static LineObject CreateLine(LineType Style, Vector2 Start, Vector2 End) // Converts two points in "grid space " into a line
     {
         GridSettings myGrid = gridSettings.GetGridSettings().settings;
 
@@ -150,7 +150,7 @@ public static class LineManager
         return lp;
     }
 
-    public static LineObject CreateLine(ScriptableLines.LineStyle Style, Vector2[] Positions) // Converts two points in "grid space " into a line
+    public static LineObject CreateLine(LineType Style, Vector2[] Positions) // Converts two points in "grid space " into a line
     {
         GridSettings myGrid = gridSettings.GetGridSettings().settings;
         LineObject lp = new LineObject();
@@ -206,7 +206,7 @@ public static class LineManager
     }
 
 
-    public static GameObject CreateLine(ScriptableLines.LineStyle Style, Vector3 cStart, Vector3 cEnd) // Converts two points in world space into a line game object, properly segmented
+    public static GameObject CreateLine(LineType Style, Vector3 cStart, Vector3 cEnd) // Converts two points in world space into a line game object, properly segmented
     {
 
         Vector2 Start = gridSettings.GetPosition(cStart);

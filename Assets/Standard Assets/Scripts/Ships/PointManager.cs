@@ -70,7 +70,7 @@ public static class PointManager
             for (int j = 0; j < myGrid.Rows; j++)
             {
                 PointObject pp = new PointObject();
-                pp.Init(new Vector2(i, j ), PointPrefabs.GetParticleByInt(PointStyle).ParticlePrefab);
+                pp.Init(new Vector2(i, j ), PointPrefabs.GetParticleByInt(0).imageObject);
                 MyPoints.Add(pp);
             }
         }

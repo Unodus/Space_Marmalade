@@ -12,7 +12,7 @@ public class ScriptableParticles : ScriptableBase
     public class ParticleSettings // Each palette
     {
         public string Name;
-        public ParticleObject particle;
+        public baseObject particle;
     }
 
     public ParticleSettings[] Particles;    // array of all palettes
