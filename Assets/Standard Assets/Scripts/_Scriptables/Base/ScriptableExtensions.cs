@@ -64,7 +64,7 @@ public static class ScriptableExtensions
     }
 
 
-    public static ParticleObject GetParticle(this ScriptableParticles a, ParticleObject myName)
+    public static baseObject GetParticle(this ScriptableParticles a, baseObject myName)
     {
         foreach (ScriptableParticles.ParticleSettings i in a.Particles)
         {
@@ -78,21 +78,14 @@ public static class ScriptableExtensions
         return null;
     }
 
-    public static ParticleObject GetParticleByInt(this ScriptableParticles a, int particleRef)
+    public static baseObject GetParticleByInt(this ScriptableParticles a, int particleRef)
     {
         return a.Particles[particleRef].particle;
     }
-    public static ScriptableLines.LineStyle GetLineStyleFromPalette(this ScriptableLines a, ScriptableLines.StyleType style)
+    public static LineType GetLineStyleFromPalette(this ScriptableLines a, int styleRef)
     {
-        foreach (ScriptableLines.LineStyle i in a.LineTemplates)
-        {
-            if (i.StyleName == style)
-            {
-                ScriptableLines.LineStyle returnLine = i;
-                return returnLine;
-            }
-        }
-        return null;
+        return a.LineTemplates[styleRef].Line;
+        
     }
 
     public static ScriptableSounds.SoundPalette GetSoundFromPalette(this ScriptableSounds a, ScriptableSounds.GameSounds soundName)

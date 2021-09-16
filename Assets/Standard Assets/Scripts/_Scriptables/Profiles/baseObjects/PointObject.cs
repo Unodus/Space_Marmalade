@@ -45,7 +45,7 @@ public class PointObject
         Pos = Position;
 
         p = Object.Instantiate(Style, GridManager.currentGrid.transform);
-        p.name = "Node:"+Position;
+        p.name = Style.name ;
         p.tag = "Point";
 
         ScriptableGrid gridSettings = ScriptableExtensions.s.scriptable.Grids;

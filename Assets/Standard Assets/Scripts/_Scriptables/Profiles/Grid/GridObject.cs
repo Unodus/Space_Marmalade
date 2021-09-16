@@ -9,7 +9,7 @@ public class GridObject : ScriptableObject
     [Range(2, 50)]
     public int Columns, Rows;
 
-    public List<UniverseObject> ObjectsInGrid;
+    public List<baseObject> ObjectsInGrid;
 
 
 

@@ -16,15 +16,16 @@ MonoBehaviour:
   - Name: Command Type
     EnumName: 1
     Enum:
-    - {fileID: 11400000, guid: 78e0c15e45095bd4ca7aea4372f7c8d1, type: 2}
-    - {fileID: 11400000, guid: d44f078ca0b48584d8c97bcd446e89cf, type: 2}
-    - {fileID: 11400000, guid: e584a35ec4df90a46a8c8151e7c6f83a, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   - Name: Input Event
     EnumName: 2
     Enum:
     - {fileID: 11400000, guid: 54035c2273544df4bae96e00ff2fbd77, type: 2}
     - {fileID: 11400000, guid: 9859d9bcd3d8aa34b9e0f91b59cd37c0, type: 2}
     - {fileID: 11400000, guid: 4404e3640165b4b4b8a6ef9227b72d7d, type: 2}
+    - {fileID: 11400000, guid: 39f197b4080d8df4ab35ec3a8de428c0, type: 2}
   - Name: Node Mode
     EnumName: 3
     Enum:
@@ -42,7 +43,7 @@ MonoBehaviour:
   - Name: Particle
     EnumName: 5
     Enum:
-    - {fileID: 11400000, guid: f8a3ce62c9a561b4b87dd9720c499b53, type: 2}
+    - {fileID: 0}
   - Name: String Categories
     EnumName: 6
     Enum:

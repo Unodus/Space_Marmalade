@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a2009801c68b324baac69fca11e21fe, type: 3}
-  m_Name: Point
+  m_Script: {fileID: 11500000, guid: 57595c401aac0224987df81b6f36b3b8, type: 3}
+  m_Name: Universal
   m_EditorClassIdentifier: 

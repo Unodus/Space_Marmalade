@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f0359dcb7a508c40b2f92d2b7752149, type: 3}
-  m_Name: Point
+  m_Script: {fileID: 11500000, guid: e478946ff0042b6428cd4fa41e9c987f, type: 3}
+  m_Name: _MyParticleProfile
   m_EditorClassIdentifier: 
-  ParticlePrefab: {fileID: 2960824873681816880, guid: d01ba1c1e33eb9f419e3b1d6ceeb6282,
-    type: 3}
+  Particles:
+  - Name: Point
+    particle: {fileID: 11400000, guid: dc96f81c29ae8f04ab22326364679db0, type: 2}
