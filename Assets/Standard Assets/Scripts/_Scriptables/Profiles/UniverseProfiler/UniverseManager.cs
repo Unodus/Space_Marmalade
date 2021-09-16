@@ -14,8 +14,28 @@ public static class UniverseManager
         grid.GameGrid.settings.PolarActive = false;
         grid.GameGrid.settings.GameObjectRef = UniverseCentre;
 
+        // Add UniverseObjects to Grid
+        foreach (ScriptableUniverse.RecursiveUniverse u in i.currentGrids)
+        {
+            GridObject gridObject = u.universe.InsideGrid;
+            gridObject.ObjectsInGrid.Clear();
+
+            baseObject universeObject = ScriptableObject.CreateInstance("baseObject") as baseObject;
+
+            universeObject.imageObject = u.universe.baseObject.imageObject;
+            universeObject.name = u.universe.baseObject.name;
+            universeObject.Classification = u.universe.DefaultClassification;
+
+            universeObject.GridPosition = u.universe.DefaultPosition;
+            
+            gridObject.ObjectsInGrid.Add(universeObject);
+
+        }
+
+
         grid.GameGrid.gridObject = currentUniverse.InsideGrid;
         grid.GameGrid.gridObject.Init();
+
     }
     public static void DeInit(this ScriptableUniverse i)
     {

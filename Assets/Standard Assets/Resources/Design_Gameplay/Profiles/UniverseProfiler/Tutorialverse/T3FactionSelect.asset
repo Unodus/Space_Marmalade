@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5774dc628f7386438fb1e35f45fba39, type: 3}
   m_Name: T3FactionSelect
   m_EditorClassIdentifier: 
-  Classification: {fileID: 11400000, guid: 04aceaaea174c714d94996dc7243aec2, type: 2}
-  PositionInContainerGrid: {x: 0, y: 0}
-  ContainerIdentifier: {fileID: 11400000, guid: 800045e78a9cdcf429028ecbd36aa470,
-    type: 2}
+  ContainerUniverse: {fileID: 11400000, guid: 800045e78a9cdcf429028ecbd36aa470, type: 2}
   InsideGrid: {fileID: 11400000, guid: b5cbca2ac274d9a4581d0cfd6dcaea78, type: 2}
+  baseObject: {fileID: 11400000, guid: 195d323924d0c4e409dc6368ed6b111e, type: 2}
+  DefaultPosition: {x: 3, y: 1}
+  DefaultClassification: {fileID: 11400000, guid: fe12fac1004bf3a499078d144cf05bc5,
+    type: 2}

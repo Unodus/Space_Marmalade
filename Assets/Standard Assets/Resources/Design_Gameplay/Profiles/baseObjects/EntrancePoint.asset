@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Classification: {fileID: 11400000, guid: fe12fac1004bf3a499078d144cf05bc5, type: 2}
   GridPosition: {x: 0, y: 0}
-  imageObject: {fileID: 0}
+  imageObject: {fileID: 5250454601997372937, guid: eefc2980298fc09408e3b8dde74eae00,
+    type: 3}

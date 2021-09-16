@@ -8,7 +8,7 @@ public class PointerManager : MonoBehaviour
     private Vector3 touchStart;
 
     public float groundZ = 0;
-
+    public float clickRadius = 0.01f;
 
     void Update()
     {
@@ -18,7 +18,7 @@ public class PointerManager : MonoBehaviour
 
         // This stuff needs to be put in the optimized input manager
         ScriptableGrid gridtype = s.Grids;
-        ScriptableGrid.GridProfile grid= s.Grids.GameGrid;
+        ScriptableGrid.GridProfile grid = s.Grids.GameGrid;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -33,20 +33,36 @@ public class PointerManager : MonoBehaviour
             gridtype.UpdateSize(grid.settings.Size + (1f * Time.deltaTime));
         }
 
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
+        //if (EventSystem.current.IsPointerOverGameObject())
+        //{
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        Debug.Log("Clicked on the UI");
+        //    }
+        //    return;
+        //}
 
         if (Input.GetMouseButtonDown(0))
         {
             touchStart = GetWorldPosition(groundZ);
+
+
+            // if the input detects an object has been clicked, return out early
+            Collider[] hitColliders = Physics.OverlapSphere(touchStart, clickRadius);
+            foreach (var hitCollider in hitColliders)
+            {
+                if (hitCollider.gameObject.TryGetComponent(out ClickBehaviour clickBehaviour))
+                {
+                    clickBehaviour.OnClick();
+                    return;
+
+                }
+            }
+
         }
         if (Input.GetMouseButton(0))
         {
             Vector3 direction = touchStart - GetWorldPosition(groundZ);
-
-            Debug.Log("Dragging");
             EventDictionary.TriggerEvent(s.GameEvents.GetEventByType(s.Enums.GetEnum(GlobalEnum.InputEvent, 1)).Name, direction);
         }
     }

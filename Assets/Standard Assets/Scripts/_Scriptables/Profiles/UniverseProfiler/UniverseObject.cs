@@ -8,4 +8,7 @@ public class UniverseObject : ScriptableObject
     public UniverseObject ContainerUniverse;
     public GridObject InsideGrid;
     public baseObject baseObject;
+    public Vector2 DefaultPosition;
+    public SpaceClass DefaultClassification;
+
 }

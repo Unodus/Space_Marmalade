@@ -19,6 +19,8 @@ MonoBehaviour:
     InputType: {fileID: 11400000, guid: 9859d9bcd3d8aa34b9e0f91b59cd37c0, type: 2}
   - Name: updateGrid
     InputType: {fileID: 11400000, guid: 4404e3640165b4b4b8a6ef9227b72d7d, type: 2}
+  - Name: enterGrid
+    InputType: {fileID: 11400000, guid: 39f197b4080d8df4ab35ec3a8de428c0, type: 2}
   TurnEvents:
   - Name: 
     turnPhase: {fileID: 0}

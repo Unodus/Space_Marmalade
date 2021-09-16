@@ -5,27 +5,27 @@ using UnityEngine;
 public static class PointManager
 {
 
-     static ScriptableParticles PointPrefabs;
-     static ScriptableGrid gridSettings;
-     static int PointStyle = 0;
-     static List<PointObject> MyPoints = new List<PointObject>();
+    static ScriptableParticles PointPrefabs;
+    static ScriptableGrid gridSettings;
+    static int PointStyle = 0;
+    static List<PointObject> MyPoints = new List<PointObject>();
 
     static int NumOfPoints;
 
-    
-    public static void PointUpdate() // Every frame, go through the list of Lines and update their positions.
-    {
-        //foreach (var Point in MyPoints)
-        //{
-        //    if (Point.p == null)
-        //    {
-        //        MyPoints.Remove(Point);
-        //        Point.DeInit();
-        //        return;
-        //    }
-        //    Point.PointUpdate();
-        //}
-    }
+
+    //public static void PointUpdate() // Every frame, go through the list of Lines and update their positions.
+    //{
+    //    //foreach (var Point in MyPoints)
+    //    //{
+    //    //    if (Point.p == null)
+    //    //    {
+    //    //        MyPoints.Remove(Point);
+    //    //        Point.DeInit();
+    //    //        return;
+    //    //    }
+    //    //    Point.PointUpdate();
+    //    //}
+    //}
 
     static public PointObject CreatePoint(Vector2 Position) // Converts two points in "grid space " into a line
     {
@@ -58,7 +58,7 @@ public static class PointManager
 
     }
 
- 
+
     static public void Init() // Instantiate Point gameobjects, based on GridMath data 
     {
         PointPrefabs = ScriptableExtensions.s.scriptable.Particles;
@@ -70,9 +70,19 @@ public static class PointManager
             for (int j = 0; j < myGrid.Rows; j++)
             {
                 PointObject pp = new PointObject();
-                pp.Init(new Vector2(i, j ), PointPrefabs.GetParticleByInt(0).imageObject);
+                pp.Init(new Vector2(i, j), PointPrefabs.GetParticleByInt(0).imageObject);
                 MyPoints.Add(pp);
             }
+        }
+
+        foreach (baseObject i in myGrid.ObjectsInGrid)
+        {
+            PointObject pp = new PointObject();
+
+            pp.Init(new Vector2(i.GridPosition.x, i.GridPosition.y), i.imageObject);
+            
+            MyPoints.Add(pp);
+
         }
     }
 
