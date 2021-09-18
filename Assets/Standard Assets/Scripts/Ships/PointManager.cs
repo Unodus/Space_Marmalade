@@ -75,15 +75,29 @@ public static class PointManager
             }
         }
 
-        foreach (baseObject i in myGrid.ObjectsInGrid)
+        foreach (object i in myGrid.ObjectsInGrid)
         {
-            PointObject pp = new PointObject();
 
-            pp.Init(new Vector2(i.GridPosition.x, i.GridPosition.y), i.imageObject);
-            
-            MyPoints.Add(pp);
+            if (i is UniverseObject)
+            {
+                UniverseObject universe = (UniverseObject)i;
+                PointObject pp = new PointObject();
+
+                pp.Init(universe.GridPosition, universe.imageObject);
+
+                if (pp.p.TryGetComponent(out ClickBehaviour clickBehaviour))
+                {
+                    clickBehaviour.myObject.Add(universe);
+                }
+
+
+                MyPoints.Add(pp);
+
+
+            }
 
         }
+
     }
 
     static void ResetPoints()

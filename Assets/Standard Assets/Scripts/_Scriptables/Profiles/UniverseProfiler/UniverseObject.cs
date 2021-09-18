@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UniverseObject", menuName = "ScriptableObject/UniverseProfile/UniverseObject")]
-public class UniverseObject : ScriptableObject
+public class UniverseObject : baseObject
 {
     public UniverseObject ContainerUniverse;
     public GridObject InsideGrid;
-    public baseObject baseObject;
-    public Vector2 DefaultPosition;
     public SpaceClass DefaultClassification;
 
 }

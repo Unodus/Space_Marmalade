@@ -4,10 +4,12 @@ using UnityEngine;
 
 public static class UniverseManager
 {
+    public static ScriptableUniverse UniverseScript;
     public static UniverseObject currentUniverse;
     public static GameObject UniverseCentre;
     public static void Init(this ScriptableUniverse i)
     {
+        UniverseScript = i;
         currentUniverse = i.startGrid;
         ScriptableGrid grid = i.displayGrid;
 
@@ -15,22 +17,15 @@ public static class UniverseManager
         grid.GameGrid.settings.GameObjectRef = UniverseCentre;
 
         // Add UniverseObjects to Grid
-        foreach (ScriptableUniverse.RecursiveUniverse u in i.currentGrids)
-        {
-            GridObject gridObject = u.universe.InsideGrid;
-            gridObject.ObjectsInGrid.Clear();
+        //foreach (ScriptableUniverse.RecursiveUniverse u in i.currentGrids)
+        //{
+        //    GridObject gridObject = u.universe.InsideGrid;
+        //    gridObject.ObjectsInGrid.Clear();
 
-            baseObject universeObject = ScriptableObject.CreateInstance("baseObject") as baseObject;
+      
+        //    gridObject.ObjectsInGrid.Add(u.universe);
 
-            universeObject.imageObject = u.universe.baseObject.imageObject;
-            universeObject.name = u.universe.baseObject.name;
-            universeObject.Classification = u.universe.DefaultClassification;
-
-            universeObject.GridPosition = u.universe.DefaultPosition;
-            
-            gridObject.ObjectsInGrid.Add(universeObject);
-
-        }
+        //}
 
 
         grid.GameGrid.gridObject = currentUniverse.InsideGrid;
@@ -56,10 +51,26 @@ public static class UniverseManager
     public static IEnumerator ZoomFarChange(this ScriptableUniverse i, UniverseObject newUniverse, float beforeZoom, float afterZoom, float Speed)
     {
         float CurrentZoom = i.displayGrid.GameGrid.settings.Size;
+        yield return new WaitForSeconds(0.4f);
+
         yield return ZoomLerp(i.displayGrid.GameGrid.settings, CurrentZoom, beforeZoom, Speed);
+
         yield return new WaitForSeconds(0.1f);
+
+        CameraPan cameraPan = Object.FindObjectOfType<CameraPan>();
+        if (cameraPan != null)
+        {
+            cameraPan.transform.SetParent(null);
+            cameraPan.transform.position = Vector3.zero;
+            cameraPan.LockOn();
+        }
+
         i.SwitchUniverse(newUniverse);
+
         yield return ZoomLerp(i.displayGrid.GameGrid.settings, afterZoom, CurrentZoom, Speed);
+
+
+     //   if (Camera.main.transform.parent.gameObject.TryGetComponent(out CameraPan cameraPan)) cameraPan.LockOn(UniverseCentre.transform);
 
         yield return null;
 

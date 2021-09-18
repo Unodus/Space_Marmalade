@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6627881253082932615}
   - component: {fileID: 647030394407828353}
   - component: {fileID: 5535392439920076124}
-  - component: {fileID: 3849418448074829044}
   m_Layer: 8
   m_Name: UniversePoint
   m_TagString: Point
@@ -110,16 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onClickType: {fileID: 11400000, guid: 39f197b4080d8df4ab35ec3a8de428c0, type: 2}
---- !u!114 &3849418448074829044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5250454601997372937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c350b6d9d26c4264e82f27c7594e4438, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   myObject: []

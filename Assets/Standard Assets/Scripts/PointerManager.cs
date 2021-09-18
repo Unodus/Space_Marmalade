@@ -32,7 +32,10 @@ public class PointerManager : MonoBehaviour
         {
             gridtype.UpdateSize(grid.settings.Size + (1f * Time.deltaTime));
         }
-
+        if (Input.GetKey(KeyCode.L))
+        {
+            StartCoroutine(UniverseManager.UniverseScript.ZoomFarChange(UniverseManager.currentUniverse.ContainerUniverse, 0.0f, 50.0f, 1));
+        }
         //if (EventSystem.current.IsPointerOverGameObject())
         //{
         //    if (Input.GetMouseButtonDown(0))

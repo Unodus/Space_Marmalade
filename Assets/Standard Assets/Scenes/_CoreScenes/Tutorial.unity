@@ -682,6 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputEvent: {fileID: 11400000, guid: 9859d9bcd3d8aa34b9e0f91b59cd37c0, type: 2}
+  lockedPosition: {fileID: 0}
 --- !u!1001 &667101000285065235
 PrefabInstance:
   m_ObjectHideFlags: 0
