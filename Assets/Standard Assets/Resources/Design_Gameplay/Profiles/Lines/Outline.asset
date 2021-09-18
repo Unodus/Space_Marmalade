@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LinePrefab: {fileID: 3636256756038235619, guid: f87ca8fc44590b842ab27a7efad7b00d,
     type: 3}
-  NumOfSegments: 200
+  NumOfSegments: 500
   LineWidth: 0.2
   Wrap: 1
   LineColorStart: {r: 1, g: 1, b: 1, a: 1}

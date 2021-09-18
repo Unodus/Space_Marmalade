@@ -15,4 +15,4 @@ MonoBehaviour:
   Columns: 2
   Rows: 9
   ObjectsInGrid:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 7cdd672ea02ea224682576796134d1d7, type: 2}
